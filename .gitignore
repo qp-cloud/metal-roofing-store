@@ -17,3 +17,6 @@ animations/__pycache__/
 # editor / OS
 .DS_Store
 *.log
+
+# local Claude Code settings
+.claude/settings.local.json
