@@ -1,0 +1,117 @@
+---
+/**
+ * An explainer diagram rendered with manim (source in /animations).
+ *
+ * Playback is user-initiated rather than autoplaying: DESIGN.md asks for
+ * low-key, functional motion, and a technical explainer looping behind the
+ * copy would fight that. `preload="none"` means a visitor who never presses
+ * play pays only for the poster image.
+ *
+ * The poster is the animation's closing summary frame, so it stands on its
+ * own as a static diagram — which is also what a prefers-reduced-motion
+ * visitor sees in place of the video.
+ */
+interface Props {
+  /** Base filename in /public/animations, e.g. "seam-systems-th". */
+  slug: string;
+  /** Short description shown under the frame. */
+  caption: string;
+  /** Accessible name for the video, and alt text for the still. */
+  label: string;
+  lang: 'th' | 'en';
+}
+
+const { slug, caption, label, lang } = Astro.props;
+
+const base = `/animations/${slug}`;
+const playHint = lang === 'en' ? 'Play' : 'กดเล่น';
+---
+
+<figure class="diagram">
+  <div class="diagram__frame">
+    <video
+      class="diagram__video"
+      controls
+      preload="none"
+      playsinline
+      poster={`${base}.webp`}
+      aria-label={label}
+      width="1920"
+      height="1080"
+    >
+      <source src={`${base}.mp4`} type="video/mp4" />
+    </video>
+    <img class="diagram__still" src={`${base}.webp`} alt={label} width="1920" height="1080" />
+  </div>
+  <figcaption class="diagram__caption">
+    <span class="diagram__hint">{playHint}</span>{caption}
+  </figcaption>
+</figure>
+
+<style>
+  .diagram {
+    margin: var(--space-5) 0;
+  }
+
+  .diagram__frame {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--color-bg);
+    line-height: 0;
+  }
+
+  .diagram__video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    background: var(--color-bg);
+  }
+
+  /* The still is only for the reduced-motion path below. */
+  .diagram__still {
+    display: none;
+    width: 100%;
+    height: auto;
+  }
+
+  .diagram__caption {
+    margin-top: var(--space-2);
+    color: var(--color-muted);
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  .diagram__hint {
+    display: inline-block;
+    margin-inline-end: 0.5em;
+    padding: 0.1em 0.55em;
+    border-radius: 999px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-ink);
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+    vertical-align: 1px;
+  }
+
+  /*
+   * Swap the player for the closing frame, so the diagram still communicates
+   * with no movement and nothing to press.
+   */
+  @media (prefers-reduced-motion: reduce) {
+    .diagram__video {
+      display: none;
+    }
+
+    .diagram__still {
+      display: block;
+    }
+
+    .diagram__hint {
+      display: none;
+    }
+  }
+</style>

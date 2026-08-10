@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Photo from '../components/Photo.astro';
+import { site } from '../data/site';
+import { location, hasAddress } from '../data/branches';
+---
+
+<BaseLayout
+  lang="th"
+  title="เกี่ยวกับเรา | หจก.มีชัยสตีล"
+  description="ประวัติความเป็นมา โรงงานผลิต มาตรฐานคุณภาพ และช่องทางติดต่อของมีชัยสตีล"
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>เกี่ยวกับเรา</h1>
+      <p>{site.taglineTh}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow">
+      <h2>ประวัติความเป็นมา</h2>
+      <p>
+        หจก.มีชัยสตีล ก่อตั้งขึ้นจากความตั้งใจของครอบครัวช่างเหล็กที่ต้องการผลิตแผ่นหลังคาคุณภาพสูงในราคาที่เข้าถึงได้
+        ตลอดระยะเวลาที่ผ่านมา เรายึดมั่นในหลักการเดียวกัน คือ ผลิตของดี ราคาสมเหตุสมผล และดูแลลูกค้าเหมือนคนในครอบครัว
+      </p>
+      <p>
+        ทุกวันนี้มีชัยสตีลให้บริการทั้งลูกค้าที่เป็นเจ้าของบ้าน และผู้รับเหมา/วิศวกรโครงการขนาดใหญ่
+        ด้วยทีมช่างเทคนิคที่มีประสบการณ์ตรง พร้อมให้คำปรึกษาตั้งแต่การเลือกสเปกไปจนถึงการติดตั้งหน้างานจริง
+      </p>
+    </div>
+    <div class="container photo-band">
+      <Photo slot="facility-exterior" lang="th" ratio="4 / 3" />
+      <Photo slot="facility-yard" lang="th" ratio="4 / 3" />
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container">
+      <h2>โรงงานและมาตรฐาน</h2>
+      <div class="grid-auto" data-reveal-group>
+        <div class="std-card reveal">
+          <h3>สายการผลิตควบคุมคุณภาพ</h3>
+          <p>ขึ้นรูปแผ่นเหล็กด้วยเครื่องจักรที่ควบคุมความหนาและมาตรฐานลอนอย่างสม่ำเสมอทุกล็อตการผลิต</p>
+        </div>
+        <div class="std-card reveal">
+          <h3>ตรวจสอบวัตถุดิบก่อนผลิต</h3>
+          <p>คัดเลือกเหล็กเคลือบจากผู้ผลิตที่ได้มาตรฐาน ทดสอบความหนาและการเคลือบสีก่อนเข้าสายการผลิต</p>
+        </div>
+        <div class="std-card reveal">
+          <h3>รับประกันสินค้า</h3>
+          <p>สินค้าทุกชิ้นมีการรับประกันตามประเภท พร้อมใบรับรองมาตรฐานสำหรับงานโครงการ</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow">
+      <h2>เครื่องจักรและกระบวนการผลิต</h2>
+      <p>
+        แผ่นหลังคาทุกแผ่นขึ้นรูปในโรงงานของเราเอง ควบคุมความหนาและมาตรฐานลอนตั้งแต่ม้วนเหล็กจนถึงแผ่นสำเร็จ
+        ทำให้ตรวจสอบคุณภาพได้ทุกขั้นตอนและสั่งความยาวตามหน้างานจริงได้
+      </p>
+    </div>
+    <div class="container photo-band">
+      <Photo slot="production-roll-former" lang="th" ratio="4 / 3" />
+      <Photo slot="production-line" lang="th" ratio="4 / 3" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow">
+      <h2>ที่ตั้งและติดต่อ</h2>
+      <div class="branch-mini">
+        <h3>{location.nameTh}</h3>
+        {hasAddress && <p>{location.addressTh}</p>}
+        <ul class="phone-inline">
+          {location.phones.map((p) => (
+            <li><a href={p.href}>{p.display}</a> <span>{p.labelTh}</span></li>
+          ))}
+        </ul>
+      </div>
+      <p class="section-cta"><a href="/branches">ดูข้อมูลติดต่อทั้งหมด &rarr;</a></p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+  }
+
+  .std-card,
+  .branch-mini {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+  }
+
+  .std-card h3,
+  .branch-mini h3 {
+    font-size: 1.05rem;
+  }
+
+  .std-card p,
+  .branch-mini p {
+    color: var(--color-muted);
+    margin: 0 0 var(--space-2);
+  }
+
+  .branch-mini a {
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .section-cta {
+    margin-top: var(--space-4);
+  }
+
+  .section-cta a {
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .photo-band {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+  }
+
+  .phone-inline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .phone-inline a {
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .phone-inline span {
+    color: var(--color-muted);
+    font-size: 0.8rem;
+  }
+</style>

@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { testimonials } from '../../data/testimonials';
+import { site } from '../../data/site';
+---
+
+<BaseLayout
+  lang="en"
+  title="Customer Reviews | Meechai Steel Ltd., Part."
+  description="Real customer reviews and job videos from Meechai Steel, on our Facebook page."
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>Customer Reviews</h1>
+      <p>Our reviews and job videos live on our Facebook page — read them straight from the customers who left them.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow">
+      <div class="review-cta">
+        <h2>See every review on Facebook</h2>
+        <p>
+          We deliberately don't reprint reviews here, so you see all of them as written, alongside on-site videos
+          and photos of finished work.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href={site.facebookHref} target="_blank" rel="noopener noreferrer">
+            Open our Facebook page &rarr;
+          </a>
+          <a class="btn btn--outline" href={site.lineHref} target="_blank" rel="noopener noreferrer">
+            Ask us on LINE
+          </a>
+        </div>
+      </div>
+
+      {testimonials.length > 0 && (
+        <div class="testimonial-list" data-reveal-group>
+          {testimonials.map((t) => (
+            <blockquote class="quote-full reveal">
+              <p>&ldquo;{t.quoteEn}&rdquo;</p>
+              <footer>
+                <strong>{t.nameEn}</strong>
+                <span>{t.projectEn}</span>
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+  }
+
+  .review-cta {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-5);
+    background: var(--color-surface);
+  }
+
+  .review-cta h2 {
+    margin-top: 0;
+  }
+
+  .review-cta p {
+    color: var(--color-muted);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .testimonial-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    margin-top: var(--space-6);
+  }
+
+  .quote-full p {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    line-height: 1.7;
+  }
+
+  .quote-full footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+</style>

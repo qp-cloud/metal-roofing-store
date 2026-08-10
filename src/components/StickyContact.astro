@@ -1,0 +1,60 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  lang: 'th' | 'en';
+}
+
+const { lang } = Astro.props;
+---
+
+<div class="sticky-contact" role="complementary" aria-label={lang === 'en' ? 'Quick contact' : 'ติดต่อด่วน'}>
+  <a class="sticky-contact__link" href={site.phoneHref}>
+    <span aria-hidden="true">📞</span>
+    {lang === 'en' ? 'Call' : 'โทร'}
+  </a>
+  <a class="sticky-contact__link sticky-contact__link--line" href={site.lineHref} target="_blank" rel="noopener noreferrer">
+    <span aria-hidden="true">💬</span>
+    LINE
+  </a>
+</div>
+
+<style>
+  .sticky-contact {
+    position: fixed;
+    bottom: 0;
+    inset-inline: 0;
+    z-index: var(--z-sticky);
+    display: none;
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    box-shadow: 0 -4px 12px oklch(0 0 0 / 0.06);
+  }
+
+  .sticky-contact__link {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.9rem;
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .sticky-contact__link--line {
+    background: var(--color-primary);
+    color: var(--color-primary-ink);
+  }
+
+  @media (max-width: 720px) {
+    .sticky-contact {
+      display: flex;
+    }
+
+    body {
+      padding-bottom: 3.5rem;
+    }
+  }
+</style>

@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { roofColors, profiles, insulationOptions } from '../data/colors';
+---
+
+<BaseLayout
+  lang="th"
+  title="สี / วัสดุ | หจก.มีชัยสตีล"
+  description="เลือกลอนหลังคา สีเคลือบ และฉนวนกันความร้อนที่เหมาะกับอาคารของคุณ"
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>สี / วัสดุ</h1>
+      <p>เลือกลอนหลังคา สีเคลือบ และชนิดฉนวน ให้เข้ากับสไตล์และการใช้งานของอาคาร</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>ลอนหลังคา</h2>
+      <div class="grid-auto" data-reveal-group>
+        {profiles.map((p) => (
+          <div class="profile-card reveal">
+            <h3>{p.nameTh}</h3>
+            <p>{p.descTh}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container">
+      <h2>สีเคลือบให้เลือก</h2>
+      <div class="color-grid" data-reveal-group>
+        {roofColors.map((c) => (
+          <div class="color-swatch reveal">
+            <span class="color-swatch__chip" style={`background:${c.hex}`}></span>
+            <span class="color-swatch__name">{c.nameTh}</span>
+          </div>
+        ))}
+      </div>
+      <p class="table-note">สีจริงอาจแตกต่างจากหน้าจอเล็กน้อย กรุณาขอตัวอย่างแผ่นสีจริงก่อนสั่งผลิตจำนวนมาก</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>ตัวเลือกฉนวนกันความร้อน</h2>
+      <div class="grid-auto" data-reveal-group>
+        {insulationOptions.map((opt) => (
+          <div class="profile-card reveal">
+            <h3>{opt.nameTh}</h3>
+            <p>{opt.descTh}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+  }
+
+  .profile-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+  }
+
+  .profile-card h3 {
+    font-size: 1.05rem;
+  }
+
+  .profile-card p {
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-3);
+  }
+
+  .color-swatch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+    text-align: center;
+  }
+
+  .color-swatch__chip {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+  }
+
+  .color-swatch__name {
+    font-size: 0.88rem;
+    color: var(--color-ink);
+  }
+
+  .table-note {
+    color: var(--color-muted);
+    font-size: 0.88rem;
+    margin-top: var(--space-3);
+  }
+</style>

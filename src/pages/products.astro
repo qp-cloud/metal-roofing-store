@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Diagram from '../components/Diagram.astro';
+import { products } from '../data/products';
+import { site } from '../data/site';
+import Photo from '../components/Photo.astro';
+---
+
+<BaseLayout
+  lang="th"
+  title="สินค้า | หจก.มีชัยสตีล"
+  description="แผ่นเหล็กมุงหลังคา แผ่นฉนวน PU Foam ระบบ Bolt Type, Clip-Lock, Snap-Lock และแผ่นผนังพาแนล"
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>สินค้าของเรา</h1>
+      <p>ครบทุกระบบหลังคาและผนังเหล็ก เลือกให้เหมาะกับงบประมาณและลักษณะอาคารของคุณ</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container product-list">
+      {products.map((p, i) => (
+        <article class="product-detail" id={p.slug} style={i % 2 === 1 ? 'background:var(--color-surface)' : undefined}>
+          <div class="container product-detail__inner">
+            <div class="product-detail__media"><Photo slot={`product-${p.slug}`} lang="th" ratio="4 / 3" eager={i === 0} /></div>
+            <div>
+              <h2>{p.nameTh}</h2>
+              <p class="product-detail__en">{p.nameEn}</p>
+              <p>{p.descTh}</p>
+              <p class="product-detail__use"><strong>เหมาะกับ:</strong> {p.useTh}</p>
+              <div class="hero__actions">
+                <a class="btn btn--outline" href="/specifications">ดูสเปกและราคาเริ่มต้น</a>
+                <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">สอบถามสินค้านี้</a>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container-narrow">
+      <h2>เข้าใจระบบก่อนตัดสินใจ</h2>
+      <p class="explainer-lead">
+        ภาพตัดขวางเชิงหลักการ ช่วยให้เห็นว่าแต่ละระบบต่างกันตรงไหน ก่อนคุยกับทีมช่างหน้างาน
+      </p>
+      <Diagram
+        lang="th"
+        slug="seam-systems-th"
+        label="ภาพตัดขวางเปรียบเทียบระบบยึดแผ่นหลังคาแบบสกรู คลิปล็อก และสแนปล็อก"
+        caption="ระบบสกรูเจาะทะลุแผ่น ทุกรูคือจุดที่น้ำเข้าได้ ส่วนคลิปล็อกและสแนปล็อกยึดในร่องรอยต่อโดยไม่เจาะแผ่น"
+      />
+      <Diagram
+        lang="th"
+        slug="pu-foam-th"
+        label="ภาพเปรียบเทียบการถ่ายเทความร้อนระหว่างแผ่นเหล็กเปล่ากับแผ่นฉนวน PU Foam"
+        caption="แผ่นฉนวน PU Foam ชะลอความร้อนที่แกนโฟม ความหนาฉนวนอ้างอิงตามสเปกสินค้า 25–50 มม."
+      />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+  }
+
+  .product-list {
+    padding: 0;
+    max-width: none;
+  }
+
+  .explainer-lead {
+    color: var(--color-muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .product-detail {
+    scroll-margin-top: 90px;
+    padding-block: var(--space-7);
+  }
+
+  .product-detail__inner {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  /* Layout only — Photo.astro owns the image and its pending state. */
+  .product-detail__media {
+    min-width: 0;
+  }
+
+  .product-detail__en {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    margin-top: -0.5rem;
+  }
+
+  .product-detail__use {
+    color: var(--color-ink);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+  }
+
+  @media (max-width: 800px) {
+    .product-detail__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .product-detail__media {
+      order: -1;
+    }
+  }
+</style>

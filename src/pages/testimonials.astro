@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { testimonials } from '../data/testimonials';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  lang="th"
+  title="รีวิวลูกค้า | หจก.มีชัยสตีล"
+  description="รีวิวและวิดีโอจากลูกค้าจริงของ หจก.มีชัยสตีล บนเพจ Facebook"
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>รีวิวลูกค้า</h1>
+      <p>รีวิวและวิดีโอจากลูกค้าจริง อยู่บนเพจ Facebook ของเรา อ่านและดูได้โดยตรงจากผู้ใช้งานจริง</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow">
+      <div class="review-cta">
+        <h2>ดูรีวิวทั้งหมดบน Facebook</h2>
+        <p>
+          เราเลือกที่จะไม่คัดลอกรีวิวมาแสดงบนเว็บไซต์ เพื่อให้คุณเห็นความคิดเห็นทั้งหมดตามจริง
+          พร้อมวิดีโอหน้างานและรูปงานที่ติดตั้งเสร็จแล้ว
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href={site.facebookHref} target="_blank" rel="noopener noreferrer">
+            เปิดเพจ Facebook &rarr;
+          </a>
+          <a class="btn btn--outline" href={site.lineHref} target="_blank" rel="noopener noreferrer">
+            สอบถามทาง LINE
+          </a>
+        </div>
+      </div>
+
+      {testimonials.length > 0 && (
+        <div class="testimonial-list" data-reveal-group>
+          {testimonials.map((t) => (
+            <blockquote class="quote-full reveal">
+              <p>&ldquo;{t.quoteTh}&rdquo;</p>
+              <footer>
+                <strong>{t.nameTh}</strong>
+                <span>{t.projectTh}</span>
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+  }
+
+  .review-cta {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-5);
+    background: var(--color-surface);
+  }
+
+  .review-cta h2 {
+    margin-top: 0;
+  }
+
+  .review-cta p {
+    color: var(--color-muted);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .testimonial-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    margin-top: var(--space-6);
+  }
+
+  .quote-full p {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    line-height: 1.7;
+  }
+
+  .quote-full footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+</style>

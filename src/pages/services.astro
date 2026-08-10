@@ -1,0 +1,155 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Photo from '../components/Photo.astro';
+import { site } from '../data/site';
+
+// Ordered as the actual customer journey — consult, produce, deliver, install —
+// not decorative numbering.
+const services = [
+  {
+    title: 'ให้คำปรึกษาทางเทคนิค',
+    desc: 'ทีมช่างเทคนิคช่วยคำนวณปริมาณวัสดุ (Taking-off) และให้คำแนะนำโครงสร้างหลังคาก่อนเริ่มงานจริง',
+  },
+  {
+    title: 'การผลิต',
+    desc: 'ขึ้นรูปแผ่นเหล็กตามสเปกที่ลูกค้าต้องการ ควบคุมคุณภาพทุกขั้นตอนตั้งแต่วัตถุดิบจนถึงสินค้าสำเร็จ',
+  },
+  {
+    title: 'การจัดส่ง',
+    desc: 'บริการจัดส่งถึงหน้างานด้วยรถของเราเอง วางแผนขนส่งให้เหมาะกับขนาดและกำหนดการก่อสร้าง',
+  },
+  {
+    title: 'การติดตั้ง',
+    desc: 'ทีมช่างติดตั้งมืออาชีพ พร้อมอุปกรณ์และความปลอดภัยหน้างานตามมาตรฐาน รับงานทั้งบ้านพักและโรงงานขนาดใหญ่',
+  },
+];
+---
+
+<BaseLayout
+  lang="th"
+  title="บริการของเรา | หจก.มีชัยสตีล"
+  description="บริการผลิต ติดตั้ง จัดส่ง และให้คำปรึกษาทางเทคนิคครบวงจร โดยทีมงานมีชัยสตีล"
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>บริการของเรา</h1>
+      <p>ครบวงจรตั้งแต่ให้คำปรึกษาจนถึงหน้างานติดตั้งจริง ไม่ต้องประสานงานหลายเจ้า</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-auto" data-reveal-group>
+        {services.map((s, i) => (
+          <div class="service-card reveal">
+            <span class="service-card__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h2>{s.title}</h2>
+            <p>{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container-narrow">
+      <h2>งานติดตั้งหน้างาน</h2>
+      <p>
+        ทีมช่างของเราติดตั้งเองทั้งหมด ไม่ผ่านผู้รับเหมาช่วง จึงคุมคุณภาพงานและระยะเวลาได้จริง
+        และรับผิดชอบงานที่ติดตั้งไปแล้วโดยตรง
+      </p>
+    </div>
+    <div class="container photo-band">
+      <Photo slot="installation-crew" lang="th" ratio="4 / 3" />
+      <Photo slot="installation-finished" lang="th" ratio="4 / 3" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow">
+      <h2>จัดส่งข้ามแดน สปป.ลาว</h2>
+      <p>
+        โรงงานเราอยู่ที่หนองคาย ห่างจากสะพานมิตรภาพไทย–ลาว แห่งที่ 1 และเวียงจันทน์ประมาณ 25 กิโลเมตร
+        ทำให้ส่งของถึงงานฝั่งลาวได้เร็วกว่าการสั่งจากโรงงานในภาคกลาง และคุยรายละเอียดหน้างานกันได้โดยตรง
+      </p>
+      <p>
+        งานส่งออกมีเอกสารและขั้นตอนพิธีการที่ต้องเตรียม กรุณาติดต่อทีมขายเพื่อคุยเงื่อนไขการส่งมอบ
+        สกุลเงิน และกำหนดเวลาของแต่ละโครงการก่อนยืนยันคำสั่งซื้อ
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container-narrow">
+      <h2>การจัดส่ง</h2>
+      <p>
+        จัดส่งแผ่นถึงหน้างานด้วยรถของเราเอง วางแผนความยาวและลำดับการขนถ่ายให้ตรงกับแผนติดตั้ง
+        เพื่อลดการขนย้ายซ้ำและความเสียหายของแผ่น
+      </p>
+    </div>
+    <div class="container photo-band">
+      <Photo slot="delivery-truck" lang="th" ratio="16 / 9" />
+    </div>
+  </section>
+
+  <section class="section section--surface cta-band">
+    <div class="container cta-band__inner">
+      <div>
+        <h2>ต้องการประเมินงานหน้างาน?</h2>
+        <p>ทีมช่างเทคนิคของเราลงพื้นที่ประเมินและให้คำแนะนำก่อนเริ่มโครงการ</p>
+      </div>
+      <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">นัดหมายทาง LINE</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+  }
+
+  .service-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-5);
+  }
+
+  .service-card__num {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .service-card h2 {
+    font-size: 1.2rem;
+  }
+
+  .service-card p {
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .cta-band__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .photo-band {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+  }
+</style>

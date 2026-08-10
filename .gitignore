@@ -1,0 +1,19 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# manim render intermediates — the web-ready files in public/animations/
+# are committed, these raw 1080p renders are not
+animations/out/
+animations/__pycache__/
+
+# environment
+.env
+.env.production
+
+# editor / OS
+.DS_Store
+*.log

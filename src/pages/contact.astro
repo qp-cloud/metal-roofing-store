@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  lang="th"
+  title="ติดต่อเรา | หจก.มีชัยสตีล"
+  description="ติดต่อมีชัยสตีลทาง LINE หรือโทรศัพท์ สอบถามสินค้า ขอใบเสนอราคา หรือนัดหมายทีมช่างเทคนิค"
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>ติดต่อเรา</h1>
+      <p>ทักแชทหรือโทรหาเราได้ทันที ทีมขายและทีมช่างเทคนิคพร้อมให้คำปรึกษา</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact-grid">
+      <a class="contact-card contact-card--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">
+        <span class="contact-card__icon" aria-hidden="true">💬</span>
+        <h2>แชททาง LINE</h2>
+        <p>{site.lineId}</p>
+        <span class="contact-card__cta">เปิดแชท &rarr;</span>
+      </a>
+      <div class="contact-card">
+        <span class="contact-card__icon" aria-hidden="true">📞</span>
+        <h2>โทรหาเรา</h2>
+        <ul class="phone-list">
+          {site.phones.map((p) => (
+            <li>
+              <a href={p.href}>{p.display}</a>
+              <span class="phone-list__label">{p.labelTh}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <a class="contact-card" href={site.facebookHref} target="_blank" rel="noopener noreferrer">
+        <span class="contact-card__icon" aria-hidden="true">📘</span>
+        <h2>Facebook</h2>
+        <p>{site.nameTh}</p>
+        <span class="contact-card__cta">ไปที่เพจ &rarr;</span>
+      </a>
+    </div>
+  </section>
+
+
+  <section class="section section--surface">
+    <div class="container-narrow">
+      <h2>ขอใบเสนอราคาโครงการ</h2>
+      <p class="rfq-lede">
+        ส่งข้อมูลต่อไปนี้มาทาง LINE หรือโทรแจ้ง จะช่วยให้เราตีราคาได้ครบและเร็วขึ้น
+        ถ้ามีแบบก่อสร้างอยู่แล้ว ส่งแบบมาได้เลย ทีมช่างเทคนิคถอดปริมาณให้
+      </p>
+      <ol class="rfq-list">
+        <li><strong>ประเภทงาน</strong> — บ้านพัก โรงงาน โกดัง ห้องเย็น หรืออาคารพาณิชย์</li>
+        <li><strong>พื้นที่หลังคาหรือผนังโดยประมาณ</strong> (ตร.ม.) หรือแนบแบบก่อสร้าง</li>
+        <li><strong>ระบบที่สนใจ</strong> — เมทัลชีท, PU Foam, Bolt Type, Clip-Lock, Snap-Lock, แผ่นผนัง</li>
+        <li><strong>ความหนาและสี</strong> ที่ต้องการ (ถ้ายังไม่แน่ใจ เราแนะนำให้ได้)</li>
+        <li><strong>ความยาวแผ่นที่ต้องใช้ และระยะแป</strong> — มีผลกับการตัดและความแข็งแรง</li>
+        <li><strong>สถานที่ส่ง</strong> — จังหวัด หรือระบุว่าเป็นงานฝั่ง สปป.ลาว</li>
+        <li><strong>กำหนดเวลาที่ต้องการของ</strong></li>
+        <li><strong>ต้องการให้ติดตั้งด้วยหรือไม่</strong></li>
+        <li><strong>ออกเอกสารในนามบริษัท/ห้างหุ้นส่วน หรือบุคคล</strong></li>
+      </ol>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">ส่งข้อมูลทาง LINE</a>
+        <a class="btn btn--outline" href={site.phones[0].href}>โทร {site.phones[0].display}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .contact-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    background: var(--color-bg);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-5);
+    text-decoration: none;
+    color: var(--color-ink);
+    transition: border-color 180ms var(--ease-out-quart), transform 180ms var(--ease-out-quart);
+  }
+
+  .contact-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-primary);
+  }
+
+  .contact-card--primary {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-primary-ink);
+  }
+
+  .contact-card--primary p,
+  .contact-card--primary .contact-card__cta {
+    color: var(--color-primary-ink);
+  }
+
+  .contact-card__icon {
+    font-size: 1.75rem;
+  }
+
+  .contact-card h2 {
+    font-size: 1.15rem;
+    margin: 0;
+  }
+
+  .contact-card p {
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .contact-card__cta {
+    margin-top: var(--space-2);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .branch-mini {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+  }
+
+  .branch-mini h3 {
+    font-size: 1rem;
+  }
+
+  .branch-mini a {
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .phone-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .phone-list li {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+
+  .phone-list a {
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.05rem;
+  }
+
+  .phone-list__label {
+    color: var(--color-muted);
+    font-size: 0.8rem;
+  }
+
+  .rfq-lede {
+    color: var(--color-muted);
+  }
+
+  .rfq-list {
+    padding-inline-start: 1.3em;
+    line-height: 1.8;
+  }
+
+  .rfq-list li {
+    margin-bottom: var(--space-1);
+  }
+
+  .rfq-list strong {
+    color: var(--color-ink);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+</style>

@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { team } from '../../data/team';
+import { site } from '../../data/site';
+---
+
+<BaseLayout
+  lang="en"
+  title="Technical Team | Meechai Steel Ltd., Part."
+  description="Meechai Steel's engineers and technicians, advising on roof structure design and material take-off."
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>Technical Team</h1>
+      <p>Roof structure advice and material take-off before your project starts, from a team with real on-site experience.</p>
+    </div>
+  </section>
+
+  {team.length > 0 && (
+  <section class="section">
+    <div class="container">
+      <div class="grid-auto" data-reveal-group>
+        {team.map((m) => (
+          <div class="team-card reveal">
+            <div class="team-card__avatar" aria-hidden="true">{m.nameEn.slice(0, 1)}</div>
+            <h3>{m.nameEn}</h3>
+            <p class="team-card__role">{m.roleEn} · {m.years} yrs experience</p>
+            <p>{m.bioEn}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  )}
+
+  <section class="section section--surface">
+    <div class="container-narrow">
+      <h2>What Our Consultation Covers</h2>
+      <ul class="check-list">
+        <li>Material take-off calculated against your construction drawings</li>
+        <li>Fastening system advice matched to slope and local climate</li>
+        <li>Structural inspection before installation begins</li>
+        <li>Free on-site assessment for mid-to-large projects</li>
+      </ul>
+      <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">Schedule with our technical team</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+  }
+
+  .team-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+  }
+
+  .team-card__avatar {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+    font-family: var(--font-display);
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+  }
+
+  .team-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .team-card__role {
+    color: var(--color-primary);
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+
+  .team-card p:not(.team-card__role) {
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .check-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .check-list li {
+    padding-left: 1.6rem;
+    position: relative;
+  }
+
+  .check-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+</style>

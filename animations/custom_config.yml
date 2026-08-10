@@ -1,0 +1,13 @@
+directories:
+  base: "./out"
+  subdirs:
+    output: "videos"
+
+camera:
+  resolution: (1920, 1080)
+  fps: 30
+  background_color: "#FFFFFF"
+  background_opacity: 1.0
+
+scene:
+  show_animation_progress: False

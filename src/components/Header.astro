@@ -1,0 +1,234 @@
+---
+import { nav } from '../data/site';
+import { site } from '../data/site';
+
+interface Props {
+  lang: 'th' | 'en';
+  path: string;
+}
+
+const { lang, path } = Astro.props;
+
+const basePath = lang === 'en' ? path.replace(/^\/en/, '') || '/' : path;
+const thHref = basePath;
+// Blog article bodies are Thai-only (no per-article translation yet), so
+// the EN toggle from an article falls back to the EN blog listing rather
+// than a 404.
+const isBlogArticle = /^\/blog\/[^/]+$/.test(basePath);
+const enHref = isBlogArticle ? '/en/blog' : basePath === '/' ? '/en' : `/en${basePath}`;
+
+const prefix = lang === 'en' ? '/en' : '';
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href={lang === 'en' ? '/en' : '/'}>
+      <span class="brand__mark" aria-hidden="true">MS</span>
+      <span class="brand__name">{lang === 'en' ? site.nameEn : site.nameTh}</span>
+    </a>
+
+    <nav class="main-nav" aria-label={lang === 'en' ? 'Main navigation' : 'เมนูหลัก'}>
+      <button class="main-nav__toggle" type="button" aria-expanded="false" aria-controls="main-nav-list">
+        <span class="visually-hidden">{lang === 'en' ? 'Toggle menu' : 'เปิดเมนู'}</span>
+        <span class="main-nav__toggle-bar" aria-hidden="true"></span>
+      </button>
+      <ul class="main-nav__list" id="main-nav-list">
+        {nav.map((item) => {
+          const href = `${prefix}${item.href === '/' ? '' : item.href}` || '/';
+          const isActive = basePath === item.href;
+          return (
+            <li>
+              <a href={href} aria-current={isActive ? 'page' : undefined}>
+                {lang === 'en' ? item.en : item.th}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <a href={thHref} aria-current={lang === 'th' ? 'true' : undefined}>TH</a>
+        <span aria-hidden="true">/</span>
+        <a href={enHref} aria-current={lang === 'en' ? 'true' : undefined}>EN</a>
+      </div>
+      <a class="btn btn--primary btn--sm" href={site.lineHref} target="_blank" rel="noopener noreferrer">
+        {lang === 'en' ? 'LINE Us' : 'แชท LINE'}
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding-block: var(--space-2);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+    color: var(--color-ink);
+    flex-shrink: 0;
+  }
+
+  .brand__mark {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius);
+    background: var(--color-primary);
+    color: var(--color-primary-ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .brand__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    line-height: 1.2;
+  }
+
+  .main-nav {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .main-nav__toggle {
+    display: none;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .main-nav__toggle-bar,
+  .main-nav__toggle-bar::before,
+  .main-nav__toggle-bar::after {
+    content: '';
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--color-ink);
+    position: relative;
+  }
+
+  .main-nav__toggle-bar::before {
+    position: absolute;
+    top: -6px;
+  }
+
+  .main-nav__toggle-bar::after {
+    position: absolute;
+    top: 6px;
+  }
+
+  .main-nav__list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-3);
+    margin: 0;
+    padding: 0;
+    font-size: 0.92rem;
+  }
+
+  .main-nav__list a {
+    color: var(--color-ink);
+    text-decoration: none;
+    padding: 0.4rem 0;
+    border-bottom: 2px solid transparent;
+  }
+
+  .main-nav__list a:hover,
+  .main-nav__list a[aria-current='page'] {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-shrink: 0;
+  }
+
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .lang-toggle a {
+    color: var(--color-muted);
+    text-decoration: none;
+  }
+
+  .lang-toggle a[aria-current='true'] {
+    color: var(--color-primary);
+  }
+
+  .btn--sm {
+    padding: 0.55rem 1rem;
+    font-size: 0.88rem;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 900px) {
+    .main-nav__toggle {
+      display: flex;
+    }
+
+    .main-nav__list {
+      display: none;
+      position: absolute;
+      inset-inline: 0;
+      top: 100%;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      flex-direction: column;
+      padding: var(--space-3) var(--space-4);
+      gap: var(--space-2);
+    }
+
+    .main-nav {
+      position: static;
+    }
+
+    .main-nav.is-open .main-nav__list {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.main-nav__toggle');
+  const nav = document.querySelector<HTMLElement>('.main-nav');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = nav?.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
+  });
+</script>

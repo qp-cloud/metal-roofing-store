@@ -1,0 +1,100 @@
+---
+/**
+ * A real photograph slot.
+ *
+ * Looks for `src/assets/photos/<slot>.{jpg,jpeg,png,webp}`. If the file is
+ * there it is served through astro:assets (resized, converted, dimensions
+ * baked in so nothing shifts on load). If it is not there yet, the slot falls
+ * back to a neutral panel instead of breaking the build — so the site stays
+ * publishable while photography is still being collected.
+ *
+ * Slot ids and alt text live in src/data/media.ts.
+ */
+import { Image } from 'astro:assets';
+import { photoSlots } from '../data/media';
+
+interface Props {
+  /** Slot id from src/data/media.ts, e.g. "facility-exterior". */
+  slot: string;
+  lang: 'th' | 'en';
+  /** Rendered width hint; the image is resized to this. */
+  width?: number;
+  /** CSS aspect-ratio for the frame, e.g. "4 / 3". */
+  ratio?: string;
+  class?: string;
+  /** First photo above the fold should not be lazy. */
+  eager?: boolean;
+}
+
+const { slot, lang, width = 900, ratio = '4 / 3', class: className, eager = false } = Astro.props;
+
+const found = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/photos/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}',
+  { eager: true },
+);
+
+// Key the glob by filename stem so any supported extension resolves.
+const byStem = new Map<string, ImageMetadata>();
+for (const [path, mod] of Object.entries(found)) {
+  const stem = path.split('/').pop()!.replace(/\.[^.]+$/, '');
+  byStem.set(stem, mod.default);
+}
+
+const image = byStem.get(slot);
+const meta = photoSlots[slot];
+const alt = meta ? (lang === 'en' ? meta.altEn : meta.altTh) : '';
+
+if (!meta) {
+  throw new Error(
+    `<Photo slot="${slot}"> is not declared in src/data/media.ts — add it there so it gets alt text.`,
+  );
+}
+---
+
+{
+  image ? (
+    <Image
+      src={image}
+      alt={alt}
+      width={width}
+      densities={[1, 2]}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+      class:list={['photo', className]}
+      style={`aspect-ratio:${ratio}`}
+    />
+  ) : (
+    <div
+      class:list={['photo', 'photo--pending', className]}
+      style={`aspect-ratio:${ratio}`}
+      role="img"
+      aria-label={alt}
+      data-slot={slot}
+    />
+  )
+}
+
+<style>
+  .photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  /*
+   * Awaiting photography. Reads as a deliberate material swatch rather than a
+   * broken image — corrugated steel banding in the brand colours.
+   */
+  .photo--pending {
+    background: repeating-linear-gradient(
+      100deg,
+      var(--color-accent) 0px,
+      var(--color-accent) 10px,
+      var(--color-primary) 10px,
+      var(--color-primary) 20px
+    );
+    opacity: 0.9;
+  }
+</style>

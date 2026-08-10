@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Diagram from '../../components/Diagram.astro';
+import { products } from '../../data/products';
+import { site } from '../../data/site';
+import Photo from '../../components/Photo.astro';
+---
+
+<BaseLayout
+  lang="en"
+  title="Products | Meechai Steel Ltd., Part."
+  description="Metal roofing sheet, PU foam insulated panels, bolt-type, clip-lock, snap-lock systems, and wall panel sheet."
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>Our Products</h1>
+      <p>Every roofing and wall panel system you need — sized to your budget and building type.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container product-list">
+      {products.map((p, i) => (
+        <article class="product-detail" id={p.slug} style={i % 2 === 1 ? 'background:var(--color-surface)' : undefined}>
+          <div class="container product-detail__inner">
+            <div class="product-detail__media"><Photo slot={`product-${p.slug}`} lang="en" ratio="4 / 3" eager={i === 0} /></div>
+            <div>
+              <h2>{p.nameEn}</h2>
+              <p class="product-detail__th">{p.nameTh}</p>
+              <p>{p.descEn}</p>
+              <p class="product-detail__use"><strong>Best for:</strong> {p.useEn}</p>
+              <div class="hero__actions">
+                <a class="btn btn--outline" href="/en/specifications">View specs & starting prices</a>
+                <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">Ask about this product</a>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container-narrow">
+      <h2>Understand the systems first</h2>
+      <p class="explainer-lead">
+        Schematic cross-sections showing what actually separates these systems, before you talk specifics with our site team.
+      </p>
+      <Diagram
+        lang="en"
+        slug="seam-systems-en"
+        label="Cross-section comparison of bolt-type, clip-lock and snap-lock roof fastening"
+        caption="Bolt-type fasteners pierce the sheet, so every screw hole is a potential leak path. Clip-lock and snap-lock fix inside the seam channel without penetrating the pan."
+      />
+      <Diagram
+        lang="en"
+        slug="pu-foam-en"
+        label="Heat transfer compared between a bare steel sheet and a PU foam insulated panel"
+        caption="A PU foam panel stops most of the heat at the core. Insulation thickness per our published specs, 25–50 mm."
+      />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+  }
+
+  .product-list {
+    padding: 0;
+    max-width: none;
+  }
+
+  .explainer-lead {
+    color: var(--color-muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .product-detail {
+    scroll-margin-top: 90px;
+    padding-block: var(--space-7);
+  }
+
+  .product-detail__inner {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  /* Layout only — Photo.astro owns the image and its pending state. */
+  .product-detail__media {
+    min-width: 0;
+  }
+
+  .product-detail__th {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    margin-top: -0.5rem;
+  }
+
+  .product-detail__use {
+    color: var(--color-ink);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+  }
+
+  @media (max-width: 800px) {
+    .product-detail__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .product-detail__media {
+      order: -1;
+    }
+  }
+</style>

@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Diagram from '../components/Diagram.astro';
+import { specs, specsNoteTh } from '../data/specs';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  lang="th"
+  title="สเปกสินค้าและราคาเริ่มต้น | หจก.มีชัยสตีล"
+  description="ตารางสเปกลอนหลังคา ความหนา การใช้งาน และราคาเริ่มต้นของแผ่นหลังคาเหล็กและแผ่นฉนวนมีชัยสตีล"
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>สเปกสินค้าและราคาเริ่มต้น</h1>
+      <p>เปรียบเทียบลอน ความหนา การใช้งาน และราคาเริ่มต้น เพื่อเลือกสินค้าให้เหมาะกับโครงการของคุณ</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>ลอน / ระบบ</th>
+              <th>ความหนา</th>
+              <th>การใช้งานที่เหมาะสม</th>
+              <th>ราคาเริ่มต้น</th>
+            </tr>
+          </thead>
+          <tbody>
+            {specs.map((s) => (
+              <tr>
+                <td>{s.profileTh}</td>
+                <td>{s.thickness}</td>
+                <td>{s.applicationTh}</td>
+                <td>{s.startingPrice || <span class="price-tbd">สอบถามราคา</span>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">{specsNoteTh}</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">ขอใบเสนอราคา</a>
+        <a class="btn btn--outline" href="/technical-team">ปรึกษาทีมช่างเทคนิค</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container-narrow">
+      <h2>ความหนามีผลอย่างไร</h2>
+      <Diagram
+        lang="th"
+        slug="sheet-thickness-th"
+        label="ภาพเปรียบเทียบการแอ่นตัวของแผ่นหลังคาความหนา 0.35 มม. และ 0.47 มม. ภายใต้น้ำหนักกดเท่ากัน"
+        caption="การแอ่นตัวในภาพเป็นการเปรียบเทียบเชิงหลักการ ไม่ใช่ค่าคำนวณทางวิศวกรรม ระยะแปและน้ำหนักใช้งานจริงควรให้ทีมช่างประเมินหน้างาน"
+      />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+  }
+
+  .table-note {
+    color: var(--color-muted);
+    font-size: 0.88rem;
+    margin-top: var(--space-3);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .price-tbd {
+    color: var(--color-muted);
+    font-size: 0.9em;
+  }
+</style>

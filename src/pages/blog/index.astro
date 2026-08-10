@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout
+  lang="th"
+  title="บทความ / ความรู้เรื่องหลังคา | หจก.มีชัยสตีล"
+  description="บทความให้ความรู้เรื่องแผ่นหลังคาเหล็ก ฉนวนกันความร้อน และการเลือกระบบหลังคาที่เหมาะกับอาคารของคุณ"
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>บทความ / ความรู้เรื่องหลังคา</h1>
+      <p>สรุปความรู้จากประสบการณ์หน้างานจริง ช่วยให้คุณตัดสินใจเลือกหลังคาได้ง่ายขึ้น</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-auto" data-reveal-group>
+        {posts.map((post) => (
+          <a class="post-card reveal" href={`/blog/${post.slug}`}>
+            <time datetime={post.data.date.toISOString()}>
+              {post.data.date.toLocaleDateString('th-TH-u-ca-buddhist', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
+            <h2>{post.data.title}</h2>
+            <p>{post.data.excerpt}</p>
+            <span class="post-card__cta">อ่านต่อ &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+  }
+
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+    text-decoration: none;
+    color: var(--color-ink);
+    transition: border-color 180ms var(--ease-out-quart), transform 180ms var(--ease-out-quart);
+  }
+
+  .post-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .post-card time {
+    font-size: 0.82rem;
+    color: var(--color-muted);
+  }
+
+  .post-card h2 {
+    font-size: 1.15rem;
+    margin: 0;
+  }
+
+  .post-card p {
+    color: var(--color-muted);
+    font-size: 0.92rem;
+    margin: 0;
+  }
+
+  .post-card__cta {
+    margin-top: var(--space-2);
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: 0.9rem;
+  }
+</style>

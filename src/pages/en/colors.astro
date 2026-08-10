@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { roofColors, profiles, insulationOptions } from '../../data/colors';
+---
+
+<BaseLayout
+  lang="en"
+  title="Colors & Materials | Meechai Steel Ltd., Part."
+  description="Choose your roofing profile, paint color, and insulation type."
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>Colors & Materials</h1>
+      <p>Pick a profile, coating color, and insulation type that fits your building's style and use.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Roofing Profiles</h2>
+      <div class="grid-auto" data-reveal-group>
+        {profiles.map((p) => (
+          <div class="profile-card reveal">
+            <h3>{p.nameEn}</h3>
+            <p>{p.descEn}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container">
+      <h2>Available Colors</h2>
+      <div class="color-grid" data-reveal-group>
+        {roofColors.map((c) => (
+          <div class="color-swatch reveal">
+            <span class="color-swatch__chip" style={`background:${c.hex}`}></span>
+            <span class="color-swatch__name">{c.nameEn}</span>
+          </div>
+        ))}
+      </div>
+      <p class="table-note">Actual colors may vary slightly from your screen. Request a physical sample before ordering in volume.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Insulation Options</h2>
+      <div class="grid-auto" data-reveal-group>
+        {insulationOptions.map((opt) => (
+          <div class="profile-card reveal">
+            <h3>{opt.nameEn}</h3>
+            <p>{opt.descEn}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+  }
+
+  .profile-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+  }
+
+  .profile-card h3 {
+    font-size: 1.05rem;
+  }
+
+  .profile-card p {
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-3);
+  }
+
+  .color-swatch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+    text-align: center;
+  }
+
+  .color-swatch__chip {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+  }
+
+  .color-swatch__name {
+    font-size: 0.88rem;
+    color: var(--color-ink);
+  }
+
+  .table-note {
+    color: var(--color-muted);
+    font-size: 0.88rem;
+    margin-top: var(--space-3);
+  }
+</style>

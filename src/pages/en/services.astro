@@ -1,0 +1,155 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Photo from '../../components/Photo.astro';
+import { site } from '../../data/site';
+
+// Ordered as the actual customer journey — consult, produce, deliver, install.
+const services = [
+  {
+    title: 'Technical Consultation',
+    desc: 'Our technical team helps with material take-off and roof structure advice before the project starts.',
+  },
+  {
+    title: 'Production',
+    desc: 'Roll-formed to your required spec, with quality control at every step from raw material to finished sheet.',
+  },
+  {
+    title: 'Delivery',
+    desc: 'Nationwide delivery to the job site, scheduled around your project size and construction timeline.',
+  },
+  {
+    title: 'Installation',
+    desc: 'A professional installation crew with proper site safety, for homes and large-scale factories alike.',
+  },
+];
+---
+
+<BaseLayout
+  lang="en"
+  title="Services | Meechai Steel Ltd., Part."
+  description="End-to-end production, installation, delivery, and technical consultation from Meechai Steel."
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>Our Services</h1>
+      <p>End-to-end, from consultation to on-site installation — no need to coordinate multiple vendors.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-auto" data-reveal-group>
+        {services.map((s, i) => (
+          <div class="service-card reveal">
+            <span class="service-card__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h2>{s.title}</h2>
+            <p>{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container-narrow">
+      <h2>On-site installation</h2>
+      <p>
+        Our own crews do the installation — no subcontracting — so quality and schedule stay under our control,
+        and we answer for the work directly.
+      </p>
+    </div>
+    <div class="container photo-band">
+      <Photo slot="installation-crew" lang="en" ratio="4 / 3" />
+      <Photo slot="installation-finished" lang="en" ratio="4 / 3" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow">
+      <h2>Cross-border delivery to Lao PDR</h2>
+      <p>
+        Our plant is in Nong Khai, about 25 km from the First Thai–Lao Friendship Bridge and Vientiane. For a job
+        on the Lao side that is far closer than ordering from a central-Thailand mill, and close enough that we can
+        talk through site details directly.
+      </p>
+      <p>
+        Export shipments involve customs paperwork and procedure, so please talk to our sales team about delivery
+        terms, currency and lead time for your specific project before an order is confirmed.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container-narrow">
+      <h2>Delivery</h2>
+      <p>
+        We deliver to site on our own trucks, sequencing lengths and unloading to match the installation plan so
+        sheet is not handled twice or damaged in transit.
+      </p>
+    </div>
+    <div class="container photo-band">
+      <Photo slot="delivery-truck" lang="en" ratio="16 / 9" />
+    </div>
+  </section>
+
+  <section class="section section--surface cta-band">
+    <div class="container cta-band__inner">
+      <div>
+        <h2>Need an on-site assessment?</h2>
+        <p>Our technical team visits the site to assess and advise before your project starts.</p>
+      </div>
+      <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">Schedule via LINE</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+  }
+
+  .service-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-5);
+  }
+
+  .service-card__num {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .service-card h2 {
+    font-size: 1.2rem;
+  }
+
+  .service-card p {
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .cta-band__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .photo-band {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+  }
+</style>

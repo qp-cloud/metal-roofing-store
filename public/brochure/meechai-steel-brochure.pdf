@@ -1,0 +1,49 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R /F2 6 0 R >> >> /MediaBox [0 0 612 792] /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 337 >>
+stream
+BT
+/F1 26 Tf
+72 700 Td
+(Meechai Steel Co., Ltd.) Tj
+0 -34 Td
+/F2 16 Tf
+(Product Brochure - placeholder) Tj
+0 -28 Td
+(Replace this file with the client's real PDF brochure) Tj
+0 -50 Td
+(Products: Metal Sheet | PU Foam | Bolt-Type | Clip-Lock | Snap-Lock | Panel Sheet) Tj
+0 -24 Td
+(Contact: LINE @meechaisteel  |  Tel: 081-234-5678) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000326 00000 n 
+0000000714 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+784
+%%EOF

@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Diagram from '../../components/Diagram.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout lang="th" title={`${post.data.title} | หจก.มีชัยสตีล`} description={post.data.excerpt}>
+  <article class="section">
+    <div class="container-narrow">
+      <a class="back-link" href="/blog">&larr; บทความทั้งหมด</a>
+      <time datetime={post.data.date.toISOString()}>
+        {post.data.date.toLocaleDateString('th-TH-u-ca-buddhist', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </time>
+      <h1>{post.data.title}</h1>
+      {post.data.diagram && (
+        <Diagram
+          lang="th"
+          slug={`${post.data.diagram}-th`}
+          label={post.data.diagramLabel ?? post.data.title}
+          caption={post.data.diagramCaption ?? ''}
+        />
+      )}
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .back-link {
+    display: inline-block;
+    margin-bottom: var(--space-3);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  time {
+    display: block;
+    color: var(--color-muted);
+    font-size: 0.85rem;
+    margin-bottom: var(--space-2);
+  }
+
+  .prose :global(h2) {
+    margin-top: var(--space-6);
+  }
+
+  .prose :global(p),
+  .prose :global(li) {
+    max-width: none;
+  }
+</style>

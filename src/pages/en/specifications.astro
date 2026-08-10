@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Diagram from '../../components/Diagram.astro';
+import { specs, specsNoteEn } from '../../data/specs';
+import { site } from '../../data/site';
+---
+
+<BaseLayout
+  lang="en"
+  title="Specifications & Starting Prices | Meechai Steel Ltd., Part."
+  description="Compare roofing profile, thickness, application, and starting price across Meechai Steel's product range."
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>Specifications & Starting Prices</h1>
+      <p>Compare profile, thickness, application, and starting price to find the right fit for your project.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Profile / System</th>
+              <th>Thickness</th>
+              <th>Best Application</th>
+              <th>Starting Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {specs.map((s) => (
+              <tr>
+                <td>{s.profileEn}</td>
+                <td>{s.thickness}</td>
+                <td>{s.applicationEn}</td>
+                <td>{s.startingPrice || <span class="price-tbd">Ask for a quote</span>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">{specsNoteEn}</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">Request a quote</a>
+        <a class="btn btn--outline" href="/en/technical-team">Talk to our technical team</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container-narrow">
+      <h2>What thickness actually changes</h2>
+      <Diagram
+        lang="en"
+        slug="sheet-thickness-en"
+        label="Deflection compared between 0.35 mm and 0.47 mm roofing sheet under the same load"
+        caption="The deflection shown is a qualitative comparison, not an engineering calculation. Real purlin spacing and service loads should be assessed on site by our technical team."
+      />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+  }
+
+  .table-note {
+    color: var(--color-muted);
+    font-size: 0.88rem;
+    margin-top: var(--space-3);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .price-tbd {
+    color: var(--color-muted);
+    font-size: 0.9em;
+  }
+</style>

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm run *)",
+      "Bash(break)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4321/en)",
+      "Bash(file public/brochure/*.pdf)",
+      "Bash(curl -s http://localhost:4321/)"
+    ]
+  }
+}

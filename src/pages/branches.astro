@@ -1,0 +1,159 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+import { location, hasAddress, serviceArea } from '../data/branches';
+---
+
+<BaseLayout
+  lang="th"
+  title="ที่ตั้งและติดต่อ | หจก.มีชัยสตีล"
+  description="ที่ตั้งโรงงานและช่องทางติดต่อของ หจก.มีชัยสตีล โทรศัพท์ LINE และ Facebook"
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>ที่ตั้งและติดต่อ</h1>
+      <p>เราให้บริการจากที่ตั้งเดียว ผลิต จัดส่ง และติดตั้งโดยทีมงานของเราเอง</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow">
+      <div class="location-card">
+        <h2>{location.nameTh}</h2>
+        <p class="location-card__province">{location.provinceTh}</p>
+        {hasAddress ? (
+          <p class="location-card__address">{location.addressTh}</p>
+        ) : (
+          <p class="location-card__pending">กำลังปรับปรุงที่อยู่แบบเต็ม ติดต่อทางโทรศัพท์หรือ LINE ได้ตามช่องทางด้านล่าง</p>
+        )}
+        <ul class="phone-list">
+          {location.phones.map((p) => (
+            <li>
+              <a href={p.href}>{p.display}</a>
+              <span class="phone-list__label">{p.labelTh}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">แชททาง LINE</a>
+          <a class="btn btn--outline" href={site.facebookHref} target="_blank" rel="noopener noreferrer">ดู Facebook</a>
+        </div>
+        {location.mapUrl && (
+          <p class="location-card__map"><a href={location.mapUrl} target="_blank" rel="noopener noreferrer">เปิดใน Google Maps &rarr;</a></p>
+        )}
+      </div>
+    </div>
+  </section>
+  <section class="section section--surface">
+    <div class="container-narrow">
+      <h2>พื้นที่จัดส่ง</h2>
+      <dl class="area-list">
+        <dt>ในประเทศ</dt>
+        <dd>{serviceArea.domesticTh}</dd>
+        <dt>ข้ามแดน</dt>
+        <dd>{serviceArea.crossBorderTh}</dd>
+      </dl>
+      <p class="area-note">
+        งานนอกพื้นที่ข้างต้นสอบถามได้ เราประเมินค่าขนส่งตามปริมาณและระยะทางจริง
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+  }
+
+  .location-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-5);
+  }
+
+  .location-card h2 {
+    margin-top: 0;
+  }
+
+  .location-card__address {
+    color: var(--color-ink);
+  }
+
+  .location-card__pending {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+  }
+
+  .location-card__map {
+    margin-bottom: 0;
+  }
+
+  .location-card__map a {
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .phone-list {
+    list-style: none;
+    margin: var(--space-3) 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .phone-list li {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+
+  .phone-list a {
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+
+  .phone-list__label {
+    color: var(--color-muted);
+    font-size: 0.8rem;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .location-card__province {
+    font-weight: 600;
+    margin: 0 0 var(--space-1);
+  }
+
+  .area-list {
+    margin: 0;
+  }
+
+  .area-list dt {
+    font-weight: 600;
+    margin-top: var(--space-3);
+  }
+
+  .area-list dd {
+    margin: 0.15rem 0 0;
+    color: var(--color-muted);
+  }
+
+  .area-note {
+    margin-top: var(--space-4);
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+</style>

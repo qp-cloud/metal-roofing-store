@@ -1,0 +1,227 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+import { products } from '../../data/products';
+import { testimonials } from '../../data/testimonials';
+---
+
+<BaseLayout
+  lang="en"
+  title="Meechai Steel, Nong Khai | Metal Roofing & Insulated Panels, Thailand & Laos"
+  description="Roofing sheet and PU foam panel manufacturer in Nong Khai. Contractor and project supply, cut to site length, delivered across upper Isan and into Lao PDR."
+>
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__copy">
+        <p class="hero__eyebrow">Manufacturing in Nong Khai · supplying upper Isan and Lao PDR</p>
+        <h1>Roofing sheet straight from the mill, for contractors and projects</h1>
+        <p class="hero__lede">
+          We roll-form our own sheet, cut it to the exact run lengths a site needs, and hold one spec across
+          the whole project — with a technical team that takes off quantities before anything is produced.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="/en/contact">Request a project quote</a>
+          <a class="btn btn--outline" href={site.lineHref} target="_blank" rel="noopener noreferrer">Ask on LINE</a>
+        </div>
+      </div>
+      <div class="hero__media" role="img" aria-label="Meechai Steel roofing sheets installed on a factory building"></div>
+    </div>
+  </section>
+
+  <section class="section" data-reveal-group>
+    <div class="container">
+      <h2>Our Products</h2>
+      <div class="grid-auto">
+        {products.map((p) => (
+          <a class="product-card reveal" href={`/en/products#${p.slug}`}>
+            <h3>{p.nameEn}</h3>
+            <p>{p.descEn}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container">
+      <h2>Why Meechai Steel</h2>
+      <div class="grid-auto" data-reveal-group>
+        <div class="point reveal">
+          <h3>Cut to your run length</h3>
+          <p>Sheet made to the actual length of each roof run — fewer laps, less offcut, less cutting on site.</p>
+        </div>
+        <div class="point reveal">
+          <h3>Take-off before you order</h3>
+          <p>Send drawings and our technical team works out quantities and the right fastening system for the job.</p>
+        </div>
+        <div class="point reveal">
+          <h3>Cross-border to Lao PDR</h3>
+          <p>We sit at the First Thai–Lao Friendship Bridge, roughly 25 km from Vientiane.</p>
+        </div>
+        <div class="point reveal">
+          <h3>Quoted on the real job</h3>
+          <p>Priced on spec, volume and site conditions, confirmed before we produce.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>What Customers Say</h2>
+      <div class="grid-auto" data-reveal-group>
+        {testimonials.map((t) => (
+          <blockquote class="quote reveal">
+            <p>&ldquo;{t.quoteEn}&rdquo;</p>
+            <footer>
+              <strong>{t.nameEn}</strong> — {t.projectEn}
+              <span class="quote__branch">{t.branchEn}</span>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+      <p class="section-cta"><a href="/en/testimonials">See all testimonials &rarr;</a></p>
+    </div>
+  </section>
+
+  <section class="section section--surface cta-band">
+    <div class="container cta-band__inner">
+      <div>
+        <h2>Ready to start your roofing project?</h2>
+        <p>Message us on LINE or call our sales team — free consultation before you decide.</p>
+      </div>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">LINE: {site.lineId}</a>
+        <a class="btn btn--outline" href={site.phoneHref}>Call {site.phone}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: var(--space-8) var(--space-7);
+    background: var(--color-surface);
+  }
+
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  .hero__lede {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .hero__media {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  }
+
+  .product-card {
+    display: block;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+    text-decoration: none;
+    color: var(--color-ink);
+    transition: border-color 180ms var(--ease-out-quart), transform 180ms var(--ease-out-quart);
+  }
+
+  .product-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .product-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: var(--space-1);
+  }
+
+  .product-card p {
+    color: var(--color-muted);
+    font-size: 0.92rem;
+    margin: 0;
+  }
+
+  .point h3 {
+    font-size: 1.1rem;
+  }
+
+  .point p {
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .quote {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+    margin: 0;
+  }
+
+  .quote p {
+    font-style: italic;
+    max-width: none;
+  }
+
+  .quote footer {
+    font-style: normal;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .quote__branch {
+    font-size: 0.82rem;
+  }
+
+  .section-cta {
+    margin-top: var(--space-4);
+  }
+
+  .section-cta a {
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .cta-band__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  @media (max-width: 800px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__media {
+      order: -1;
+    }
+  }
+
+  .hero__eyebrow {
+    margin: 0 0 var(--space-2);
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+  }
+</style>

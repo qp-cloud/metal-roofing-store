@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { products } from '../data/products';
+---
+
+<BaseLayout
+  lang="th"
+  title="โบรชัวร์สินค้า | หจก.มีชัยสตีล"
+  description="ดาวน์โหลดโบรชัวร์สินค้ามีชัยสตีล รวมสเปกและรายละเอียดผลิตภัณฑ์ทั้งหมด"
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>โบรชัวร์สินค้า</h1>
+      <p>ดาวน์โหลดไฟล์ PDF สรุปสินค้า สเปก และช่องทางติดต่อ นำไปใช้ประกอบการตัดสินใจหรือส่งต่อให้ทีมงานของคุณ</p>
+      <a class="btn btn--primary" href="/brochure/meechai-steel-brochure.pdf" download>
+        ดาวน์โหลดโบรชัวร์ (PDF)
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>สินค้าที่รวมอยู่ในโบรชัวร์</h2>
+      <ul class="brochure-list">
+        {products.map((p) => (
+          <li>{p.nameTh}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+    max-width: 60ch;
+  }
+
+  .page-hero .btn {
+    margin-top: var(--space-3);
+  }
+
+  .brochure-list {
+    columns: 2;
+    gap: var(--space-5);
+    padding-left: 1.2rem;
+    color: var(--color-ink);
+  }
+
+  .brochure-list li {
+    margin-bottom: var(--space-2);
+    break-inside: avoid;
+  }
+
+  @media (max-width: 600px) {
+    .brochure-list {
+      columns: 1;
+    }
+  }
+</style>

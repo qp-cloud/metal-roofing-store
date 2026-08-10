@@ -1,0 +1,159 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Photo from '../../components/Photo.astro';
+import { site } from '../../data/site';
+import { location, hasAddress } from '../../data/branches';
+---
+
+<BaseLayout
+  lang="en"
+  title="About Us | Meechai Steel Ltd., Part."
+  description="Our history, factory, quality standards, and how to reach us."
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>About Us</h1>
+      <p>{site.taglineEn}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow">
+      <h2>Our History</h2>
+      <p>
+        Meechai Steel was founded by a family of steel craftsmen who wanted to produce high-quality roofing sheet
+        at a price customers could actually afford. Through it all, the principle has stayed the same: build it
+        well, price it fairly, and treat every customer like family.
+      </p>
+      <p>
+        Today Meechai Steel serves both individual homeowners and large-project contractors and engineers, backed by
+        a technical team with real hands-on experience — from choosing the right spec to installing it on site.
+      </p>
+    </div>
+  <div class="container photo-band">
+      <Photo slot="facility-exterior" lang="en" ratio="4 / 3" />
+      <Photo slot="facility-yard" lang="en" ratio="4 / 3" />
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container">
+      <h2>Factory & Standards</h2>
+      <div class="grid-auto" data-reveal-group>
+        <div class="std-card reveal">
+          <h3>Quality-controlled production line</h3>
+          <p>Roll-formed on machinery that holds consistent thickness and profile standards across every batch.</p>
+        </div>
+        <div class="std-card reveal">
+          <h3>Raw material inspection</h3>
+          <p>We source coated steel from certified suppliers and test thickness and coating before it enters production.</p>
+        </div>
+        <div class="std-card reveal">
+          <h3>Product warranty</h3>
+          <p>Every product ships with a warranty appropriate to its type, plus certification for project use.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow">
+      <h2>Machinery & Production</h2>
+      <p>
+        Every sheet is roll-formed in our own plant, with thickness and profile controlled from the coil through to
+        the finished sheet. That keeps quality checkable at each step and lets us cut to the exact lengths a site needs.
+      </p>
+    </div>
+    <div class="container photo-band">
+      <Photo slot="production-roll-former" lang="en" ratio="4 / 3" />
+      <Photo slot="production-line" lang="en" ratio="4 / 3" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow">
+      <h2>Location & Contact</h2>
+      <div class="branch-mini">
+        <h3>{location.nameEn}</h3>
+        {hasAddress && <p>{location.addressEn}</p>}
+        <ul class="phone-inline">
+          {location.phones.map((p) => (
+            <li><a href={p.href}>{p.display}</a> <span>{p.labelEn}</span></li>
+          ))}
+        </ul>
+      </div>
+      <p class="section-cta"><a href="/en/branches">All contact details &rarr;</a></p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+  }
+
+  .std-card,
+  .branch-mini {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+  }
+
+  .std-card h3,
+  .branch-mini h3 {
+    font-size: 1.05rem;
+  }
+
+  .std-card p,
+  .branch-mini p {
+    color: var(--color-muted);
+    margin: 0 0 var(--space-2);
+  }
+
+  .branch-mini a {
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .section-cta {
+    margin-top: var(--space-4);
+  }
+
+  .section-cta a {
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .photo-band {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+  }
+
+  .phone-inline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .phone-inline a {
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .phone-inline span {
+    color: var(--color-muted);
+    font-size: 0.8rem;
+  }
+</style>
