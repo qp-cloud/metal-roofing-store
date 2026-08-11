@@ -1,0 +1,176 @@
+---
+import { configuratorUrl } from '../data/configurator';
+
+interface Props {
+  lang: 'th' | 'en';
+}
+
+const { lang } = Astro.props;
+
+const copy = {
+  th: {
+    eyebrow: 'เครื่องมือใหม่',
+    heading: 'ออกแบบแผ่นหลังคาของคุณ แบบ 3 มิติ',
+    lede:
+      'เลือกรูปลอน ความหนา ความยาว ความกว้าง และสี เห็นภาพจริงทันที พร้อมคำนวณพื้นที่มุง น้ำหนัก และราคาโดยประมาณ',
+    button: 'เปิดเครื่องมือออกแบบ 3 มิติ',
+    note: 'ใช้ฟรี ไม่ต้องสมัครสมาชิก',
+    points: ['4 รูปลอนให้เลือก', 'ยาว 1–20 เมตร', 'สีจริง 15 เฉด'],
+  },
+  en: {
+    eyebrow: 'New tool',
+    heading: 'Configure your roofing sheet in 3D',
+    lede:
+      'Pick a profile, thickness, length, width and colour and see it immediately — with coverage, weight and an estimated price worked out for you.',
+    button: 'Open the 3D configurator',
+    note: 'Free to use, no sign-up',
+    points: ['4 profiles', '1–20 m lengths', '15 real colours'],
+  },
+}[lang];
+---
+
+<section class="config-cta">
+  <div class="container config-cta__inner">
+    <div class="config-cta__copy">
+      <p class="config-cta__eyebrow">{copy.eyebrow}</p>
+      <h2>{copy.heading}</h2>
+      <p class="config-cta__lede">{copy.lede}</p>
+      <ul class="config-cta__points">
+        {copy.points.map((p) => <li>{p}</li>)}
+      </ul>
+    </div>
+
+    <div class="config-cta__action">
+      {/*
+        Opens the configurator directly rather than the embedded /configurator
+        page: a direct link cannot be broken by an iframe policy, and this is the
+        button the whole section exists for. The embedded page remains in the nav
+        for customers who prefer to stay on the site.
+      */}
+      <a
+        class="btn btn--primary btn--xl"
+        href={configuratorUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path
+            d="M12 2.5 21 7v10l-9 4.5L3 17V7l9-4.5Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M3 7l9 4.5L21 7M12 11.5V21.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linejoin="round"
+          />
+        </svg>
+        {copy.button}
+      </a>
+      <p class="config-cta__note">{copy.note}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /*
+    Accent band, not a card: the section reads as part of the page rather than a
+    floating panel. Steel-blue accent rather than the red-oxide primary so the
+    button — which IS primary — carries the emphasis instead of competing with a
+    tinted background.
+  */
+  .config-cta {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+    padding-block: var(--space-7);
+  }
+
+  .config-cta__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+
+  .config-cta__copy {
+    flex: 1 1 460px;
+  }
+
+  .config-cta__eyebrow {
+    margin: 0 0 var(--space-1);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .config-cta h2 {
+    margin: 0 0 var(--space-2);
+    color: var(--color-accent-ink);
+  }
+
+  .config-cta__lede {
+    margin: 0 0 var(--space-3);
+    max-width: 56ch;
+    opacity: 0.9;
+  }
+
+  .config-cta__points {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+
+  .config-cta__points li::before {
+    content: '—';
+    margin-right: 0.5rem;
+    opacity: 0.6;
+  }
+
+  .config-cta__action {
+    flex: 0 1 auto;
+    text-align: center;
+  }
+
+  /* The one oversized control on the site; sized so it is unmistakably the
+     primary action in this band without shouting on a phone. */
+  .btn--xl {
+    font-size: clamp(1rem, 2.4vw, 1.15rem);
+    padding: 1.1rem 2rem;
+    gap: var(--space-2);
+  }
+
+  .btn--xl svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .config-cta__note {
+    margin: var(--space-2) 0 0;
+    font-size: 0.85rem;
+    opacity: 0.75;
+  }
+
+  @media (max-width: 720px) {
+    .config-cta__action {
+      width: 100%;
+    }
+
+    .btn--xl {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

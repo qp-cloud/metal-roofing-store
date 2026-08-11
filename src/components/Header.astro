@@ -147,7 +147,10 @@ const prefix = lang === 'en' ? '/en' : '';
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-1) var(--space-3);
+    /* space-2 rather than space-3: with the configurator added the nav is 13
+       items, and at 16px gaps the last one wrapped to a second row on a 1440px
+       screen. Twelve gaps at 4px less recovers ~48px and keeps it on one line. */
+    gap: var(--space-1) var(--space-2);
     margin: 0;
     padding: 0;
     font-size: 0.92rem;
