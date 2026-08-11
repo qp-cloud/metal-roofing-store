@@ -12,7 +12,12 @@
     "facebook": "node --env-file-if-exists=.env --experimental-strip-types scripts/fetch-facebook.mjs"
   },
   "dependencies": {
+    "@astrojs/react": "^6.0.2",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
     "astro": "^5.2.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "sharp": "^0.35.3"
   },
   "devDependencies": {

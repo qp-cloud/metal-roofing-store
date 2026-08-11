@@ -57,6 +57,7 @@ export const nav: NavItem[] = [
   { th: 'หน้าแรก', en: 'Home', href: '/' },
   { th: 'เกี่ยวกับเรา', en: 'About Us', href: '/about' },
   { th: 'สินค้า', en: 'Products', href: '/products' },
+  { th: 'ออกแบบ 3D', en: '3D Configurator', href: '/configurator' },
   { th: 'สเปกสินค้า', en: 'Specifications', href: '/specifications' },
   { th: 'สี / วัสดุ', en: 'Colors & Materials', href: '/colors' },
   { th: 'บริการ', en: 'Services', href: '/services' },

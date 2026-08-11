@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { configuratorUrl } from '../data/configurator';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  lang="th"
+  title="ออกแบบแผ่นหลังคา 3 มิติ | หจก.มีชัยสตีล"
+  description="เลือกรูปลอน ความหนา ขนาด และสีแผ่นหลังคาเหล็ก ดูภาพ 3 มิติทันที พร้อมคำนวณพื้นที่ น้ำหนัก และราคาโดยประมาณ"
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>ออกแบบแผ่นหลังคาของคุณ</h1>
+      <p>
+        เลือกรูปลอน ความหนา ความยาว ความกว้าง และสี แล้วดูผลเป็นภาพ 3 มิติทันที
+        ระบบคำนวณพื้นที่มุง น้ำหนัก และราคาโดยประมาณให้อัตโนมัติ
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {/*
+        The configurator is embedded rather than linked away so the customer
+        stays on our site. Its own server restricts frame-ancestors to this
+        origin, so nobody else can embed it.
+      */}
+      <div class="configurator-frame">
+        <iframe
+          src={configuratorUrl}
+          title="เครื่องมือออกแบบแผ่นหลังคา 3 มิติ"
+          loading="lazy"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <p class="configurator-note">
+        เปิดไม่ขึ้น หรือต้องการดูเต็มจอ?
+        <a href={configuratorUrl} target="_blank" rel="noopener noreferrer">
+          เปิดเครื่องมือในแท็บใหม่ &rarr;
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container cta-band__inner">
+      <div>
+        <h2>อยากได้ราคาจริง?</h2>
+        <p>ส่งสเปกที่คุณเลือกมาทาง LINE หรือโทรหาทีมขาย รับใบเสนอราคาตามหน้างานจริง</p>
+      </div>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">
+          แชท LINE: {site.lineId}
+        </a>
+        <a class="btn btn--outline" href={site.phoneHref}>โทร {site.phone}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /*
+    Tall enough that the configurator's own desktop layout (viewer + panel side
+    by side) has room to breathe, without the page becoming an endless scroll.
+    On narrow screens the tool stacks internally, so it needs more height.
+  */
+  .configurator-frame {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--color-surface);
+    height: min(84vh, 900px);
+  }
+
+  @media (max-width: 900px) {
+    .configurator-frame {
+      height: min(140vh, 1100px);
+    }
+  }
+
+  .configurator-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  .configurator-note {
+    margin-top: var(--space-3);
+    color: var(--color-muted);
+    font-size: 0.95rem;
+  }
+
+  .cta-band__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+</style>
