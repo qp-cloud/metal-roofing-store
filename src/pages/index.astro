@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site';
 import { products } from '../data/products';
 import { testimonials } from '../data/testimonials';
+import FacebookUpdates from '../components/FacebookUpdates.astro';
 ---
 
 <BaseLayout
@@ -83,6 +84,8 @@ import { testimonials } from '../data/testimonials';
       <p class="section-cta"><a href="/testimonials">ดูรีวิวทั้งหมด &rarr;</a></p>
     </div>
   </section>
+
+  <FacebookUpdates lang="th" />
 
   <section class="section section--surface cta-band">
     <div class="container cta-band__inner">

@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "photos": "node --experimental-strip-types scripts/list-missing-photos.mjs"
+    "photos": "node --experimental-strip-types scripts/list-missing-photos.mjs",
+    "facebook": "node --env-file-if-exists=.env --experimental-strip-types scripts/fetch-facebook.mjs"
   },
   "dependencies": {
     "astro": "^5.2.0",

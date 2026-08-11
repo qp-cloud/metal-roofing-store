@@ -1,0 +1,129 @@
+---
+import { site } from '../data/site';
+import { recentPosts, formatPostDate } from '../data/facebook';
+
+type Props = {
+  lang: 'th' | 'en';
+  /** How many posts to show. The rest stay on the Page. */
+  count?: number;
+};
+
+const { lang, count = 3 } = Astro.props;
+const posts = recentPosts(count);
+
+const copy = {
+  th: {
+    heading: 'ข่าวสารจากเพจ',
+    lede: 'อัปเดตงานผลิตและงานติดตั้งล่าสุดจากเพจ Facebook ของเรา',
+    readMore: 'อ่านบน Facebook',
+    all: 'ดูโพสต์ทั้งหมดบน Facebook',
+  },
+  en: {
+    heading: 'From our Page',
+    lede: 'Recent production and installation updates from our Facebook Page.',
+    readMore: 'Read on Facebook',
+    all: 'See all posts on Facebook',
+  },
+}[lang];
+
+// Excerpt long posts rather than reflowing the whole thing into a card.
+const excerpt = (text: string) => (text.length > 220 ? `${text.slice(0, 220).trimEnd()}…` : text);
+---
+
+{
+  /* Nothing to show until `pnpm run facebook` has run — render no section at all
+     rather than an empty grid with a heading over it. */
+  posts.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <h2>{copy.heading}</h2>
+        <p class="fb-lede">{copy.lede}</p>
+
+        <div class="grid-auto" data-reveal-group>
+          {posts.map((post) => (
+            <article class="fb-card reveal">
+              {post.image && (
+                <img
+                  class="fb-card__image"
+                  src={post.image}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+              <time class="fb-card__date" datetime={post.createdTime}>
+                {formatPostDate(post.createdTime, lang)}
+              </time>
+              <p class="fb-card__text">{excerpt(post.message)}</p>
+              {post.permalink && (
+                <a class="fb-card__link" href={post.permalink} target="_blank" rel="noopener noreferrer">
+                  {copy.readMore} &rarr;
+                </a>
+              )}
+            </article>
+          ))}
+        </div>
+
+        <p class="section-cta">
+          <a href={site.facebookHref} target="_blank" rel="noopener noreferrer">
+            {copy.all} &rarr;
+          </a>
+        </p>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .fb-lede {
+    color: var(--color-muted);
+    margin-top: 0;
+    margin-bottom: var(--space-4);
+  }
+
+  .fb-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+  }
+
+  .fb-card__image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    margin-bottom: var(--space-1);
+  }
+
+  .fb-card__date {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+
+  .fb-card__text {
+    margin: 0;
+    /* Facebook posts keep their line breaks; honour them without letting a long
+       unbroken URL blow out the card. */
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+  }
+
+  .fb-card__link {
+    margin-top: auto;
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .fb-card__link:hover {
+    text-decoration: underline;
+  }
+
+  .section-cta {
+    margin-top: var(--space-4);
+  }
+</style>
