@@ -5,6 +5,7 @@ import { products } from '../../data/products';
 import { testimonials } from '../../data/testimonials';
 import FacebookUpdates from '../../components/FacebookUpdates.astro';
 import ConfiguratorCTA from '../../components/ConfiguratorCTA.astro';
+import AnimatedBackground from '../../components/AnimatedBackground.astro';
 ---
 
 <BaseLayout
@@ -13,6 +14,7 @@ import ConfiguratorCTA from '../../components/ConfiguratorCTA.astro';
   description="Roofing sheet and PU foam panel manufacturer in Nong Khai. Contractor and project supply, cut to site length, delivered across upper Isan and into Lao PDR."
 >
   <section class="hero">
+    <AnimatedBackground />
     <div class="container hero__inner">
       <div class="hero__copy">
         <p class="hero__eyebrow">Manufacturing in Nong Khai · supplying upper Isan and Lao PDR</p>
@@ -106,11 +108,14 @@ import ConfiguratorCTA from '../../components/ConfiguratorCTA.astro';
 
 <style>
   .hero {
+    position: relative;
+    isolation: isolate;
     padding-block: var(--space-8) var(--space-7);
-    background: var(--color-surface);
   }
 
   .hero__inner {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
     gap: var(--space-6);

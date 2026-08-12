@@ -1,0 +1,140 @@
+---
+/**
+ * Decorative animated background for the hero band: brushed-metal ribs with a
+ * slow light sweep, echoing the roofing profiles the shop actually rolls.
+ *
+ * Drop it as the first child of a `position: relative` section; it fills the
+ * section and fades out at the bottom so content below stays clean.
+ *
+ * Motion rules it sticks to:
+ *  - only `transform` and `opacity` animate (no layout, no repaint)
+ *  - purely presentational, so `aria-hidden` + `pointer-events: none`
+ *  - frozen entirely under `prefers-reduced-motion: reduce`
+ */
+---
+
+<div class="bg" aria-hidden="true">
+  <div class="bg__ribs"></div>
+  <div class="bg__sheen"></div>
+  <div class="bg__glow"></div>
+</div>
+
+<style>
+  .bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
+  }
+
+  /* Rotated frame so the ribs read as a diagonal roof plane, while the drift
+     itself stays on the child's local X axis — that keeps the loop seamless. */
+  .bg__ribs {
+    position: absolute;
+    inset: -25% -35%;
+    transform: rotate(-8deg);
+  }
+
+  .bg__ribs::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* One period = 96px: a thin standing seam plus a wider rib shadow. */
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0 18px,
+      color-mix(in oklab, var(--color-ink) 4%, transparent) 18px 19px,
+      transparent 19px 46px,
+      color-mix(in oklab, var(--color-ink) 7%, transparent) 46px 48px,
+      transparent 48px 96px
+    );
+    will-change: transform;
+    animation: rib-drift 22s linear infinite;
+  }
+
+  @keyframes rib-drift {
+    to {
+      transform: translate3d(96px, 0, 0);
+    }
+  }
+
+  /* Light travelling across the sheet, then a beat of rest before it repeats. */
+  .bg__sheen {
+    position: absolute;
+    inset: -40% -10%;
+    background: linear-gradient(
+      100deg,
+      transparent 38%,
+      color-mix(in oklab, white 70%, transparent) 50%,
+      transparent 62%
+    );
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: sheen-sweep 16s var(--ease-out-quart) infinite;
+  }
+
+  @keyframes sheen-sweep {
+    0% {
+      transform: translate3d(-70%, 0, 0);
+      opacity: 0;
+    }
+    15% {
+      opacity: 0.85;
+    }
+    60% {
+      opacity: 0.85;
+    }
+    75%,
+    100% {
+      transform: translate3d(70%, 0, 0);
+      opacity: 0;
+    }
+  }
+
+  /* Brand-tinted haze so the band never looks like flat grey. */
+  .bg__glow {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        60% 70% at 12% 18%,
+        color-mix(in oklab, var(--color-primary) 12%, transparent) 0%,
+        transparent 70%
+      ),
+      radial-gradient(
+        55% 65% at 88% 82%,
+        color-mix(in oklab, var(--color-accent) 10%, transparent) 0%,
+        transparent 70%
+      );
+    animation: glow-breathe 14s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow-breathe {
+    from {
+      transform: scale(1);
+      opacity: 0.75;
+    }
+    to {
+      transform: scale(1.08);
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bg__ribs::before,
+    .bg__glow {
+      animation: none;
+    }
+
+    /* Keep the highlight as a static gleam rather than dropping it entirely. */
+    .bg__sheen {
+      animation: none;
+      opacity: 0.6;
+      transform: translate3d(-10%, 0, 0);
+    }
+  }
+</style>
