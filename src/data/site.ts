@@ -63,6 +63,7 @@ export const nav: NavItem[] = [
   { th: 'บริการ', en: 'Services', href: '/services' },
   { th: 'ทีมช่างเทคนิค', en: 'Technical Team', href: '/technical-team' },
   { th: 'ที่ตั้ง', en: 'Location', href: '/branches' },
+  { th: 'ผลงาน', en: 'Our Work', href: '/gallery' },
   { th: 'รีวิวลูกค้า', en: 'Testimonials', href: '/testimonials' },
   { th: 'บทความ', en: 'Blog', href: '/blog' },
   { th: 'โบรชัวร์', en: 'Brochure', href: '/brochure' },
