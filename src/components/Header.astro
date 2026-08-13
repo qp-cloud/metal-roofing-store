@@ -1,6 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import { nav } from '../data/site';
 import { site } from '../data/site';
+import logo from '../assets/brand/logo.png';
 
 interface Props {
   lang: 'th' | 'en';
@@ -23,7 +25,7 @@ const prefix = lang === 'en' ? '/en' : '';
 <header class="site-header">
   <div class="container site-header__inner">
     <a class="brand" href={lang === 'en' ? '/en' : '/'}>
-      <span class="brand__mark" aria-hidden="true">MS</span>
+      <Image src={logo} alt="" width={44} height={44} class="brand__mark" />
       <span class="brand__name">{lang === 'en' ? site.nameEn : site.nameTh}</span>
     </a>
 
@@ -86,16 +88,10 @@ const prefix = lang === 'en' ? '/en' : '';
   }
 
   .brand__mark {
-    display: grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius);
-    background: var(--color-primary);
-    color: var(--color-primary-ink);
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.95rem;
+    display: block;
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
   }
 
   .brand__name {

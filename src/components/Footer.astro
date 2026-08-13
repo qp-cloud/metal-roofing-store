@@ -1,6 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import { site, nav } from '../data/site';
 import { location, hasAddress } from '../data/branches';
+import logo from '../assets/brand/logo.png';
 
 interface Props {
   lang: 'th' | 'en';
@@ -14,7 +16,10 @@ const prefix = lang === 'en' ? '/en' : '';
 <footer class="site-footer">
   <div class="container footer-grid">
     <div>
-      <p class="footer-brand">{lang === 'en' ? site.nameEn : site.nameTh}</p>
+      <div class="footer-brand">
+        <Image src={logo} alt="" width={40} height={40} class="footer-brand__mark" />
+        <p>{lang === 'en' ? site.nameEn : site.nameTh}</p>
+      </div>
       <p class="footer-tagline">{lang === 'en' ? site.taglineEn : site.taglineTh}</p>
       {hasAddress && <p class="footer-hq">{lang === 'en' ? location.addressEn : location.addressTh}</p>}
     </div>
@@ -68,10 +73,25 @@ const prefix = lang === 'en' ? '/en' : '';
   }
 
   .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0 0 var(--space-2);
+  }
+
+  .footer-brand p {
     font-family: var(--font-display);
     font-size: 1.2rem;
     font-weight: 600;
-    margin: 0 0 var(--space-2);
+    margin: 0;
+  }
+
+  .footer-brand__mark {
+    display: block;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
   }
 
   .footer-tagline,
