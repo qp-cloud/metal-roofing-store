@@ -31,7 +31,10 @@
 
   --content-max: 1280px;
   --content-narrow: 68ch;
-  --radius: 6px;
+  --radius: 8px;
+  --radius-sm: 4px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
 
   --z-dropdown: 100;
   --z-sticky: 200;
@@ -41,6 +44,11 @@
   --z-tooltip: 600;
 
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* Elevation scale — tinted to the steel-blue accent hue (240), never pure black. */
+  --shadow-1: 0 1px 2px oklch(0.32 0.03 240 / 0.08);
+  --shadow-2: 0 4px 14px oklch(0.30 0.035 240 / 0.12);
+  --shadow-3: 0 24px 48px -8px oklch(0.26 0.04 240 / 0.24);
 }
 
 *,
@@ -202,6 +210,12 @@ tbody tr:nth-child(even) {
 
 .table-scroll {
   overflow-x: auto;
+}
+
+.table-panel {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
 }
 
 .visually-hidden {
