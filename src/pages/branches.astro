@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/Card.astro';
 import { site } from '../data/site';
 import { location, hasAddress, serviceArea } from '../data/branches';
 ---
@@ -18,7 +19,7 @@ import { location, hasAddress, serviceArea } from '../data/branches';
 
   <section class="section">
     <div class="container-narrow">
-      <div class="location-card">
+      <Card variant="base" class="location-card">
         <h2>{location.nameTh}</h2>
         <p class="location-card__province">{location.provinceTh}</p>
         {hasAddress ? (
@@ -41,7 +42,7 @@ import { location, hasAddress, serviceArea } from '../data/branches';
         {location.mapUrl && (
           <p class="location-card__map"><a href={location.mapUrl} target="_blank" rel="noopener noreferrer">เปิดใน Google Maps &rarr;</a></p>
         )}
-      </div>
+      </Card>
     </div>
   </section>
   <section class="section section--surface">
@@ -69,12 +70,6 @@ import { location, hasAddress, serviceArea } from '../data/branches';
   .page-hero p {
     color: var(--color-muted);
     font-size: 1.05rem;
-  }
-
-  .location-card {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    padding: var(--space-5);
   }
 
   .location-card h2 {
