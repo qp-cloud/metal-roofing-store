@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Photo from '../../components/Photo.astro';
+import Card from '../../components/Card.astro';
 import { site } from '../../data/site';
 import { location, hasAddress } from '../../data/branches';
 ---
@@ -40,18 +41,18 @@ import { location, hasAddress } from '../../data/branches';
     <div class="container">
       <h2>Factory & Standards</h2>
       <div class="grid-auto" data-reveal-group>
-        <div class="std-card reveal">
+        <Card variant="base" class="std-card reveal">
           <h3>Quality-controlled production line</h3>
           <p>Roll-formed on machinery that holds consistent thickness and profile standards across every batch.</p>
-        </div>
-        <div class="std-card reveal">
+        </Card>
+        <Card variant="base" class="std-card reveal">
           <h3>Raw material inspection</h3>
           <p>We source coated steel from certified suppliers and test thickness and coating before it enters production.</p>
-        </div>
-        <div class="std-card reveal">
+        </Card>
+        <Card variant="base" class="std-card reveal">
           <h3>Product warranty</h3>
           <p>Every product ships with a warranty appropriate to its type, plus certification for project use.</p>
-        </div>
+        </Card>
       </div>
     </div>
   </section>
@@ -73,7 +74,7 @@ import { location, hasAddress } from '../../data/branches';
   <section class="section">
     <div class="container-narrow">
       <h2>Location & Contact</h2>
-      <div class="branch-mini">
+      <Card variant="base" class="branch-mini">
         <h3>{location.nameEn}</h3>
         {hasAddress && <p>{location.addressEn}</p>}
         <ul class="phone-inline">
@@ -81,7 +82,7 @@ import { location, hasAddress } from '../../data/branches';
             <li><a href={p.href}>{p.display}</a> <span>{p.labelEn}</span></li>
           ))}
         </ul>
-      </div>
+      </Card>
       <p class="section-cta"><a href="/en/branches">All contact details &rarr;</a></p>
     </div>
   </section>
@@ -96,14 +97,6 @@ import { location, hasAddress } from '../../data/branches';
   .page-hero p {
     color: var(--color-muted);
     font-size: 1.05rem;
-  }
-
-  .std-card,
-  .branch-mini {
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    padding: var(--space-4);
   }
 
   .std-card h3,

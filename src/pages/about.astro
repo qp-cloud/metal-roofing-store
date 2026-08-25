@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Photo from '../components/Photo.astro';
+import Card from '../components/Card.astro';
 import { site } from '../data/site';
 import { location, hasAddress } from '../data/branches';
 ---
@@ -39,18 +40,18 @@ import { location, hasAddress } from '../data/branches';
     <div class="container">
       <h2>โรงงานและมาตรฐาน</h2>
       <div class="grid-auto" data-reveal-group>
-        <div class="std-card reveal">
+        <Card variant="base" class="std-card reveal">
           <h3>สายการผลิตควบคุมคุณภาพ</h3>
           <p>ขึ้นรูปแผ่นเหล็กด้วยเครื่องจักรที่ควบคุมความหนาและมาตรฐานลอนอย่างสม่ำเสมอทุกล็อตการผลิต</p>
-        </div>
-        <div class="std-card reveal">
+        </Card>
+        <Card variant="base" class="std-card reveal">
           <h3>ตรวจสอบวัตถุดิบก่อนผลิต</h3>
           <p>คัดเลือกเหล็กเคลือบจากผู้ผลิตที่ได้มาตรฐาน ทดสอบความหนาและการเคลือบสีก่อนเข้าสายการผลิต</p>
-        </div>
-        <div class="std-card reveal">
+        </Card>
+        <Card variant="base" class="std-card reveal">
           <h3>รับประกันสินค้า</h3>
           <p>สินค้าทุกชิ้นมีการรับประกันตามประเภท พร้อมใบรับรองมาตรฐานสำหรับงานโครงการ</p>
-        </div>
+        </Card>
       </div>
     </div>
   </section>
@@ -72,7 +73,7 @@ import { location, hasAddress } from '../data/branches';
   <section class="section">
     <div class="container-narrow">
       <h2>ที่ตั้งและติดต่อ</h2>
-      <div class="branch-mini">
+      <Card variant="base" class="branch-mini">
         <h3>{location.nameTh}</h3>
         {hasAddress && <p>{location.addressTh}</p>}
         <ul class="phone-inline">
@@ -80,7 +81,7 @@ import { location, hasAddress } from '../data/branches';
             <li><a href={p.href}>{p.display}</a> <span>{p.labelTh}</span></li>
           ))}
         </ul>
-      </div>
+      </Card>
       <p class="section-cta"><a href="/branches">ดูข้อมูลติดต่อทั้งหมด &rarr;</a></p>
     </div>
   </section>
@@ -95,14 +96,6 @@ import { location, hasAddress } from '../data/branches';
   .page-hero p {
     color: var(--color-muted);
     font-size: 1.05rem;
-  }
-
-  .std-card,
-  .branch-mini {
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    padding: var(--space-4);
   }
 
   .std-card h3,
