@@ -48,13 +48,10 @@ Meechai Steel (`หจก.มีชัยสตีล`) is a Thai metal-roofing 
   --shadow-2: 0 4px 14px oklch(0.30 0.035 240 / 0.12); /* resting feature/elevated card */
   --shadow-3: 0 24px 48px -8px oklch(0.26 0.04 240 / 0.24); /* one hero-featured photo only */
 
-  /* new: soft (low-alpha) backgrounds for tag-style badges, derived from existing tones */
-  --color-primary-soft: oklch(0.55 0.16 32 / 0.12);
-  --color-success-soft: oklch(0.56 0.13 145 / 0.12);
-  --color-danger-soft: oklch(0.55 0.18 25 / 0.12);
-  --color-neutral-soft: var(--color-surface);
 }
 ```
+
+**Contrast correction found during planning:** the site's existing `--color-primary` / `--color-success` / `--color-danger` tokens, used directly as badge fills (solid, white text) or as badge-tag text over a light tint of themselves (soft), fall short of WCAG AA 4.5:1 at this component's small size (computed: 4.39-4.44:1 depending on tone/variant). Rather than change those existing tokens — which are already used elsewhere for buttons/forms and are out of scope here — `Badge.astro` defines its own darker, WCAG-AA-passing shades scoped to the component (`oklch(0.525 0.16 32)` / `oklch(0.495 0.13 145)` / `oklch(0.530 0.18 25)` for primary/success/danger, verified 4.8-4.9:1 in both solid and soft use). See the implementation plan's Task 3 for the full verification script and numbers.
 
 `StickyContact.astro`'s existing pure-black shadow is replaced with `var(--shadow-2)` (flipped vertically via a `-shadow-2` override or simply `0 -4px 14px oklch(0.30 0.035 240 / 0.12)`) as part of this token rollout, since it's the one pre-existing shadow in the codebase.
 
@@ -124,7 +121,7 @@ New tokens and components are added globally, but full-site migration of every e
 - `contact.astro` / `en/contact.astro` — `.contact-card` → `Card` (`variant="interactive"`, `href`).
 - `branches.astro` / `en/branches.astro` — `.branch-mini` → `Card` (`variant="base"`).
 - `about.astro` / `en/about.astro` — `.std-card` → `Card` (`variant="base"`); add one `Card` (`variant="elevated"`) around the facility photo if a real photo exists at that slot (currently a `photo--pending` placeholder — if still pending at implementation time, skip the elevated treatment rather than applying a deep shadow to a placeholder pattern fill).
-- `specifications.astro` / `en/specifications.astro`, `products.astro` / `en/products.astro` — `.table-panel` wrapper.
+- `specifications.astro` / `en/specifications.astro` — `.table-panel` wrapper. (Correction found during planning: `products.astro` has no `<table>` — it's a zig-zag product-detail layout — so it's not a target for this wrapper.)
 - `StickyContact.astro`, `contact.astro`, `en/contact.astro` — icon replacement + shadow token.
 - `Header.astro` — breakpoint fix.
 
