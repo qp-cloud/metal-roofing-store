@@ -76,6 +76,10 @@ const prefix = lang === 'en' ? '/en' : '';
     align-items: center;
     gap: var(--space-4);
     padding-block: var(--space-2);
+    /* Wider than the site's --content-max (1280px): the bilingual 14-item
+       nav plus lang toggle plus CTA needs more room than that cap allows
+       without wrapping, especially for the longer EN labels. */
+    max-width: 1600px;
   }
 
   .brand {
@@ -192,7 +196,7 @@ const prefix = lang === 'en' ? '/en' : '';
     white-space: nowrap;
   }
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1600px) {
     .main-nav__toggle {
       display: flex;
     }
