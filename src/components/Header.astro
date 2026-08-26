@@ -76,6 +76,10 @@ const prefix = lang === 'en' ? '/en' : '';
     align-items: center;
     gap: var(--space-4);
     padding-block: var(--space-2);
+    /* Wider than the site's --content-max (1280px): the bilingual 14-item
+       nav plus lang toggle plus CTA needs more room than that cap allows
+       without wrapping, especially for the longer EN labels. */
+    max-width: 1600px;
   }
 
   .brand {
@@ -142,14 +146,11 @@ const prefix = lang === 'en' ? '/en' : '';
   .main-nav__list {
     list-style: none;
     display: flex;
-    flex-wrap: wrap;
-    /* Nav is now 14 items (Gallery added). Tighter gap plus a smaller
-       font-size keeps all of them on one line at 1440px — see the earlier
-       12-space-2 fix, which stopped being enough once a 14th item landed. */
+    flex-wrap: nowrap;
     gap: var(--space-1) 0.5rem;
     margin: 0;
     padding: 0;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
   }
 
   .main-nav__list a {
@@ -195,7 +196,7 @@ const prefix = lang === 'en' ? '/en' : '';
     white-space: nowrap;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1660px) {
     .main-nav__toggle {
       display: flex;
     }
@@ -214,6 +215,8 @@ const prefix = lang === 'en' ? '/en' : '';
 
     .main-nav {
       position: static;
+      display: flex;
+      justify-content: flex-end;
     }
 
     .main-nav.is-open .main-nav__list {

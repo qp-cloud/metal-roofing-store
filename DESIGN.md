@@ -62,6 +62,7 @@ Thai-first with full Latin coverage for the EN toggle — both families below co
 - Responsive card/spec grids: `repeat(auto-fit, minmax(280px, 1fr))`.
 - Max content width: 1280px, with a 1024px reading column for blog/article pages.
 - Section rhythm alternates `--color-bg` and `--color-surface` to separate the long homepage/product pages without relying on cards for everything.
+- **Header is a deliberate exception to the 1280px cap.** `.site-header__inner` caps at 1600px instead of the shared 1280px content max, because the bilingual 14-item nav plus lang toggle plus CTA genuinely cannot fit inside 1280px at any usable font size without wrapping — this was verified during the nav-wrap fix, not an oversight. Every other section on the site uses the shared 1280px cap; if you're tempted to add a second wide-chrome exception elsewhere, check whether the header's constraint actually applies to your case first, and don't "fix" the header by narrowing it back to 1280px or adding matching padding-inline math — that reintroduces the wrap regression this exception exists to prevent.
 
 ## Components
 

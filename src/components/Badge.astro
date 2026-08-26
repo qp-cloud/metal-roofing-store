@@ -1,0 +1,55 @@
+---
+interface Props {
+  tone?: 'primary' | 'success' | 'danger' | 'neutral';
+  variant?: 'solid' | 'soft';
+  class?: string;
+}
+
+const { tone = 'neutral', variant = 'soft', class: className } = Astro.props;
+---
+
+<span class:list={['badge', `badge--${variant}`, `badge--${tone}`, className]}>
+  <slot />
+</span>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  /* Badge-safe tones: darker than the site's general --color-primary/success/danger
+     tokens so solid-fill white text and soft-tint text both clear WCAG AA 4.5:1
+     at this component's small size. See Task 3 verification for the numbers. */
+  .badge--primary { --badge-color: oklch(0.525 0.16 32); }
+  .badge--success { --badge-color: oklch(0.495 0.13 145); }
+  .badge--danger  { --badge-color: oklch(0.530 0.18 25); }
+  .badge--neutral { --badge-color: var(--color-accent); }
+
+  .badge--solid {
+    border-radius: var(--radius-full);
+    padding: 4px 10px;
+    background: var(--badge-color);
+    color: var(--color-accent-ink);
+  }
+
+  .badge--soft {
+    border-radius: var(--radius-sm);
+    padding: 2px 8px;
+    /* Fallback for engines without color-mix() support: at least a visible
+       background instead of none. */
+    background: var(--color-surface);
+    background: color-mix(in oklab, var(--badge-color) 12%, var(--color-bg));
+    color: var(--badge-color);
+  }
+
+  .badge--soft.badge--neutral {
+    background: var(--color-surface);
+    color: var(--color-muted);
+    border: 1px solid var(--color-border);
+  }
+</style>

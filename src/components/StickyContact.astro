@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site';
+import { PhoneIcon, ChatCircleDotsIcon } from '@phosphor-icons/react/dist/ssr';
 
 interface Props {
   lang: 'th' | 'en';
@@ -10,11 +11,11 @@ const { lang } = Astro.props;
 
 <div class="sticky-contact" role="complementary" aria-label={lang === 'en' ? 'Quick contact' : 'ติดต่อด่วน'}>
   <a class="sticky-contact__link" href={site.phoneHref}>
-    <span aria-hidden="true">📞</span>
+    <PhoneIcon size={20} weight="bold" aria-hidden="true" />
     {lang === 'en' ? 'Call' : 'โทร'}
   </a>
   <a class="sticky-contact__link sticky-contact__link--line" href={site.lineHref} target="_blank" rel="noopener noreferrer">
-    <span aria-hidden="true">💬</span>
+    <ChatCircleDotsIcon size={20} weight="bold" aria-hidden="true" />
     LINE
   </a>
 </div>
@@ -28,7 +29,7 @@ const { lang } = Astro.props;
     display: none;
     background: var(--color-bg);
     border-top: 1px solid var(--color-border);
-    box-shadow: 0 -4px 12px oklch(0 0 0 / 0.06);
+    box-shadow: 0 -4px 14px oklch(0.30 0.035 240 / 0.10);
   }
 
   .sticky-contact__link {

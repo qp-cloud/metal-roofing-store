@@ -105,7 +105,7 @@ git commit -m "Add radius/elevation token scale and table-panel class"
 
 **Interfaces:**
 - Consumes: `--radius-lg`, `--shadow-1`, `--shadow-2`, `--shadow-3`, `--color-bg`, `--color-border`, `--color-primary`, `--color-primary-ink`, `--space-4`, `--ease-out-quart` (all from Task 1 / existing tokens).
-- Produces (consumed by Tasks 4, 5, 6): `Card` component with:
+- Produces (consumed by Tasks 5, 6, 7): `Card` component with:
   ```ts
   interface Props {
     variant?: 'base' | 'interactive' | 'elevated'; // default 'base'
