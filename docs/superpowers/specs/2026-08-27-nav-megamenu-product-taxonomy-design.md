@@ -196,6 +196,26 @@ keeps the 3 group headers as inline sub-labels within the expanded
 accordion — the grouping information isn't dropped, only the multi-column
 layout.
 
+## Attribute-detail gap (found during planning)
+
+The taxonomy names specific attribute values for เมทัลชีท (ลอน 760, ลอน 860,
+ลอนอื่นๆ, สี, ความหนา, ความยาว, วัสดุ/เกรด) and ผนัง (สี, ความหนา, ขนาด). The
+site already has real, shipped content covering roof profiles, colors, and
+insulation types — `/colors` (`src/data/colors.ts`'s `profiles`,
+`roofColors`, `insulationOptions`) and `/specifications` (thickness/price
+table) — but the existing profile names ("ลอนเมทัลชีทมาตรฐาน", "ลอนบิ๊กไฟว์",
+"ลอนทรงสถาปัตย์") don't match the "760/860" naming in the outline, and no
+data anywhere maps one to the other.
+
+**Resolution:** rather than fabricating a 760/860 naming or inventing
+values that aren't backed by real data, each of the เมทัลชีท/ผนัง/ฉนวน
+category sections on `/products` gets a short pointer note directing users
+to the real existing `/colors` and `/specifications` pages, which already
+carry this information under their own (different) naming. Renaming or
+remapping the existing profile names to "760/860" is out of scope — that
+would require confirming real product specs with the business, which
+nobody has supplied.
+
 ## Data model changes
 
 `src/data/site.ts`'s `NavItem` type (`{ th, en, href }`) becomes a
