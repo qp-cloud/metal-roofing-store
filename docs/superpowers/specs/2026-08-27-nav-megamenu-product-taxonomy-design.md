@@ -98,6 +98,16 @@ section's de facto landing page.
 | หลังคาเมทัลชีท | Metal Roofing | `/products#metal-sheet` | existing product, gains attribute display (ลอน 760/860/other, สี, ความหนา, ความยาว, วัสดุ/เกรด) |
 | Snap Lock | Snap Lock | `/products#snap-lock` | existing product |
 
+**Gap found while mapping (not in the user's original outline):** two existing
+products — `bolt-type` (ระบบยึดสกรู) and `clip-lock` (ระบบคลิปล็อก) — aren't
+named anywhere in the target taxonomy. Per the depth rule (fold content in,
+don't drop it), both stay on `/products` grouped visually under the same
+"ระบบหลังคา" (Roofing Systems) category area as หลังคาเมทัลชีท and Snap Lock —
+reachable by anyone landing on that category, keeping their own anchors for
+existing internal links — but do not get their own top-level mega-menu entry.
+The mega-menu's "ระบบหลังคา" column links to the category overview; all four
+roofing-system products live together on the page underneath it.
+
 *ผนังและฉนวน / Walls & Insulation*
 | TH | EN | Destination | Status |
 |----|----|-----------  |--------|
