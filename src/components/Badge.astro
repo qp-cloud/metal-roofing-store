@@ -40,7 +40,10 @@ const { tone = 'neutral', variant = 'soft', class: className } = Astro.props;
   .badge--soft {
     border-radius: var(--radius-sm);
     padding: 2px 8px;
-    background: oklch(from var(--badge-color) l c h / 0.12);
+    /* Fallback for engines without color-mix() support: at least a visible
+       background instead of none. */
+    background: var(--color-surface);
+    background: color-mix(in oklab, var(--badge-color) 12%, var(--color-bg));
     color: var(--badge-color);
   }
 
