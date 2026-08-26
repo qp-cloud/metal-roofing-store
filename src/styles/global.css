@@ -218,6 +218,11 @@ tbody tr:nth-child(even) {
   overflow: hidden;
 }
 
+.table-scroll.table-panel {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
