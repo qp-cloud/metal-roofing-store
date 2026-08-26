@@ -137,7 +137,7 @@ roofing-system products live together on the page underneath it.
 
 | TH | EN | Destination | Status |
 |----|----|-----------  |--------|
-| ที่อยู่ | Address | `/contact#address` | existing content, needs an anchor id added |
+| ที่อยู่ | Address | `/branches` | **correction:** the old flat nav's "ที่ตั้ง / Location" page (`branches.astro`) was missed from the original "orphaned pages" list — it isn't `/contact` content at all, it's this existing dedicated page. Linking there directly avoids duplicating `src/data/branches.ts` content onto the contact page. |
 | โทรศัพท์ | Phone | `/contact#phone` | existing content, needs an anchor id added |
 | LINE | LINE | `/contact#line` | existing content, needs an anchor id added |
 | Facebook | Facebook | `/contact#facebook` | existing content, needs an anchor id added |
