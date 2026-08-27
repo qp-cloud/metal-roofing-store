@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Card from '../../components/Card.astro';
+import Badge from '../../components/Badge.astro';
 import { site } from '../../data/site';
 import { ChatCircleDotsIcon, PhoneIcon, FacebookLogoIcon } from '@phosphor-icons/react/dist/ssr';
 ---
@@ -20,6 +21,7 @@ import { ChatCircleDotsIcon, PhoneIcon, FacebookLogoIcon } from '@phosphor-icons
   <section class="section">
     <div class="container contact-grid">
       <Card
+        id="line"
         variant="interactive"
         emphasis="primary"
         class="contact-card contact-card--primary"
@@ -32,7 +34,7 @@ import { ChatCircleDotsIcon, PhoneIcon, FacebookLogoIcon } from '@phosphor-icons
         <p>{site.lineId}</p>
         <span class="contact-card__cta">Open chat &rarr;</span>
       </Card>
-      <Card variant="base" class="contact-card">
+      <Card id="phone" variant="base" class="contact-card">
         <PhoneIcon size={28} weight="bold" className="contact-card__icon" aria-hidden="true" />
         <h2>Call Us</h2>
         <ul class="phone-list">
@@ -44,7 +46,7 @@ import { ChatCircleDotsIcon, PhoneIcon, FacebookLogoIcon } from '@phosphor-icons
           ))}
         </ul>
       </Card>
-      <Card variant="interactive" class="contact-card" href={site.facebookHref} target="_blank" rel="noopener noreferrer">
+      <Card id="facebook" variant="interactive" class="contact-card" href={site.facebookHref} target="_blank" rel="noopener noreferrer">
         <FacebookLogoIcon size={28} weight="bold" className="contact-card__icon" aria-hidden="true" />
         <h2>Facebook</h2>
         <p>{site.nameEn}</p>
@@ -53,6 +55,25 @@ import { ChatCircleDotsIcon, PhoneIcon, FacebookLogoIcon } from '@phosphor-icons
     </div>
   </section>
 
+  <section class="section" id="map">
+    <div class="container-narrow">
+      <h2>Google Maps <Badge tone="neutral" variant="soft">Coming Soon</Badge></h2>
+      <p>
+        We're preparing an embedded map for this page. In the meantime, see the full address and coordinates on our
+        <a href="/en/branches">branch locations</a> page.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="hours">
+    <div class="container-narrow">
+      <h2>Business Hours <Badge tone="neutral" variant="soft">Coming Soon</Badge></h2>
+      <p>
+        We're preparing our business hours for this page. In the meantime, message us on LINE or call the numbers
+        above — our team replies during business hours.
+      </p>
+    </div>
+  </section>
 
   <section class="section section--surface">
     <div class="container-narrow">
