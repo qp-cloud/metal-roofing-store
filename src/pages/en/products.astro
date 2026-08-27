@@ -1,15 +1,28 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Diagram from '../../components/Diagram.astro';
-import { products } from '../../data/products';
+import Badge from '../../components/Badge.astro';
+import { products, productCategories } from '../../data/products';
 import { site } from '../../data/site';
 import Photo from '../../components/Photo.astro';
+
+const categoryOrder = ['roofing', 'wall', 'insulation', 'accessories'] as const;
+
+// Roof profile/color/insulation-type detail already lives on /colors and
+// /specifications under their own naming — this points there rather than
+// fabricating attribute values (e.g. "760/860") that aren't backed by real
+// product data. Accessories has no equivalent existing page, so no note.
+const categoryNotes: Partial<Record<(typeof categoryOrder)[number], string>> = {
+  roofing: 'See all profiles and colors on <a href="/en/colors">Colors & Materials</a>, and thickness plus starting prices on <a href="/en/specifications">Specifications</a>.',
+  wall: 'See colors and material options on <a href="/en/colors">Colors & Materials</a>, and thickness plus starting prices on <a href="/en/specifications">Specifications</a>.',
+  insulation: 'See more insulation types on <a href="/en/colors">Colors & Materials</a>, and thickness plus starting prices on <a href="/en/specifications">Specifications</a>.',
+};
 ---
 
 <BaseLayout
   lang="en"
   title="Products | Meechai Steel Ltd., Part."
-  description="Metal roofing sheet, PU foam insulated panels, bolt-type, clip-lock, snap-lock systems, and wall panel sheet."
+  description="Metal roofing sheet, wall panels, insulation, and installation accessories — every system you need."
 >
   <section class="page-hero">
     <div class="container">
@@ -18,27 +31,46 @@ import Photo from '../../components/Photo.astro';
     </div>
   </section>
 
-  <section class="section">
-    <div class="container product-list">
-      {products.map((p, i) => (
-        <article class="product-detail" id={p.slug} style={i % 2 === 1 ? 'background:var(--color-surface)' : undefined}>
-          <div class="container product-detail__inner">
-            <div class="product-detail__media"><Photo slot={`product-${p.slug}`} lang="en" ratio="4 / 3" eager={i === 0} /></div>
-            <div>
-              <h2>{p.nameEn}</h2>
-              <p class="product-detail__th">{p.nameTh}</p>
-              <p>{p.descEn}</p>
-              <p class="product-detail__use"><strong>Best for:</strong> {p.useEn}</p>
-              <div class="hero__actions">
-                <a class="btn btn--outline" href="/en/specifications">View specs & starting prices</a>
-                <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">Ask about this product</a>
+  {categoryOrder.map((cat, catIndex) => {
+    const items = products.filter((p) => p.category === cat);
+    const note = categoryNotes[cat];
+    return (
+      <section
+        class="section"
+        id={`category-${cat}`}
+        style={catIndex % 2 === 1 ? 'background:var(--color-surface)' : undefined}
+      >
+        <div class="container product-list">
+          <h2 class="category-heading">{productCategories[cat].en}</h2>
+          {note && <p class="category-note" set:html={note} />}
+          {items.map((p, i) => (
+            <article class="product-detail" id={p.slug}>
+              <div class="container product-detail__inner">
+                <div class="product-detail__media">
+                  <Photo slot={`product-${p.slug}`} lang="en" ratio="4 / 3" eager={catIndex === 0 && i === 0} />
+                </div>
+                <div>
+                  <h3>
+                    {p.nameEn}
+                    {p.comingSoon && (
+                      <Badge tone="neutral" variant="soft" class="product-detail__badge">Coming Soon</Badge>
+                    )}
+                  </h3>
+                  <p class="product-detail__th">{p.nameTh}</p>
+                  <p>{p.descEn}</p>
+                  <p class="product-detail__use"><strong>Best for:</strong> {p.useEn}</p>
+                  <div class="hero__actions">
+                    <a class="btn btn--outline" href="/en/specifications">View specs & starting prices</a>
+                    <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">Ask about this product</a>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
-  </section>
+            </article>
+          ))}
+        </div>
+      </section>
+    );
+  })}
 
   <section class="section section--surface">
     <div class="container-narrow">
@@ -74,8 +106,20 @@ import Photo from '../../components/Photo.astro';
   }
 
   .product-list {
-    padding: 0;
-    max-width: none;
+    padding-block: var(--space-7);
+  }
+
+  .category-heading {
+    margin-bottom: var(--space-2);
+  }
+
+  .category-note {
+    color: var(--color-muted);
+    margin-bottom: var(--space-5);
+  }
+
+  .category-note a {
+    font-weight: 600;
   }
 
   .explainer-lead {
@@ -85,7 +129,10 @@ import Photo from '../../components/Photo.astro';
 
   .product-detail {
     scroll-margin-top: 90px;
-    padding-block: var(--space-7);
+  }
+
+  .product-detail + .product-detail {
+    margin-top: var(--space-7);
   }
 
   .product-detail__inner {
@@ -98,6 +145,11 @@ import Photo from '../../components/Photo.astro';
   /* Layout only — Photo.astro owns the image and its pending state. */
   .product-detail__media {
     min-width: 0;
+  }
+
+  .product-detail__badge {
+    margin-left: var(--space-2);
+    vertical-align: middle;
   }
 
   .product-detail__th {

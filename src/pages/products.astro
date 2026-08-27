@@ -1,15 +1,28 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Diagram from '../components/Diagram.astro';
-import { products } from '../data/products';
+import Badge from '../components/Badge.astro';
+import { products, productCategories } from '../data/products';
 import { site } from '../data/site';
 import Photo from '../components/Photo.astro';
+
+const categoryOrder = ['roofing', 'wall', 'insulation', 'accessories'] as const;
+
+// Roof profile/color/insulation-type detail already lives on /colors and
+// /specifications under their own naming — this points there rather than
+// fabricating attribute values (e.g. "760/860") that aren't backed by real
+// product data. Accessories has no equivalent existing page, so no note.
+const categoryNotes: Partial<Record<(typeof categoryOrder)[number], string>> = {
+  roofing: 'ดูลอนและสีทั้งหมดที่หน้า <a href="/colors">สี / วัสดุ</a> และดูความหนากับราคาเริ่มต้นที่หน้า <a href="/specifications">สเปกสินค้า</a>',
+  wall: 'ดูสีและตัวเลือกวัสดุที่หน้า <a href="/colors">สี / วัสดุ</a> และดูความหนากับราคาเริ่มต้นที่หน้า <a href="/specifications">สเปกสินค้า</a>',
+  insulation: 'ดูชนิดฉนวนเพิ่มเติมที่หน้า <a href="/colors">สี / วัสดุ</a> และดูความหนากับราคาเริ่มต้นที่หน้า <a href="/specifications">สเปกสินค้า</a>',
+};
 ---
 
 <BaseLayout
   lang="th"
   title="สินค้า | หจก.มีชัยสตีล"
-  description="แผ่นเหล็กมุงหลังคา แผ่นฉนวน PU Foam ระบบ Bolt Type, Clip-Lock, Snap-Lock และแผ่นผนังพาแนล"
+  description="แผ่นเหล็กมุงหลังคา แผ่นผนัง ฉนวนกันความร้อน และอุปกรณ์ติดตั้ง ครบทุกระบบ"
 >
   <section class="page-hero">
     <div class="container">
@@ -18,27 +31,46 @@ import Photo from '../components/Photo.astro';
     </div>
   </section>
 
-  <section class="section">
-    <div class="container product-list">
-      {products.map((p, i) => (
-        <article class="product-detail" id={p.slug} style={i % 2 === 1 ? 'background:var(--color-surface)' : undefined}>
-          <div class="container product-detail__inner">
-            <div class="product-detail__media"><Photo slot={`product-${p.slug}`} lang="th" ratio="4 / 3" eager={i === 0} /></div>
-            <div>
-              <h2>{p.nameTh}</h2>
-              <p class="product-detail__en">{p.nameEn}</p>
-              <p>{p.descTh}</p>
-              <p class="product-detail__use"><strong>เหมาะกับ:</strong> {p.useTh}</p>
-              <div class="hero__actions">
-                <a class="btn btn--outline" href="/specifications">ดูสเปกและราคาเริ่มต้น</a>
-                <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">สอบถามสินค้านี้</a>
+  {categoryOrder.map((cat, catIndex) => {
+    const items = products.filter((p) => p.category === cat);
+    const note = categoryNotes[cat];
+    return (
+      <section
+        class="section"
+        id={`category-${cat}`}
+        style={catIndex % 2 === 1 ? 'background:var(--color-surface)' : undefined}
+      >
+        <div class="container product-list">
+          <h2 class="category-heading">{productCategories[cat].th}</h2>
+          {note && <p class="category-note" set:html={note} />}
+          {items.map((p, i) => (
+            <article class="product-detail" id={p.slug}>
+              <div class="container product-detail__inner">
+                <div class="product-detail__media">
+                  <Photo slot={`product-${p.slug}`} lang="th" ratio="4 / 3" eager={catIndex === 0 && i === 0} />
+                </div>
+                <div>
+                  <h3>
+                    {p.nameTh}
+                    {p.comingSoon && (
+                      <Badge tone="neutral" variant="soft" class="product-detail__badge">เร็ว ๆ นี้</Badge>
+                    )}
+                  </h3>
+                  <p class="product-detail__en">{p.nameEn}</p>
+                  <p>{p.descTh}</p>
+                  <p class="product-detail__use"><strong>เหมาะกับ:</strong> {p.useTh}</p>
+                  <div class="hero__actions">
+                    <a class="btn btn--outline" href="/specifications">ดูสเปกและราคาเริ่มต้น</a>
+                    <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">สอบถามสินค้านี้</a>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
-  </section>
+            </article>
+          ))}
+        </div>
+      </section>
+    );
+  })}
 
   <section class="section section--surface">
     <div class="container-narrow">
@@ -74,8 +106,20 @@ import Photo from '../components/Photo.astro';
   }
 
   .product-list {
-    padding: 0;
-    max-width: none;
+    padding-block: var(--space-7);
+  }
+
+  .category-heading {
+    margin-bottom: var(--space-2);
+  }
+
+  .category-note {
+    color: var(--color-muted);
+    margin-bottom: var(--space-5);
+  }
+
+  .category-note a {
+    font-weight: 600;
   }
 
   .explainer-lead {
@@ -85,7 +129,10 @@ import Photo from '../components/Photo.astro';
 
   .product-detail {
     scroll-margin-top: 90px;
-    padding-block: var(--space-7);
+  }
+
+  .product-detail + .product-detail {
+    margin-top: var(--space-7);
   }
 
   .product-detail__inner {
@@ -98,6 +145,11 @@ import Photo from '../components/Photo.astro';
   /* Layout only — Photo.astro owns the image and its pending state. */
   .product-detail__media {
     min-width: 0;
+  }
+
+  .product-detail__badge {
+    margin-left: var(--space-2);
+    vertical-align: middle;
   }
 
   .product-detail__en {
