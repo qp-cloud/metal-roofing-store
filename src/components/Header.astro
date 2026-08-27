@@ -507,6 +507,12 @@ function localize(href: string) {
         links[(currentIndex - 1 + links.length) % links.length]?.focus();
       }
     });
+
+    panel?.querySelectorAll<HTMLAnchorElement>('a').forEach((link) => {
+      link?.addEventListener('click', () => {
+        closeAllDropdowns();
+      });
+    });
   });
 
   document.addEventListener('click', (event) => {
