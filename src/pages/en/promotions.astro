@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Badge from '../../components/Badge.astro';
+import { site } from '../../data/site';
+---
+
+<BaseLayout
+  lang="en"
+  title="Promotions | Meechai Steel Ltd., Part."
+  description="Promotions and special offers from Meechai Steel."
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>Promotions <Badge tone="neutral" variant="soft">Coming Soon</Badge></h1>
+      <p>We're preparing promotions and special offers. In the meantime, message us on LINE for current pricing.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow">
+      <div class="hero__actions">
+        <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">Ask on LINE</a>
+        <a class="btn btn--outline" href="/en/products">View all products</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-7) var(--space-6);
+    background: var(--color-surface);
+  }
+
+  .page-hero h1 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .page-hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+</style>
