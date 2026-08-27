@@ -70,6 +70,12 @@ export const photoCategories: PhotoCategory[] = [
       { id: 'product-clip-lock', altTh: 'หลังคาระบบคลิปล็อก', altEn: 'Clip-lock roofing system' },
       { id: 'product-snap-lock', altTh: 'หลังคาระบบสแนปล็อก', altEn: 'Snap-lock roofing system' },
       { id: 'product-panel-sheet', altTh: 'แผ่นผนังพาแนล', altEn: 'Wall panel sheet' },
+      { id: 'product-pe-foam', altTh: 'แผ่นฉนวน PE Foam', altEn: 'PE foam insulated panel' },
+      { id: 'product-eps', altTh: 'แผ่นฉนวน EPS', altEn: 'EPS insulation board' },
+      { id: 'product-accessory-ridge-cap', altTh: 'ครอบสันหลังคาเหล็ก', altEn: 'Steel ridge cap' },
+      { id: 'product-accessory-screw', altTh: 'สกรูยึดแผ่นหลังคา', altEn: 'Roofing fixing screws' },
+      { id: 'product-accessory-flashing', altTh: 'แผ่น Flashing ปิดรอยต่อ', altEn: 'Flashing trim' },
+      { id: 'product-accessory-fixing', altTh: 'อุปกรณ์ยึดติดตั้งหลังคา', altEn: 'Roof installation fixings' },
     ],
   },
   {
