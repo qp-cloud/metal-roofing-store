@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Photo from '../../components/Photo.astro';
 import Card from '../../components/Card.astro';
+import Badge from '../../components/Badge.astro';
 import { site } from '../../data/site';
 import { location, hasAddress } from '../../data/branches';
 ---
@@ -18,7 +19,7 @@ import { location, hasAddress } from '../../data/branches';
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="company">
     <div class="container-narrow">
       <h2>Our History</h2>
       <p>
@@ -37,7 +38,17 @@ import { location, hasAddress } from '../../data/branches';
     </div>
   </section>
 
-  <section class="section section--surface">
+  <section class="section" id="vision">
+    <div class="container-narrow">
+      <h2>Vision <Badge tone="neutral" variant="soft">Coming Soon</Badge></h2>
+      <p>
+        We're putting together a clearer statement of Meechai Steel's long-term vision and goals.
+        In the meantime, message us on LINE to talk with the team directly.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--surface" id="standards">
     <div class="container">
       <h2>Factory & Standards</h2>
       <div class="grid-auto" data-reveal-group>
