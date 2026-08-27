@@ -20,6 +20,8 @@ export const productCategories: Record<ProductCategory, { th: string; en: string
   accessories: { th: 'อุปกรณ์และอะไหล่', en: 'Accessories & Parts' },
 };
 
+export const categoryOrder: readonly ProductCategory[] = ['roofing', 'wall', 'insulation', 'accessories'];
+
 export const products: Product[] = [
   {
     slug: 'metal-sheet',

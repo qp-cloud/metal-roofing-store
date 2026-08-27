@@ -54,14 +54,14 @@ function localize(href: string) {
           if (entry.kind === 'dropdown') {
             return (
               <li class="has-dropdown">
-                <button class="nav-toggle" type="button" aria-expanded="false" aria-haspopup="true">
+                <button class="nav-toggle" type="button" aria-expanded="false">
                   {lang === 'en' ? entry.en : entry.th}
                   <span class="nav-caret" aria-hidden="true" />
                 </button>
                 <ul class="dropdown-panel">
                   {entry.items.map((item) => {
                     const itemPath = item.href.split('#')[0];
-                    const isActive = itemPath !== '' && basePath === itemPath;
+                    const isActive = !item.href.includes('#') && basePath === itemPath;
                     return (
                       <li>
                         <a href={localize(item.href)} aria-current={isActive ? 'page' : undefined}>
@@ -89,7 +89,7 @@ function localize(href: string) {
                     <ul>
                       {group.items.map((item) => {
                         const itemPath = item.href.split('#')[0];
-                        const isActive = itemPath !== '' && basePath === itemPath;
+                        const isActive = !item.href.includes('#') && basePath === itemPath;
                         return (
                           <li>
                             <a href={localize(item.href)} aria-current={isActive ? 'page' : undefined}>
@@ -393,12 +393,13 @@ function localize(href: string) {
   /* Breakpoint verified empirically (screenshot sweep, both locales; EN's
      "Products & Services" is the longest label and the binding constraint).
      The nav naturally fits on one line starting ~1090px and wraps to two
-     lines at 1085px and below, so 1150px gives ~60px of headroom above the
-     measured wrap point. With only 6 short top-level items (vs. the prior
-     14-item flat nav), this needs far less width than the 1600px/1660px
-     exception the prior UI refresh required; that exception is
-     intentionally removed here (see DESIGN.md Step 4). */
-  @media (max-width: 1150px) {
+     lines at 1085px and below, so 1200px gives headroom above the measured
+     wrap point and enough room for the ~698px-wide mega panel to render
+     without clipping at the boundary. With only 6 short top-level items
+     (vs. the prior 14-item flat nav), this needs far less width than the
+     1600px/1660px exception the prior UI refresh required; that exception
+     is intentionally removed here (see DESIGN.md Step 4). */
+  @media (max-width: 1200px) {
     .main-nav__toggle {
       display: flex;
     }
@@ -414,7 +415,7 @@ function localize(href: string) {
       align-items: stretch;
       padding: var(--space-3) var(--space-4);
       gap: var(--space-1);
-      max-height: calc(100vh - 64px);
+      max-height: calc(100vh - 64px - 3.5rem);
       overflow-y: auto;
     }
 
@@ -511,6 +512,8 @@ function localize(href: string) {
     panel?.querySelectorAll<HTMLAnchorElement>('a').forEach((link) => {
       link?.addEventListener('click', () => {
         closeAllDropdowns();
+        nav?.classList.remove('is-open');
+        toggle?.setAttribute('aria-expanded', 'false');
       });
     });
   });
@@ -525,7 +528,9 @@ function localize(href: string) {
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
+      const openItem = dropdownItems.find((li) => li.classList.contains('is-open'));
       closeAllDropdowns();
+      openItem?.querySelector<HTMLButtonElement>('.nav-toggle')?.focus();
     }
   });
 </script>

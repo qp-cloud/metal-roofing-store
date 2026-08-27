@@ -134,6 +134,9 @@ export const nav: NavEntry[] = [
   },
 ];
 
+// Deliberately independent of `nav` — the footer wants plain landing
+// pages, not the nested dropdown/mega structure (which has no single
+// "first item" that would make a good footer link for every entry).
 export const footerLinks: { th: string; en: string; href: string }[] = [
   { th: 'หน้าแรก', en: 'Home', href: '/' },
   { th: 'เกี่ยวกับเรา', en: 'About Us', href: '/about' },

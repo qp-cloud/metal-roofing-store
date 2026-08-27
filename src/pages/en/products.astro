@@ -2,17 +2,16 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Diagram from '../../components/Diagram.astro';
 import Badge from '../../components/Badge.astro';
-import { products, productCategories } from '../../data/products';
+import { products, productCategories, categoryOrder } from '../../data/products';
+import type { ProductCategory } from '../../data/products';
 import { site } from '../../data/site';
 import Photo from '../../components/Photo.astro';
-
-const categoryOrder = ['roofing', 'wall', 'insulation', 'accessories'] as const;
 
 // Roof profile/color/insulation-type detail already lives on /colors and
 // /specifications under their own naming — this points there rather than
 // fabricating attribute values (e.g. "760/860") that aren't backed by real
 // product data. Accessories has no equivalent existing page, so no note.
-const categoryNotes: Partial<Record<(typeof categoryOrder)[number], string>> = {
+const categoryNotes: Partial<Record<ProductCategory, string>> = {
   roofing: 'See all profiles and colors on <a href="/en/colors">Colors & Materials</a>, and thickness plus starting prices on <a href="/en/specifications">Specifications</a>.',
   wall: 'See colors and material options on <a href="/en/colors">Colors & Materials</a>, and thickness plus starting prices on <a href="/en/specifications">Specifications</a>.',
   insulation: 'See more insulation types on <a href="/en/colors">Colors & Materials</a>, and thickness plus starting prices on <a href="/en/specifications">Specifications</a>.',
@@ -107,6 +106,8 @@ const categoryNotes: Partial<Record<(typeof categoryOrder)[number], string>> = {
 
   .product-list {
     padding-block: var(--space-7);
+    padding-inline: 0;
+    max-width: none;
   }
 
   .category-heading {
