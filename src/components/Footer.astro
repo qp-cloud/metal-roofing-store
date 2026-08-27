@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { site, nav } from '../data/site';
+import { site, footerLinks } from '../data/site';
 import { location, hasAddress } from '../data/branches';
 import logo from '../assets/brand/logo.png';
 
@@ -27,7 +27,7 @@ const prefix = lang === 'en' ? '/en' : '';
     <div>
       <h3>{lang === 'en' ? 'Quick Links' : 'ลิงก์ด่วน'}</h3>
       <ul class="footer-list">
-        {nav.slice(0, 6).map((item) => (
+        {footerLinks.map((item) => (
           <li><a href={`${prefix}${item.href === '/' ? '' : item.href}` || '/'}>{lang === 'en' ? item.en : item.th}</a></li>
         ))}
       </ul>

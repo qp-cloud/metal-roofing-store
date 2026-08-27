@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { nav } from '../data/site';
-import { site } from '../data/site';
+import { nav, site } from '../data/site';
 import logo from '../assets/brand/logo.png';
 
 interface Props {
@@ -20,6 +19,10 @@ const isBlogArticle = /^\/blog\/[^/]+$/.test(basePath);
 const enHref = isBlogArticle ? '/en/blog' : basePath === '/' ? '/en' : `/en${basePath}`;
 
 const prefix = lang === 'en' ? '/en' : '';
+
+function localize(href: string) {
+  return `${prefix}${href === '/' ? '' : href}` || '/';
+}
 ---
 
 <header class="site-header">
@@ -35,14 +38,71 @@ const prefix = lang === 'en' ? '/en' : '';
         <span class="main-nav__toggle-bar" aria-hidden="true"></span>
       </button>
       <ul class="main-nav__list" id="main-nav-list">
-        {nav.map((item) => {
-          const href = `${prefix}${item.href === '/' ? '' : item.href}` || '/';
-          const isActive = basePath === item.href;
+        {nav.map((entry) => {
+          if (entry.kind === 'link') {
+            const href = localize(entry.href);
+            const isActive = basePath === entry.href;
+            return (
+              <li>
+                <a href={href} aria-current={isActive ? 'page' : undefined}>
+                  {lang === 'en' ? entry.en : entry.th}
+                </a>
+              </li>
+            );
+          }
+
+          if (entry.kind === 'dropdown') {
+            return (
+              <li class="has-dropdown">
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-haspopup="true">
+                  {lang === 'en' ? entry.en : entry.th}
+                  <span class="nav-caret" aria-hidden="true" />
+                </button>
+                <ul class="dropdown-panel">
+                  {entry.items.map((item) => {
+                    const itemPath = item.href.split('#')[0];
+                    const isActive = itemPath !== '' && basePath === itemPath;
+                    return (
+                      <li>
+                        <a href={localize(item.href)} aria-current={isActive ? 'page' : undefined}>
+                          {lang === 'en' ? item.en : item.th}
+                          {item.isNew && <span class="new-badge">{lang === 'en' ? 'New' : 'ใหม่'}</span>}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </li>
+            );
+          }
+
           return (
-            <li>
-              <a href={href} aria-current={isActive ? 'page' : undefined}>
-                {lang === 'en' ? item.en : item.th}
-              </a>
+            <li class="has-dropdown has-mega">
+              <button class="nav-toggle" type="button" aria-expanded="false" aria-haspopup="true">
+                {lang === 'en' ? entry.en : entry.th}
+                <span class="nav-caret" aria-hidden="true" />
+              </button>
+              <div class="mega-panel">
+                {entry.groups.map((group) => (
+                  <div class="mega-group">
+                    <h3>{lang === 'en' ? group.en : group.th}</h3>
+                    <ul>
+                      {group.items.map((item) => {
+                        const itemPath = item.href.split('#')[0];
+                        const isActive = itemPath !== '' && basePath === itemPath;
+                        return (
+                          <li>
+                            <a href={localize(item.href)} aria-current={isActive ? 'page' : undefined}>
+                              {lang === 'en' ? item.en : item.th}
+                              {item.isNew && <span class="new-badge">{lang === 'en' ? 'New' : 'ใหม่'}</span>}
+                            </a>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </li>
           );
         })}
@@ -76,10 +136,6 @@ const prefix = lang === 'en' ? '/en' : '';
     align-items: center;
     gap: var(--space-4);
     padding-block: var(--space-2);
-    /* Wider than the site's --content-max (1280px): the bilingual 14-item
-       nav plus lang toggle plus CTA needs more room than that cap allows
-       without wrapping, especially for the longer EN labels. */
-    max-width: 1600px;
   }
 
   .brand {
@@ -147,23 +203,161 @@ const prefix = lang === 'en' ? '/en' : '';
     list-style: none;
     display: flex;
     flex-wrap: nowrap;
-    gap: var(--space-1) 0.5rem;
+    gap: var(--space-4);
     margin: 0;
     padding: 0;
     font-size: 0.95rem;
   }
 
-  .main-nav__list a {
+  .main-nav__list > li {
+    position: relative;
+  }
+
+  .main-nav__list > li > a {
+    display: block;
     color: var(--color-ink);
     text-decoration: none;
     padding: 0.4rem 0;
     border-bottom: 2px solid transparent;
   }
 
-  .main-nav__list a:hover,
-  .main-nav__list a[aria-current='page'] {
+  .main-nav__list > li > a:hover,
+  .main-nav__list > li > a[aria-current='page'] {
     color: var(--color-primary);
     border-bottom-color: var(--color-primary);
+  }
+
+  .nav-toggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-ink);
+    padding: 0.4rem 0;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: none;
+    font: inherit;
+    font-size: inherit;
+    cursor: pointer;
+  }
+
+  .nav-toggle:hover,
+  .nav-toggle[aria-expanded='true'] {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+  }
+
+  .nav-caret {
+    width: 7px;
+    height: 7px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    margin-top: -3px;
+    transition: transform 0.15s ease;
+  }
+
+  .nav-toggle[aria-expanded='true'] .nav-caret {
+    transform: rotate(225deg);
+    margin-top: 3px;
+  }
+
+  .dropdown-panel,
+  .mega-panel {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 4px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-2);
+    z-index: var(--z-sticky);
+  }
+
+  .has-dropdown.is-open .dropdown-panel,
+  .has-dropdown.is-open .mega-panel {
+    display: block;
+  }
+
+  .dropdown-panel {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: var(--space-2);
+    min-width: 200px;
+  }
+
+  .dropdown-panel li a {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-ink);
+    text-decoration: none;
+    font-size: 0.92rem;
+    white-space: nowrap;
+  }
+
+  .dropdown-panel li a:hover,
+  .dropdown-panel li a[aria-current='page'] {
+    background: var(--color-surface);
+    color: var(--color-primary);
+  }
+
+  .mega-panel {
+    padding: var(--space-4);
+  }
+
+  .has-dropdown.is-open .mega-panel {
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    gap: var(--space-4);
+  }
+
+  .mega-group h3 {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--color-muted);
+    margin: 0 0 var(--space-2);
+  }
+
+  .mega-group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mega-group li a {
+    display: block;
+    padding: 0.45rem 0.5rem;
+    margin-inline: -0.5rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-ink);
+    text-decoration: none;
+    font-size: 0.92rem;
+    white-space: nowrap;
+  }
+
+  .mega-group li a:hover,
+  .mega-group li a[aria-current='page'] {
+    background: var(--color-surface);
+    color: var(--color-primary);
+  }
+
+  .new-badge {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    background: var(--color-surface);
+    color: var(--color-muted);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    padding: 1px 7px;
+    vertical-align: middle;
   }
 
   .header-actions {
@@ -196,7 +390,15 @@ const prefix = lang === 'en' ? '/en' : '';
     white-space: nowrap;
   }
 
-  @media (max-width: 1660px) {
+  /* Breakpoint verified empirically (screenshot sweep, both locales; EN's
+     "Products & Services" is the longest label and the binding constraint).
+     The nav naturally fits on one line starting ~1090px and wraps to two
+     lines at 1085px and below, so 1150px gives ~60px of headroom above the
+     measured wrap point. With only 6 short top-level items (vs. the prior
+     14-item flat nav), this needs far less width than the 1600px/1660px
+     exception the prior UI refresh required; that exception is
+     intentionally removed here (see DESIGN.md Step 4). */
+  @media (max-width: 1150px) {
     .main-nav__toggle {
       display: flex;
     }
@@ -209,8 +411,11 @@ const prefix = lang === 'en' ? '/en' : '';
       background: var(--color-bg);
       border-bottom: 1px solid var(--color-border);
       flex-direction: column;
+      align-items: stretch;
       padding: var(--space-3) var(--space-4);
-      gap: var(--space-2);
+      gap: var(--space-1);
+      max-height: calc(100vh - 64px);
+      overflow-y: auto;
     }
 
     .main-nav {
@@ -222,6 +427,41 @@ const prefix = lang === 'en' ? '/en' : '';
     .main-nav.is-open .main-nav__list {
       display: flex;
     }
+
+    .main-nav__list > li {
+      width: 100%;
+    }
+
+    .nav-toggle {
+      width: 100%;
+      justify-content: space-between;
+      padding: var(--space-2) 0;
+    }
+
+    .dropdown-panel,
+    .mega-panel {
+      position: static;
+      display: none;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      margin: 0 0 0 var(--space-3);
+      padding: 0 0 var(--space-2);
+      background: none;
+    }
+
+    .has-dropdown.is-open .dropdown-panel {
+      display: block;
+    }
+
+    .has-dropdown.is-open .mega-panel {
+      display: block;
+      grid-template-columns: none;
+    }
+
+    .mega-group {
+      margin-bottom: var(--space-2);
+    }
   }
 </style>
 
@@ -232,5 +472,54 @@ const prefix = lang === 'en' ? '/en' : '';
   toggle?.addEventListener('click', () => {
     const isOpen = nav?.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
+  });
+
+  const dropdownItems = Array.from(document.querySelectorAll<HTMLLIElement>('.has-dropdown'));
+
+  function closeAllDropdowns(except?: HTMLLIElement) {
+    dropdownItems.forEach((li) => {
+      if (li === except) return;
+      li.classList.remove('is-open');
+      li.querySelector<HTMLButtonElement>('.nav-toggle')?.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  dropdownItems.forEach((li) => {
+    const button = li.querySelector<HTMLButtonElement>('.nav-toggle');
+    button?.addEventListener('click', () => {
+      const willOpen = !li.classList.contains('is-open');
+      closeAllDropdowns();
+      if (willOpen) {
+        li.classList.add('is-open');
+        button.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    const panel = li.querySelector<HTMLElement>('.dropdown-panel, .mega-panel');
+    panel?.addEventListener('keydown', (event) => {
+      const links = Array.from(panel.querySelectorAll<HTMLAnchorElement>('a'));
+      const currentIndex = links.indexOf(document.activeElement as HTMLAnchorElement);
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        links[(currentIndex + 1) % links.length]?.focus();
+      } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        links[(currentIndex - 1 + links.length) % links.length]?.focus();
+      }
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    const target = event.target as Node;
+    const clickedInsideAnyDropdown = dropdownItems.some((li) => li.contains(target));
+    if (!clickedInsideAnyDropdown) {
+      closeAllDropdowns();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeAllDropdowns();
+    }
   });
 </script>
