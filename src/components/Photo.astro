@@ -40,7 +40,20 @@ for (const [path, mod] of Object.entries(found)) {
   byStem.set(stem, mod.default);
 }
 
-const image = byStem.get(slot);
+// Several product variants share one accurate category photograph until the
+// supplier provides variant-specific photography. This keeps the product
+// pages visual without duplicating large image files in the repository.
+const imageSourceBySlot: Record<string, string> = {
+  'product-bolt-type': 'product-metal-sheet',
+  'product-clip-lock': 'product-metal-sheet',
+  'product-snap-lock': 'product-metal-sheet',
+  'product-pe-foam': 'product-pu-foam',
+  'product-eps': 'product-pu-foam',
+  'product-accessory-screw': 'product-accessory-ridge-cap',
+  'product-accessory-flashing': 'product-accessory-ridge-cap',
+  'product-accessory-fixing': 'product-accessory-ridge-cap',
+};
+const image = byStem.get(imageSourceBySlot[slot] ?? slot);
 const meta = photoSlots[slot];
 const alt = meta ? (lang === 'en' ? meta.altEn : meta.altTh) : '';
 
