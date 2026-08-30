@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
 import SectionHeader from '../components/SectionHeader.astro';
 import Card from '../components/Card.astro';
-import AnimatedBackground from '../components/AnimatedBackground.astro';
 import FacebookUpdates from '../components/FacebookUpdates.astro';
+import heroRoofPhoto from '../assets/photos/hero-metal-roof.png';
+import wallCeilingPhoto from '../assets/photos/wall-ceiling-cafe.png';
 import { site } from '../data/site';
 import { products, productCategories, categoryOrder } from '../data/products';
 import { configuratorLink } from '../data/configurator';
@@ -72,8 +74,16 @@ const roofing = products.filter((p) => p.category === 'roofing');
         </p>
       </div>
 
-      <div class="hero__panel">
-        <AnimatedBackground />
+      <figure class="hero__panel">
+        <Image
+          class="hero__image"
+          src={heroRoofPhoto}
+          alt="หลังคาเมทัลชีทสีน้ำเงินเข้มบนอาคารสมัยใหม่ในช่วงเย็น"
+          widths={[640, 960, 1280]}
+          sizes="(max-width: 860px) 100vw, 48vw"
+          quality={86}
+        />
+        <div class="hero__image-shade" aria-hidden="true"></div>
         <p class="label hero__panel-label">MATERIAL <span aria-hidden="true">/</span> ON SITE</p>
         <div class="hero__panel-cta">
           <span>ตัดความยาวตามหน้างาน</span>
@@ -82,7 +92,7 @@ const roofing = products.filter((p) => p.category === 'roofing');
             <ArrowRightIcon size={16} weight="bold" aria-hidden="true" />
           </a>
         </div>
-      </div>
+      </figure>
     </div>
 
     <div class="container hero__tags">
@@ -152,9 +162,19 @@ const roofing = products.filter((p) => p.category === 'roofing');
     </div>
   </section>
 
-  <section class="section wall" data-reveal-group>
-    <div class="container wall__inner">
-      <div class="wall__media" role="img" aria-label="แผ่นผนังและฝ้าเมทัลชีทลายไม้ในอาคารสมัยใหม่"></div>
+  <section class="wall" data-reveal-group>
+    <div class="wall__inner">
+      <figure class="wall__media">
+        <Image
+          src={wallCeilingPhoto}
+          alt="ฝ้าเมทัลชีทลายไม้และผนังเหล็กสีเข้มในคาเฟ่สมัยใหม่"
+          widths={[720, 1080, 1600]}
+          sizes="(max-width: 899px) 100vw, 50vw"
+          quality={86}
+          loading="lazy"
+        />
+        <figcaption class="label wall__caption">REAL MATERIAL / INSTALLED</figcaption>
+      </figure>
       <div class="wall__copy">
         <SectionHeader
           index="03"
@@ -238,6 +258,20 @@ const roofing = products.filter((p) => p.category === 'roofing');
         heading="ผลงานติดตั้งจริงจากหน้างาน"
         lede="ดูงานหลังคา ผนัง และฉนวนที่ติดตั้งจริง พร้อมรีวิวจากลูกค้าบนเฟซบุ๊ก"
       />
+      <div class="work-gallery">
+        <a class="work-photo work-photo--wide" href="/gallery">
+          <img src="/gallery/full/1013322459072462.webp" alt="งานหลังคาเมทัลชีทโรงจอดรถที่ติดตั้งเสร็จแล้ว" loading="lazy" />
+          <span>หลังคาที่พักอาศัย</span>
+        </a>
+        <a class="work-photo" href="/gallery">
+          <img src="/gallery/full/1116543733807710.webp" alt="งานติดตั้งโครงสร้างเหล็กในพื้นที่ก่อสร้าง" loading="lazy" />
+          <span>งานโครงสร้าง</span>
+        </a>
+        <a class="work-photo" href="/gallery">
+          <img src="/gallery/full/1005493303188711.webp" alt="แผ่นเมทัลชีทสีเทาที่ผลิตและเตรียมส่งหน้างาน" loading="lazy" />
+          <span>ผลิตตามสเปก</span>
+        </a>
+      </div>
       <div class="hero__actions">
         <a class="btn btn--primary" href="/gallery">ดูผลงานทั้งหมด</a>
         <a class="btn btn--outline" href="/testimonials">รีวิวลูกค้า</a>
@@ -315,21 +349,37 @@ const roofing = products.filter((p) => p.category === 'roofing');
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 340px;
+    min-height: 500px;
+    margin: 0;
     padding: var(--space-4);
     border-radius: var(--radius-lg);
     background: var(--color-band);
     color: var(--color-band-ink);
   }
 
-  .hero__panel :global(.bg) {
-    background: none;
+  .hero__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .hero__image-shade {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgb(5 19 35 / 45%) 0%, transparent 42%),
+      linear-gradient(0deg, rgb(5 19 35 / 86%) 0%, transparent 42%);
   }
 
   .hero__panel-label {
     position: relative;
-    z-index: 1;
-    color: color-mix(in oklab, var(--color-band-ink) 70%, transparent);
+    z-index: 2;
+    color: var(--color-band-ink);
+    text-shadow: 0 1px 12px rgb(0 0 0 / 45%);
   }
 
   .hero__panel-label span {
@@ -338,7 +388,7 @@ const roofing = products.filter((p) => p.category === 'roofing');
 
   .hero__panel-cta {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -347,6 +397,7 @@ const roofing = products.filter((p) => p.category === 'roofing');
     padding-top: var(--space-3);
     border-top: 1px solid color-mix(in oklab, var(--color-band-ink) 22%, transparent);
     font-weight: 600;
+    text-shadow: 0 1px 12px rgb(0 0 0 / 55%);
   }
 
   .hero__panel-link {
@@ -421,11 +472,15 @@ const roofing = products.filter((p) => p.category === 'roofing');
     color: var(--color-muted);
   }
 
-  .roofing__inner,
-  .wall__inner {
+  .roofing__inner {
     display: grid;
     gap: var(--space-6);
     align-items: center;
+  }
+
+  .wall__inner {
+    display: grid;
+    align-items: stretch;
   }
 
   @media (min-width: 900px) {
@@ -434,7 +489,7 @@ const roofing = products.filter((p) => p.category === 'roofing');
     }
 
     .wall__inner {
-      grid-template-columns: 0.9fr 1.1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     }
   }
 
@@ -533,10 +588,34 @@ const roofing = products.filter((p) => p.category === 'roofing');
   }
 
   .wall__media {
-    aspect-ratio: 4 / 3;
-    border-radius: var(--radius-lg);
-    background:
-      linear-gradient(135deg, var(--color-accent) 0%, var(--color-band) 60%, var(--color-primary) 160%);
+    position: relative;
+    min-height: 640px;
+    margin: 0;
+    overflow: hidden;
+    background: var(--color-band);
+  }
+
+  .wall__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .wall__caption {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+    padding: 0.45rem 0.65rem;
+    background: var(--color-bg);
+    color: var(--color-ink);
+  }
+
+  .wall__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(var(--space-6), 8vw, 7rem) clamp(var(--space-4), 7vw, 7rem);
+    background: var(--color-bg);
   }
 
   .wall__points {
@@ -564,8 +643,55 @@ const roofing = products.filter((p) => p.category === 'roofing');
     }
 
     .wall__media {
-      order: -1;
+      min-height: 320px;
     }
+  }
+
+  .work-gallery {
+    display: grid;
+    grid-template-columns: 1.35fr 0.65fr;
+    grid-template-rows: repeat(2, minmax(180px, 1fr));
+    gap: var(--space-2);
+    margin-top: var(--space-5);
+  }
+
+  .work-photo {
+    position: relative;
+    min-height: 180px;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--color-band);
+    color: var(--color-band-ink);
+  }
+
+  .work-photo--wide {
+    grid-row: 1 / 3;
+  }
+
+  .work-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 400ms var(--ease-out-quart);
+  }
+
+  .work-photo::after {
+    content: '';
+    position: absolute;
+    inset: 45% 0 0;
+    background: linear-gradient(transparent, rgb(5 19 35 / 78%));
+  }
+
+  .work-photo span {
+    position: absolute;
+    z-index: 1;
+    left: var(--space-3);
+    bottom: var(--space-3);
+    font-weight: 600;
+  }
+
+  .work-photo:hover img {
+    transform: scale(1.025);
   }
 
   .why-grid {
@@ -659,6 +785,15 @@ const roofing = products.filter((p) => p.category === 'roofing');
   @media (max-width: 560px) {
     .why-grid {
       grid-template-columns: 1fr;
+    }
+
+    .work-gallery {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(3, 220px);
+    }
+
+    .work-photo--wide {
+      grid-row: auto;
     }
   }
 </style>
