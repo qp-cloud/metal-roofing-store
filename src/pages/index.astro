@@ -113,26 +113,62 @@ const roofing = products.filter((p) => p.category === 'roofing');
     </div>
   </section>
 
-  <section class="section section--surface">
-    <div class="container">
-      <h2>ทำไมต้องมีชัยสตีล</h2>
-      <div class="grid-auto" data-reveal-group>
-        <div class="point reveal">
-          <h3>สั่งผลิตตามความยาวหน้างาน</h3>
-          <p>ตัดตามความยาวจริงของแต่ละช่วงหลังคา ลดรอยต่อ ลดเศษเหลือ และลดงานตัดหน้างาน</p>
+  <section class="section section--band roofing" data-reveal-group>
+    <div class="container roofing__inner">
+      <div class="roofing__copy">
+        <SectionHeader
+          index="02"
+          kicker="ROOFING METAL SHEET"
+          heading="หลังคาเมทัลชีท สวย เรียบ ลดปัญหารั่วซึม"
+          tone="dark"
+          lede="เลือกหลังคาให้เหมาะกับบ้าน อาคาร โรงงาน และโกดัง พร้อมบริการสั่งผลิตและตัดความยาวตามขนาดหน้างาน"
+        />
+        <ul class="roofing__chips">
+          {roofing.map((p) => <li>{p.nameTh.replace(/\s*\(.*?\)\s*/g, '').trim()}</li>)}
+        </ul>
+        <a class="btn btn--primary" href="/contact">ส่งขนาดหลังคาให้เราประเมิน</a>
+      </div>
+
+      <div class="roofing__panel">
+        <p class="label roofing__panel-label">ROOFING <span aria-hidden="true">/</span> PRODUCT RANGE</p>
+        <div class="range-tiles">
+          <a class="range-tile" href={configuratorLink({ profile: 'bolt-type' })}>
+            <span class="range-tile__value">760</span>
+            <span class="range-tile__name">ลอนมาตรฐาน</span>
+          </a>
+          <a class="range-tile range-tile--active" href={configuratorLink({ profile: 'snap-lock' })}>
+            <span class="range-tile__value">304</span>
+            <span class="range-tile__name">Snap-Lock</span>
+          </a>
+          <a class="range-tile" href={configuratorLink({ profile: 'clip-lock' })}>
+            <span class="range-tile__value" aria-hidden="true"><PathIcon size={30} weight="bold" /></span>
+            <span class="range-tile__name">หลังคาโค้ง</span>
+          </a>
         </div>
-        <div class="point reveal">
-          <h3>คำนวณปริมาณวัสดุให้ก่อนสั่ง</h3>
-          <p>ส่งแบบมา ทีมช่างเทคนิคช่วยถอดปริมาณ (Taking-off) และแนะนำระบบยึดที่เหมาะกับงาน</p>
-        </div>
-        <div class="point reveal">
-          <h3>ส่งข้ามแดนไป สปป.ลาว</h3>
-          <p>อยู่ติดสะพานมิตรภาพไทย–ลาว แห่งที่ 1 ห่างเวียงจันทน์ประมาณ 25 กม.</p>
-        </div>
-        <div class="point reveal">
-          <h3>ใบเสนอราคาตามงานจริง</h3>
-          <p>คิดราคาตามสเปก ปริมาณ และหน้างานจริง แจ้งชัดเจนก่อนสั่งผลิต</p>
-        </div>
+        <p class="roofing__note">
+          <CheckIcon size={15} weight="bold" aria-hidden="true" />
+          สั่งตัดความยาวต่อเนื่อง ลดรอยต่อและเศษวัสดุ
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wall" data-reveal-group>
+    <div class="container wall__inner">
+      <div class="wall__media" role="img" aria-label="แผ่นผนังและฝ้าเมทัลชีทลายไม้ในอาคารสมัยใหม่"></div>
+      <div class="wall__copy">
+        <SectionHeader
+          index="03"
+          kicker="WALL & CEILING"
+          heading="เปลี่ยนฝ้าและผนังเดิม ให้ดูโมเดิร์นด้วยลายไม้"
+          lede="แผ่นผนังและฝ้าเมทัลชีท ผิวเรียบ น้ำหนักเบา ติดตั้งรวดเร็ว เหมาะกับบ้าน คาเฟ่ ร้านค้า และสำนักงาน"
+        />
+        <ul class="wall__points">
+          <li><CheckIcon size={16} weight="bold" aria-hidden="true" /> ลายไม้และสีเรียบแบบใหม่</li>
+          <li><CheckIcon size={16} weight="bold" aria-hidden="true" /> ลดปัญหาฝ้าเดิมบวมน้ำและเป็นสนิม</li>
+          <li><CheckIcon size={16} weight="bold" aria-hidden="true" /> เหมาะกับงานภายในและภายนอก</li>
+        </ul>
+        <a class="btn btn--outline" href={site.lineHref} target="_blank" rel="noopener noreferrer">สอบถามทาง LINE</a>
       </div>
     </div>
   </section>
@@ -355,13 +391,151 @@ const roofing = products.filter((p) => p.category === 'roofing');
     margin: 0;
   }
 
-  .point h3 {
-    font-size: 1.1rem;
+  .roofing__inner,
+  .wall__inner {
+    display: grid;
+    gap: var(--space-6);
+    align-items: center;
   }
 
-  .point p {
+  @media (min-width: 900px) {
+    .roofing__inner {
+      grid-template-columns: 1.05fr 0.95fr;
+    }
+
+    .wall__inner {
+      grid-template-columns: 0.9fr 1.1fr;
+    }
+  }
+
+  .roofing__chips {
+    list-style: none;
+    margin: 0 0 var(--space-4);
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .roofing__chips li {
+    padding: 0.3rem 0.7rem;
+    border: 1px solid color-mix(in oklab, var(--color-band-ink) 30%, transparent);
+    border-radius: var(--radius-full);
+    font-size: 0.82rem;
+  }
+
+  .roofing__panel {
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    background: var(--color-panel);
+    color: var(--color-ink);
+  }
+
+  .roofing__panel-label {
+    margin-bottom: var(--space-3);
+  }
+
+  .roofing__panel-label span {
+    color: var(--color-primary);
+  }
+
+  .range-tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+  }
+
+  .range-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: var(--space-3) var(--space-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-bg);
+    color: var(--color-ink);
+    text-decoration: none;
+    text-align: center;
+    transition: border-color 180ms var(--ease-out-quart), transform 180ms var(--ease-out-quart);
+  }
+
+  .range-tile:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .range-tile--active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-primary-ink);
+  }
+
+  /* Out-specify the global `.section--band a:not(.btn)` link colour so the
+     tile ink above actually applies to these in-band anchors. */
+  .roofing__panel .range-tile {
+    color: var(--color-ink);
+  }
+
+  .roofing__panel .range-tile--active {
+    color: var(--color-primary-ink);
+  }
+
+  .range-tile__value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+
+  .range-tile__name {
+    font-size: 0.78rem;
+  }
+
+  .roofing__note {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: var(--space-3) 0 0;
+    font-size: 0.85rem;
     color: var(--color-muted);
-    margin: 0;
+  }
+
+  .wall__media {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-lg);
+    background:
+      linear-gradient(135deg, var(--color-accent) 0%, var(--color-band) 60%, var(--color-primary) 160%);
+  }
+
+  .wall__points {
+    list-style: none;
+    margin: 0 0 var(--space-4);
+    padding: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .wall__points li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .wall__points svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .range-tiles {
+      grid-template-columns: 1fr;
+    }
+
+    .wall__media {
+      order: -1;
+    }
   }
 
   .quote {
