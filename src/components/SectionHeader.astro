@@ -1,0 +1,90 @@
+---
+interface Props {
+  index: string;
+  kicker: string;
+  heading: string;
+  lede?: string;
+  tone?: 'light' | 'dark';
+}
+
+const { index, kicker, heading, lede, tone = 'light' } = Astro.props;
+---
+
+<header class:list={['section-header', `section-header--${tone}`]}>
+  <p class="label section-header__kicker">
+    <span class="section-header__index">{index}</span>
+    <span class="section-header__slash" aria-hidden="true">/</span>
+    {kicker}
+  </p>
+  <div class="rule section-header__rule"></div>
+  <div class="section-header__body">
+    <h2 class="section-header__heading">{heading}</h2>
+    {lede && <p class="section-header__lede">{lede}</p>}
+  </div>
+</header>
+
+<style>
+  .section-header {
+    margin-bottom: var(--space-6);
+  }
+
+  .section-header__kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: var(--space-3);
+  }
+
+  .section-header__index {
+    color: var(--color-ink);
+    font-weight: 700;
+  }
+
+  .section-header__slash {
+    color: var(--color-primary);
+  }
+
+  .section-header__rule {
+    margin-bottom: var(--space-4);
+  }
+
+  .section-header__body {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .section-header__heading {
+    margin: 0;
+  }
+
+  .section-header__lede {
+    margin: 0;
+    max-width: 46ch;
+    color: var(--color-muted);
+  }
+
+  @media (min-width: 900px) {
+    .section-header__body {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: end;
+      gap: var(--space-6);
+    }
+
+    .section-header__lede {
+      justify-self: end;
+    }
+  }
+
+  .section-header--dark .section-header__kicker,
+  .section-header--dark .section-header__lede {
+    color: color-mix(in oklab, var(--color-band-ink) 72%, transparent);
+  }
+
+  .section-header--dark .section-header__index {
+    color: var(--color-band-ink);
+  }
+
+  .section-header--dark .section-header__rule {
+    border-top-color: color-mix(in oklab, var(--color-band-ink) 25%, transparent);
+  }
+</style>
