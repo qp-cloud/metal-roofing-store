@@ -1,23 +1,30 @@
 :root {
   /* Core */
-  --color-bg: oklch(1 0 0);
-  --color-surface: oklch(0.965 0.004 250);
-  --color-ink: oklch(0.22 0.01 30);
-  --color-muted: oklch(0.48 0.006 30);
+  --color-bg: oklch(0.995 0.004 95);
+  --color-surface: oklch(0.975 0.003 245);
+  --color-ink: oklch(0.23 0.008 250);
+  --color-muted: oklch(0.52 0.03 250);
 
   /* Brand */
-  --color-primary: oklch(0.55 0.16 32);
-  --color-primary-hover: oklch(0.48 0.16 32);
-  --color-primary-ink: oklch(1 0 0);
-  --color-accent: oklch(0.28 0.06 240);
-  --color-accent-ink: oklch(1 0 0);
+  --color-primary: oklch(0.76 0.145 74);
+  --color-primary-hover: oklch(0.68 0.13 70);
+  --color-primary-ink: oklch(0.2 0.01 60);
+  --color-accent: oklch(0.27 0.045 252);
+  --color-accent-ink: oklch(0.97 0.01 250);
 
-  --color-border: oklch(0.88 0.006 250);
-  --color-success: oklch(0.56 0.13 145);
+  /* Editorial additions */
+  --color-link: oklch(0.52 0.11 74);
+  --color-band: oklch(0.24 0.04 252);
+  --color-band-ink: oklch(0.95 0.01 250);
+  --color-panel: oklch(0.93 0.012 245);
+  --rule: oklch(0.82 0.015 245);
+
+  --color-border: oklch(0.87 0.012 245);
+  --color-success: oklch(0.52 0.11 155);
   --color-danger: oklch(0.55 0.18 25);
 
-  --font-display: 'Taviraj', 'Noto Serif Thai', serif;
-  --font-body: 'Sarabun', 'Noto Sans Thai', sans-serif;
+  --font-display: 'IBM Plex Sans Thai', 'Noto Sans Thai', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans Thai', 'Noto Sans Thai', system-ui, sans-serif;
 
   --space-1: 0.5rem;
   --space-2: 0.75rem;
@@ -82,11 +89,11 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 600;
-  line-height: 1.25;
+  font-weight: 700;
+  line-height: 1.15;
   margin: 0 0 var(--space-3);
   text-wrap: balance;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 h1 {
@@ -108,7 +115,7 @@ p {
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--color-link);
 }
 
 .container {
