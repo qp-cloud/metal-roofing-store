@@ -1,11 +1,47 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site } from '../data/site';
-import { products } from '../data/products';
-import { testimonials } from '../data/testimonials';
-import FacebookUpdates from '../components/FacebookUpdates.astro';
-import ConfiguratorCTA from '../components/ConfiguratorCTA.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Card from '../components/Card.astro';
 import AnimatedBackground from '../components/AnimatedBackground.astro';
+import FacebookUpdates from '../components/FacebookUpdates.astro';
+import { site } from '../data/site';
+import { products, productCategories, categoryOrder } from '../data/products';
+import { configuratorLink } from '../data/configurator';
+import {
+  HouseLineIcon,
+  WallIcon,
+  ThermometerIcon,
+  WrenchIcon,
+  ArrowUpRightIcon,
+  ArrowRightIcon,
+  CheckIcon,
+  PathIcon,
+} from '@phosphor-icons/react/dist/ssr';
+
+const categoryIcons = {
+  roofing: HouseLineIcon,
+  wall: WallIcon,
+  insulation: ThermometerIcon,
+  accessories: WrenchIcon,
+} as const;
+
+const stripParens = (name: string) => name.replace(/\s*\(.*?\)\s*/g, '').trim();
+
+const supply = categoryOrder.map((cat, i) => {
+  const inCat = products.filter((p) => p.category === cat);
+  const named = inCat.filter((p) => !p.comingSoon);
+  const names = (named.length ? named : inCat).map((p) => stripParens(p.nameTh)).slice(0, 4);
+  return {
+    cat,
+    index: String(i + 1).padStart(2, '0'),
+    label: productCategories[cat].th,
+    sub: names.join(' · '),
+    Icon: categoryIcons[cat],
+    href: `/products#category-${cat}`,
+  };
+});
+
+const roofing = products.filter((p) => p.category === 'roofing');
 ---
 
 <BaseLayout
@@ -14,10 +50,13 @@ import AnimatedBackground from '../components/AnimatedBackground.astro';
   description="โรงงานผลิตแผ่นหลังคาเหล็กและแผ่นฉนวน PU Foam ที่หนองคาย รับงานผู้รับเหมาและโครงการ ตัดตามความยาวหน้างาน จัดส่งอีสานตอนบนและ สปป.ลาว"
 >
   <section class="hero">
-    <AnimatedBackground />
     <div class="container hero__inner">
       <div class="hero__copy">
-        <p class="hero__eyebrow">โรงงานผลิตที่หนองคาย · ส่งอีสานตอนบนและ สปป.ลาว</p>
+        <p class="label hero__eyebrow">
+          <span aria-hidden="true">[</span>
+          ผู้ผลิตและจำหน่ายเมทัลชีท มาตรฐานโรงงาน
+          <span aria-hidden="true">]</span>
+        </p>
         <h1>แผ่นหลังคาเหล็กจากโรงงาน สำหรับงานผู้รับเหมาและโครงการ</h1>
         <p class="hero__lede">
           ผลิตเอง ตัดตามความยาวหน้างาน คุมสเปกให้เหมือนกันทั้งโครงการ
@@ -27,80 +66,199 @@ import AnimatedBackground from '../components/AnimatedBackground.astro';
           <a class="btn btn--primary" href="/contact">ขอใบเสนอราคาโครงการ</a>
           <a class="btn btn--outline" href={site.lineHref} target="_blank" rel="noopener noreferrer">สอบถามทาง LINE</a>
         </div>
+        <p class="hero__reassure">
+          <CheckIcon size={16} weight="bold" aria-hidden="true" />
+          ส่งอีสานตอนบนและ สปป.ลาว · ปรึกษาฟรีก่อนสั่งผลิต
+        </p>
       </div>
-      <div class="hero__media" role="img" aria-label="แผ่นหลังคาเหล็กมีชัยสตีลติดตั้งบนโรงงาน"></div>
+
+      <div class="hero__panel">
+        <AnimatedBackground />
+        <p class="label hero__panel-label">MATERIAL <span aria-hidden="true">/</span> ON SITE</p>
+        <div class="hero__panel-cta">
+          <span>ตัดความยาวตามหน้างาน</span>
+          <a class="hero__panel-link" href="/configurator">
+            ออกแบบ 3D
+            <ArrowRightIcon size={16} weight="bold" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container hero__tags">
+      {categoryOrder.map((cat) => <span class="hero__tag">{productCategories[cat].th}</span>)}
     </div>
   </section>
 
-  <ConfiguratorCTA lang="th" />
+  <section class="section" data-reveal-group>
+    <div class="container">
+      <SectionHeader
+        index="01"
+        kicker="WHAT WE SUPPLY"
+        heading="วัสดุครบ จบในที่เดียว"
+        lede="เลือกสินค้าให้ตรงกับงานของคุณ พร้อมคำแนะนำเรื่องสเปก ลอน สี และปริมาณวัสดุก่อนสั่งซื้อ"
+      />
+      <div class="grid-auto supply-grid">
+        {supply.map(({ index, label, sub, Icon, href }) => (
+          <Card variant="interactive" href={href} class="supply-card reveal">
+            <span class="supply-card__icon"><Icon size={26} weight="light" aria-hidden="true" /></span>
+            <span class="supply-card__arrow" aria-hidden="true"><ArrowUpRightIcon size={18} weight="bold" /></span>
+            <span class="label supply-card__index">{index}</span>
+            <h3>{label}</h3>
+            <p>{sub}</p>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--band roofing" data-reveal-group>
+    <div class="container roofing__inner">
+      <div class="roofing__copy">
+        <SectionHeader
+          index="02"
+          kicker="ROOFING METAL SHEET"
+          heading="หลังคาเมทัลชีท สวย เรียบ ลดปัญหารั่วซึม"
+          tone="dark"
+          lede="เลือกหลังคาให้เหมาะกับบ้าน อาคาร โรงงาน และโกดัง พร้อมบริการสั่งผลิตและตัดความยาวตามขนาดหน้างาน"
+        />
+        <ul class="roofing__chips">
+          {roofing.map((p) => <li>{p.nameTh.replace(/\s*\(.*?\)\s*/g, '').trim()}</li>)}
+        </ul>
+        <a class="btn btn--primary" href="/contact">ส่งขนาดหลังคาให้เราประเมิน</a>
+      </div>
+
+      <div class="roofing__panel">
+        <p class="label roofing__panel-label">ROOFING <span aria-hidden="true">/</span> PRODUCT RANGE</p>
+        <div class="range-tiles">
+          <a class="range-tile" href={configuratorLink({ profile: 'bolt-type' })}>
+            <span class="range-tile__value">760</span>
+            <span class="range-tile__name">ลอนมาตรฐาน</span>
+          </a>
+          <a class="range-tile range-tile--active" href={configuratorLink({ profile: 'snap-lock' })}>
+            <span class="range-tile__value">304</span>
+            <span class="range-tile__name">Snap-Lock</span>
+          </a>
+          <a class="range-tile" href={configuratorLink({ profile: 'clip-lock' })}>
+            <span class="range-tile__value" aria-hidden="true"><PathIcon size={30} weight="bold" /></span>
+            <span class="range-tile__name">หลังคาโค้ง</span>
+          </a>
+        </div>
+        <p class="roofing__note">
+          <CheckIcon size={15} weight="bold" aria-hidden="true" />
+          สั่งตัดความยาวต่อเนื่อง ลดรอยต่อและเศษวัสดุ
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wall" data-reveal-group>
+    <div class="container wall__inner">
+      <div class="wall__media" role="img" aria-label="แผ่นผนังและฝ้าเมทัลชีทลายไม้ในอาคารสมัยใหม่"></div>
+      <div class="wall__copy">
+        <SectionHeader
+          index="03"
+          kicker="WALL & CEILING"
+          heading="เปลี่ยนฝ้าและผนังเดิม ให้ดูโมเดิร์นด้วยลายไม้"
+          lede="แผ่นผนังและฝ้าเมทัลชีท ผิวเรียบ น้ำหนักเบา ติดตั้งรวดเร็ว เหมาะกับบ้าน คาเฟ่ ร้านค้า และสำนักงาน"
+        />
+        <ul class="wall__points">
+          <li><CheckIcon size={16} weight="bold" aria-hidden="true" /> ลายไม้และสีเรียบแบบใหม่</li>
+          <li><CheckIcon size={16} weight="bold" aria-hidden="true" /> ลดปัญหาฝ้าเดิมบวมน้ำและเป็นสนิม</li>
+          <li><CheckIcon size={16} weight="bold" aria-hidden="true" /> เหมาะกับงานภายในและภายนอก</li>
+        </ul>
+        <a class="btn btn--outline" href={site.lineHref} target="_blank" rel="noopener noreferrer">สอบถามทาง LINE</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface" data-reveal-group>
+    <div class="container">
+      <SectionHeader
+        index="04"
+        kicker="WHY CHOOSE US"
+        heading="มีสินค้าจริง ให้คำปรึกษาได้จริง"
+        lede="ตั้งแต่เลือกวัสดุไปจนถึงสั่งผลิต ทีมช่างเทคนิคช่วยถอดแบบและคำนวณปริมาณให้ก่อนตัดสินใจ"
+      />
+      <ol class="why-grid">
+        <li class="why reveal">
+          <span class="label why__index">01</span>
+          <h3>สั่งผลิตตามความยาวหน้างาน</h3>
+          <p>ตัดตามความยาวจริงของแต่ละช่วงหลังคา ลดรอยต่อ ลดเศษเหลือ และลดงานตัดหน้างาน</p>
+        </li>
+        <li class="why reveal">
+          <span class="label why__index">02</span>
+          <h3>คำนวณปริมาณวัสดุให้ก่อนสั่ง</h3>
+          <p>ส่งแบบมา ทีมช่างเทคนิคช่วยถอดปริมาณ (Taking-off) และแนะนำระบบยึดที่เหมาะกับงาน</p>
+        </li>
+        <li class="why reveal">
+          <span class="label why__index">03</span>
+          <h3>ส่งข้ามแดนไป สปป.ลาว</h3>
+          <p>อยู่ติดสะพานมิตรภาพไทย–ลาว แห่งที่ 1 ห่างเวียงจันทน์ประมาณ 25 กม.</p>
+        </li>
+        <li class="why reveal">
+          <span class="label why__index">04</span>
+          <h3>ใบเสนอราคาตามงานจริง</h3>
+          <p>คิดราคาตามสเปก ปริมาณ และหน้างานจริง แจ้งชัดเจนก่อนสั่งผลิต</p>
+        </li>
+      </ol>
+    </div>
+  </section>
 
   <section class="section" data-reveal-group>
     <div class="container">
-      <h2>สินค้าของเรา</h2>
-      <div class="grid-auto">
-        {products.map((p) => (
-          <a class="product-card reveal" href={`/products#${p.slug}`}>
-            <h3>{p.nameTh}</h3>
-            <p>{p.descTh}</p>
-          </a>
-        ))}
-      </div>
+      <SectionHeader
+        index="05"
+        kicker="MORE MATERIALS"
+        heading="ต่อยอดงานให้ครบทุกมุม"
+        lede="นอกจากหลังคา เรายังมีฉนวน สี และสเปกให้เทียบ เพื่อวางแผนทั้งโครงการจากผู้ผลิตรายเดียว"
+      />
+      <dl class="more-list">
+        <div class="more-row rule">
+          <dt><a href="/products#category-insulation">ฉนวนกันความร้อน</a></dt>
+          <dd>PU Foam / PE / EPS ประกบแผ่นเหล็ก ลดความร้อนเข้าอาคารและลดเสียง</dd>
+        </div>
+        <div class="more-row rule">
+          <dt><a href="/colors">สีและเฉดวัสดุ</a></dt>
+          <dd>เทียบเฉดหลังคาและผนังก่อนสั่ง เลือกให้เข้ากับงาน</dd>
+        </div>
+        <div class="more-row rule">
+          <dt><a href="/specifications">สเปกสินค้า</a></dt>
+          <dd>ความหนา ลอน และการใช้งานของแต่ละระบบ ในตารางเดียว</dd>
+        </div>
+      </dl>
     </div>
   </section>
 
   <section class="section section--surface">
     <div class="container">
-      <h2>ทำไมต้องมีชัยสตีล</h2>
-      <div class="grid-auto" data-reveal-group>
-        <div class="point reveal">
-          <h3>สั่งผลิตตามความยาวหน้างาน</h3>
-          <p>ตัดตามความยาวจริงของแต่ละช่วงหลังคา ลดรอยต่อ ลดเศษเหลือ และลดงานตัดหน้างาน</p>
-        </div>
-        <div class="point reveal">
-          <h3>คำนวณปริมาณวัสดุให้ก่อนสั่ง</h3>
-          <p>ส่งแบบมา ทีมช่างเทคนิคช่วยถอดปริมาณ (Taking-off) และแนะนำระบบยึดที่เหมาะกับงาน</p>
-        </div>
-        <div class="point reveal">
-          <h3>ส่งข้ามแดนไป สปป.ลาว</h3>
-          <p>อยู่ติดสะพานมิตรภาพไทย–ลาว แห่งที่ 1 ห่างเวียงจันทน์ประมาณ 25 กม.</p>
-        </div>
-        <div class="point reveal">
-          <h3>ใบเสนอราคาตามงานจริง</h3>
-          <p>คิดราคาตามสเปก ปริมาณ และหน้างานจริง แจ้งชัดเจนก่อนสั่งผลิต</p>
-        </div>
+      <SectionHeader
+        index="06"
+        kicker="CLIENT WORK"
+        heading="ผลงานติดตั้งจริงจากหน้างาน"
+        lede="ดูงานหลังคา ผนัง และฉนวนที่ติดตั้งจริง พร้อมรีวิวจากลูกค้าบนเฟซบุ๊ก"
+      />
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="/gallery">ดูผลงานทั้งหมด</a>
+        <a class="btn btn--outline" href="/testimonials">รีวิวลูกค้า</a>
       </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2>เสียงจากลูกค้า</h2>
-      <div class="grid-auto" data-reveal-group>
-        {testimonials.map((t) => (
-          <blockquote class="quote reveal">
-            <p>&ldquo;{t.quoteTh}&rdquo;</p>
-            <footer>
-              <strong>{t.nameTh}</strong> — {t.projectTh}
-              <span class="quote__branch">{t.branchTh}</span>
-            </footer>
-          </blockquote>
-        ))}
-      </div>
-      <p class="section-cta"><a href="/testimonials">ดูรีวิวทั้งหมด &rarr;</a></p>
     </div>
   </section>
 
   <FacebookUpdates lang="th" />
 
-  <section class="section section--surface cta-band">
+  <section class="section section--band cta-band">
     <div class="container cta-band__inner">
-      <div>
-        <h2>พร้อมเริ่มโครงการหลังคาของคุณ?</h2>
-        <p>ทักแชท LINE หรือโทรหาทีมขาย รับคำปรึกษาฟรีก่อนตัดสินใจ</p>
-      </div>
+      <SectionHeader
+        index="07"
+        kicker="START YOUR PROJECT"
+        heading="พร้อมเริ่มโครงการหลังคาของคุณ?"
+        tone="dark"
+        lede="ทักแชท LINE หรือโทรหาทีมขาย รับคำปรึกษาฟรีก่อนตัดสินใจ"
+      />
       <div class="hero__actions">
         <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">แชท LINE: {site.lineId}</a>
-        <a class="btn btn--outline" href={site.phoneHref}>โทร {site.phone}</a>
+        <a class="btn btn--outline cta-band__outline" href={site.phoneHref}>โทร {site.phone}</a>
       </div>
     </div>
   </section>
@@ -108,18 +266,25 @@ import AnimatedBackground from '../components/AnimatedBackground.astro';
 
 <style>
   .hero {
-    position: relative;
-    isolation: isolate;
-    padding-block: var(--space-8) var(--space-7);
+    padding-block: var(--space-8) var(--space-6);
   }
 
   .hero__inner {
-    position: relative;
-    z-index: 1;
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: 1.05fr 0.95fr;
     gap: var(--space-6);
-    align-items: center;
+    align-items: stretch;
+  }
+
+  .hero__eyebrow {
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: var(--space-3);
+    color: var(--color-muted);
+  }
+
+  .hero__eyebrow span {
+    color: var(--color-primary);
   }
 
   .hero__lede {
@@ -134,105 +299,366 @@ import AnimatedBackground from '../components/AnimatedBackground.astro';
     margin-top: var(--space-4);
   }
 
-  .hero__media {
-    aspect-ratio: 4 / 3;
-    border-radius: var(--radius);
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
-  }
-
-  .product-card {
-    display: block;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    padding: var(--space-4);
-    text-decoration: none;
-    color: var(--color-ink);
-    transition: border-color 180ms var(--ease-out-quart), transform 180ms var(--ease-out-quart);
-  }
-
-  .product-card:hover {
-    border-color: var(--color-primary);
-    transform: translateY(-2px);
-  }
-
-  .product-card h3 {
-    font-size: 1.1rem;
-    margin-bottom: var(--space-1);
-  }
-
-  .product-card p {
-    color: var(--color-muted);
-    font-size: 0.92rem;
-    margin: 0;
-  }
-
-  .point h3 {
-    font-size: 1.1rem;
-  }
-
-  .point p {
-    color: var(--color-muted);
-    margin: 0;
-  }
-
-  .quote {
-    background: var(--color-surface);
-    border-radius: var(--radius);
-    padding: var(--space-4);
-    margin: 0;
-  }
-
-  .quote p {
-    font-style: italic;
-    max-width: none;
-  }
-
-  .quote footer {
-    font-style: normal;
+  .hero__reassure {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: var(--space-3);
     font-size: 0.9rem;
     color: var(--color-muted);
+  }
+
+  .hero__panel {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    justify-content: space-between;
+    min-height: 340px;
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    background: var(--color-band);
+    color: var(--color-band-ink);
   }
 
-  .quote__branch {
-    font-size: 0.82rem;
+  .hero__panel :global(.bg) {
+    background: none;
   }
 
-  .section-cta {
-    margin-top: var(--space-4);
+  .hero__panel-label {
+    position: relative;
+    z-index: 1;
+    color: color-mix(in oklab, var(--color-band-ink) 70%, transparent);
   }
 
-  .section-cta a {
-    text-decoration: none;
-    font-weight: 600;
+  .hero__panel-label span {
+    color: var(--color-primary);
   }
 
-  .cta-band__inner {
+  .hero__panel-cta {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-4);
+    gap: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: 1px solid color-mix(in oklab, var(--color-band-ink) 22%, transparent);
+    font-weight: 600;
   }
 
-  @media (max-width: 800px) {
-    .hero__inner {
+  .hero__panel-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .hero__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--rule);
+  }
+
+  .hero__tag {
+    font-size: 0.82rem;
+    color: var(--color-muted);
+  }
+
+  .hero__tag:not(:last-child)::after {
+    content: '·';
+    margin-left: var(--space-2);
+    color: var(--color-primary);
+  }
+
+  .supply-grid {
+    margin-top: var(--space-2);
+  }
+
+  .supply-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .supply-card__icon {
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .supply-card__arrow {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    color: var(--color-muted);
+    transition: color 180ms var(--ease-out-quart), transform 180ms var(--ease-out-quart);
+  }
+
+  .supply-card:hover .supply-card__arrow {
+    color: var(--color-primary);
+    transform: translate(2px, -2px);
+  }
+
+  .supply-card__index {
+    color: var(--color-muted);
+  }
+
+  .supply-card h3 {
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .supply-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+  }
+
+  .roofing__inner,
+  .wall__inner {
+    display: grid;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .roofing__inner {
+      grid-template-columns: 1.05fr 0.95fr;
+    }
+
+    .wall__inner {
+      grid-template-columns: 0.9fr 1.1fr;
+    }
+  }
+
+  .roofing__chips {
+    list-style: none;
+    margin: 0 0 var(--space-4);
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .roofing__chips li {
+    padding: 0.3rem 0.7rem;
+    border: 1px solid color-mix(in oklab, var(--color-band-ink) 30%, transparent);
+    border-radius: var(--radius-full);
+    font-size: 0.82rem;
+  }
+
+  .roofing__panel {
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    background: var(--color-panel);
+    color: var(--color-ink);
+  }
+
+  .roofing__panel-label {
+    margin-bottom: var(--space-3);
+  }
+
+  .roofing__panel-label span {
+    color: var(--color-primary);
+  }
+
+  .range-tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+  }
+
+  .range-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: var(--space-3) var(--space-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-bg);
+    color: var(--color-ink);
+    text-decoration: none;
+    text-align: center;
+    transition: border-color 180ms var(--ease-out-quart), transform 180ms var(--ease-out-quart);
+  }
+
+  .range-tile:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .range-tile--active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-primary-ink);
+  }
+
+  /* Out-specify the global `.section--band a:not(.btn)` link colour so the
+     tile ink above actually applies to these in-band anchors. */
+  .roofing__panel .range-tile {
+    color: var(--color-ink);
+  }
+
+  .roofing__panel .range-tile--active {
+    color: var(--color-primary-ink);
+  }
+
+  .range-tile__value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+
+  .range-tile__name {
+    font-size: 0.78rem;
+  }
+
+  .roofing__note {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: var(--space-3) 0 0;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+  }
+
+  .wall__media {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-lg);
+    background:
+      linear-gradient(135deg, var(--color-accent) 0%, var(--color-band) 60%, var(--color-primary) 160%);
+  }
+
+  .wall__points {
+    list-style: none;
+    margin: 0 0 var(--space-4);
+    padding: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .wall__points li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .wall__points svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .range-tiles {
       grid-template-columns: 1fr;
     }
 
-    .hero__media {
+    .wall__media {
       order: -1;
     }
   }
 
-  .hero__eyebrow {
-    margin: 0 0 var(--space-2);
+  .why-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+
+  .why {
+    padding-top: var(--space-3);
+  }
+
+  .why__index {
+    display: block;
+    margin-bottom: var(--space-2);
     color: var(--color-primary);
-    font-weight: 600;
-    font-size: 0.85rem;
-    letter-spacing: 0.02em;
+  }
+
+  .why h3 {
+    font-size: 1.05rem;
+  }
+
+  .why p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+  }
+
+  .more-list {
+    margin: 0;
+  }
+
+  .more-row {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-4) 0;
+  }
+
+  .more-row dt {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .more-row dd {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.92rem;
+  }
+
+  @media (min-width: 720px) {
+    .more-row {
+      grid-template-columns: 0.4fr 0.6fr;
+      align-items: baseline;
+      gap: var(--space-4);
+    }
+  }
+
+  .cta-band__inner {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .cta-band__outline {
+    color: var(--color-band-ink);
+    border-color: color-mix(in oklab, var(--color-band-ink) 40%, transparent);
+  }
+
+  .cta-band__outline:hover {
+    border-color: var(--color-band-ink);
+  }
+
+  @media (max-width: 860px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__panel {
+      order: -1;
+      min-height: 240px;
+    }
+
+    .why-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .why-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
