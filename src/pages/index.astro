@@ -6,7 +6,6 @@ import AnimatedBackground from '../components/AnimatedBackground.astro';
 import FacebookUpdates from '../components/FacebookUpdates.astro';
 import { site } from '../data/site';
 import { products, productCategories, categoryOrder } from '../data/products';
-import { testimonials } from '../data/testimonials';
 import { configuratorLink } from '../data/configurator';
 import {
   HouseLineIcon,
@@ -173,35 +172,93 @@ const roofing = products.filter((p) => p.category === 'roofing');
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--surface" data-reveal-group>
     <div class="container">
-      <h2>เสียงจากลูกค้า</h2>
-      <div class="grid-auto" data-reveal-group>
-        {testimonials.map((t) => (
-          <blockquote class="quote reveal">
-            <p>&ldquo;{t.quoteTh}&rdquo;</p>
-            <footer>
-              <strong>{t.nameTh}</strong> — {t.projectTh}
-              <span class="quote__branch">{t.branchTh}</span>
-            </footer>
-          </blockquote>
-        ))}
+      <SectionHeader
+        index="04"
+        kicker="WHY CHOOSE US"
+        heading="มีสินค้าจริง ให้คำปรึกษาได้จริง"
+        lede="ตั้งแต่เลือกวัสดุไปจนถึงสั่งผลิต ทีมช่างเทคนิคช่วยถอดแบบและคำนวณปริมาณให้ก่อนตัดสินใจ"
+      />
+      <ol class="why-grid">
+        <li class="why reveal">
+          <span class="label why__index">01</span>
+          <h3>สั่งผลิตตามความยาวหน้างาน</h3>
+          <p>ตัดตามความยาวจริงของแต่ละช่วงหลังคา ลดรอยต่อ ลดเศษเหลือ และลดงานตัดหน้างาน</p>
+        </li>
+        <li class="why reveal">
+          <span class="label why__index">02</span>
+          <h3>คำนวณปริมาณวัสดุให้ก่อนสั่ง</h3>
+          <p>ส่งแบบมา ทีมช่างเทคนิคช่วยถอดปริมาณ (Taking-off) และแนะนำระบบยึดที่เหมาะกับงาน</p>
+        </li>
+        <li class="why reveal">
+          <span class="label why__index">03</span>
+          <h3>ส่งข้ามแดนไป สปป.ลาว</h3>
+          <p>อยู่ติดสะพานมิตรภาพไทย–ลาว แห่งที่ 1 ห่างเวียงจันทน์ประมาณ 25 กม.</p>
+        </li>
+        <li class="why reveal">
+          <span class="label why__index">04</span>
+          <h3>ใบเสนอราคาตามงานจริง</h3>
+          <p>คิดราคาตามสเปก ปริมาณ และหน้างานจริง แจ้งชัดเจนก่อนสั่งผลิต</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" data-reveal-group>
+    <div class="container">
+      <SectionHeader
+        index="05"
+        kicker="MORE MATERIALS"
+        heading="ต่อยอดงานให้ครบทุกมุม"
+        lede="นอกจากหลังคา เรายังมีฉนวน สี และสเปกให้เทียบ เพื่อวางแผนทั้งโครงการจากผู้ผลิตรายเดียว"
+      />
+      <dl class="more-list">
+        <div class="more-row rule">
+          <dt><a href="/products#category-insulation">ฉนวนกันความร้อน</a></dt>
+          <dd>PU Foam / PE / EPS ประกบแผ่นเหล็ก ลดความร้อนเข้าอาคารและลดเสียง</dd>
+        </div>
+        <div class="more-row rule">
+          <dt><a href="/colors">สีและเฉดวัสดุ</a></dt>
+          <dd>เทียบเฉดหลังคาและผนังก่อนสั่ง เลือกให้เข้ากับงาน</dd>
+        </div>
+        <div class="more-row rule">
+          <dt><a href="/specifications">สเปกสินค้า</a></dt>
+          <dd>ความหนา ลอน และการใช้งานของแต่ละระบบ ในตารางเดียว</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container">
+      <SectionHeader
+        index="06"
+        kicker="CLIENT WORK"
+        heading="ผลงานติดตั้งจริงจากหน้างาน"
+        lede="ดูงานหลังคา ผนัง และฉนวนที่ติดตั้งจริง พร้อมรีวิวจากลูกค้าบนเฟซบุ๊ก"
+      />
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="/gallery">ดูผลงานทั้งหมด</a>
+        <a class="btn btn--outline" href="/testimonials">รีวิวลูกค้า</a>
       </div>
-      <p class="section-cta"><a href="/testimonials">ดูรีวิวทั้งหมด &rarr;</a></p>
     </div>
   </section>
 
   <FacebookUpdates lang="th" />
 
-  <section class="section section--surface cta-band">
+  <section class="section section--band cta-band">
     <div class="container cta-band__inner">
-      <div>
-        <h2>พร้อมเริ่มโครงการหลังคาของคุณ?</h2>
-        <p>ทักแชท LINE หรือโทรหาทีมขาย รับคำปรึกษาฟรีก่อนตัดสินใจ</p>
-      </div>
+      <SectionHeader
+        index="07"
+        kicker="START YOUR PROJECT"
+        heading="พร้อมเริ่มโครงการหลังคาของคุณ?"
+        tone="dark"
+        lede="ทักแชท LINE หรือโทรหาทีมขาย รับคำปรึกษาฟรีก่อนตัดสินใจ"
+      />
       <div class="hero__actions">
         <a class="btn btn--primary" href={site.lineHref} target="_blank" rel="noopener noreferrer">แชท LINE: {site.lineId}</a>
-        <a class="btn btn--outline" href={site.phoneHref}>โทร {site.phone}</a>
+        <a class="btn btn--outline cta-band__outline" href={site.phoneHref}>โทร {site.phone}</a>
       </div>
     </div>
   </section>
@@ -364,33 +421,6 @@ const roofing = products.filter((p) => p.category === 'roofing');
     color: var(--color-muted);
   }
 
-  .product-card {
-    display: block;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    padding: var(--space-4);
-    text-decoration: none;
-    color: var(--color-ink);
-    transition: border-color 180ms var(--ease-out-quart), transform 180ms var(--ease-out-quart);
-  }
-
-  .product-card:hover {
-    border-color: var(--color-primary);
-    transform: translateY(-2px);
-  }
-
-  .product-card h3 {
-    font-size: 1.1rem;
-    margin-bottom: var(--space-1);
-  }
-
-  .product-card p {
-    color: var(--color-muted);
-    font-size: 0.92rem;
-    margin: 0;
-  }
-
   .roofing__inner,
   .wall__inner {
     display: grid;
@@ -538,46 +568,77 @@ const roofing = products.filter((p) => p.category === 'roofing');
     }
   }
 
-  .quote {
-    background: var(--color-surface);
-    border-radius: var(--radius);
-    padding: var(--space-4);
+  .why-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+
+  .why {
+    padding-top: var(--space-3);
+  }
+
+  .why__index {
+    display: block;
+    margin-bottom: var(--space-2);
+    color: var(--color-primary);
+  }
+
+  .why h3 {
+    font-size: 1.05rem;
+  }
+
+  .why p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+  }
+
+  .more-list {
     margin: 0;
   }
 
-  .quote p {
-    font-style: italic;
-    max-width: none;
+  .more-row {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-4) 0;
   }
 
-  .quote footer {
-    font-style: normal;
-    font-size: 0.9rem;
+  .more-row dt {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .more-row dd {
+    margin: 0;
     color: var(--color-muted);
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
+    font-size: 0.92rem;
   }
 
-  .quote__branch {
-    font-size: 0.82rem;
-  }
-
-  .section-cta {
-    margin-top: var(--space-4);
-  }
-
-  .section-cta a {
-    text-decoration: none;
-    font-weight: 600;
+  @media (min-width: 720px) {
+    .more-row {
+      grid-template-columns: 0.4fr 0.6fr;
+      align-items: baseline;
+      gap: var(--space-4);
+    }
   }
 
   .cta-band__inner {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
     gap: var(--space-4);
+  }
+
+  .cta-band__outline {
+    color: var(--color-band-ink);
+    border-color: color-mix(in oklab, var(--color-band-ink) 40%, transparent);
+  }
+
+  .cta-band__outline:hover {
+    border-color: var(--color-band-ink);
   }
 
   @media (max-width: 860px) {
@@ -588,6 +649,16 @@ const roofing = products.filter((p) => p.category === 'roofing');
     .hero__panel {
       order: -1;
       min-height: 240px;
+    }
+
+    .why-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .why-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
