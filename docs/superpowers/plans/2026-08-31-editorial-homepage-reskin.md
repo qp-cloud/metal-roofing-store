@@ -12,7 +12,7 @@
 
 ## Global Constraints
 
-- **No test runner exists.** Every task is verified by: `pnpm check` (astro check) clean, `pnpm build` succeeds with **31 pages**, then a screenshot via the recipe below with explicit visual assertions. Commit at the end of every task.
+- **No test runner exists.** Every task is verified by: `pnpm check` (astro check) clean, `pnpm build` succeeds with **33 pages**, then a screenshot via the recipe below with explicit visual assertions. Commit at the end of every task.
 - **Scope:** Thai homepage only. Do **not** edit `src/pages/en/index.astro` or any other page. Other pages inherit the new palette by cascade and are only spot-checked (Task 9).
 - **Token names are frozen.** Only change token *values* in `global.css` and add the five new tokens named in the spec (`--color-link`, `--color-band`, `--color-band-ink`, `--color-panel`, `--rule`). Never rename an existing token.
 - **`Header.astro` markup and `<script>` are frozen.** Only its `<style>` block changes. Same for `Footer.astro` (style block only).
@@ -134,7 +134,7 @@ https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700
 - [ ] **Step 5: Check and build**
 
 Run: `pnpm check && pnpm build`
-Expected: no errors; `pnpm build` prints `31 page(s) built`.
+Expected: no errors; `pnpm build` prints `33 page(s) built`.
 
 - [ ] **Step 6: Screenshot and eyeball**
 
@@ -318,7 +318,7 @@ Expected: at the top of the page, a small grey uppercase `00 / RENDER TEST` line
 
 Delete the `<section>...RENDER TEST...</section>` block from Step 3. Keep the `SectionHeader` import — Task 3 uses it.
 
-Run: `pnpm build` again; expect `31 page(s)` and no `RENDER TEST` text in `dist/index.html` (`grep -c "RENDER TEST" dist/index.html` → `0`).
+Run: `pnpm build` again; expect `33 page(s)` and no `RENDER TEST` text in `dist/index.html` (`grep -c "RENDER TEST" dist/index.html` → `0`).
 
 - [ ] **Step 6: Commit**
 
@@ -639,7 +639,7 @@ Leave `.product-card`, `.point`, `.quote`, `.section-cta`, `.cta-band__inner` ru
 - [ ] **Step 4: Check and build**
 
 Run: `pnpm check && pnpm build`
-Expected: no errors; `31 page(s)`.
+Expected: no errors; `33 page(s)`.
 
 - [ ] **Step 5: Screenshot desktop + mobile**
 
@@ -1113,7 +1113,7 @@ Change `.cta-band__inner` and add the rest:
 - [ ] **Step 5: Check and build**
 
 Run: `pnpm check && pnpm build`
-Expected: no errors; `31 page(s)`. Confirm no leftover references: `grep -n "product-card\|class=\"quote\|ConfiguratorCTA" src/pages/index.astro` → no matches.
+Expected: no errors; `33 page(s)`. Confirm no leftover references: `grep -n "product-card\|class=\"quote\|ConfiguratorCTA" src/pages/index.astro` → no matches.
 
 - [ ] **Step 6: Full-page screenshot desktop + mobile**
 
@@ -1278,7 +1278,7 @@ Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>"
 - [ ] **Step 1: Clean check + build**
 
 Run: `pnpm check && pnpm build`
-Expected: zero errors/warnings from `astro check`; build reports **31 page(s)**. If the count differs, a route was lost — stop and investigate.
+Expected: zero errors/warnings from `astro check`; build reports **33 page(s)**. If the count differs, a route was lost — stop and investigate.
 
 - [ ] **Step 2: Homepage screenshots, full height, both viewports**
 
@@ -1347,7 +1347,7 @@ Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>"
 | `Footer.astro` style-only restyle | 7 |
 | `Badge.astro` tone literals | 8 |
 | `StickyContact.astro` contrast check | 8 |
-| Verify: check, build 31 pages, screenshots, 4 spot-checks, reduced-motion, AA | 9 |
+| Verify: check, build 33 pages, screenshots, 4 spot-checks, reduced-motion, AA | 9 |
 
 Deviations from the spec, all minor and noted in-task:
 - The dist hero panel label `01 / PROJECT MATERIAL` is rendered as `MATERIAL / ON SITE` to avoid colliding with the §01 index (spec already updated to this).
