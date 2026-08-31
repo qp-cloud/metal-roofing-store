@@ -1,0 +1,20 @@
+---
+import { organizationNode, websiteNode } from '../lib/schema';
+
+interface Props {
+  /** Page-specific nodes merged into the site-wide @graph so @id refs resolve. */
+  nodes?: Record<string, unknown>[];
+}
+
+const { nodes = [] } = Astro.props;
+
+const graph = [organizationNode, websiteNode, ...nodes];
+const json = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })
+  // Neutralise </script> breakout + JSON-in-HTML parser hazards.
+  .replace(/</g, '\\u003c')
+  .replace(/>/g, '\\u003e')
+  .replace(/&/g, '\\u0026')
+  .replace(new RegExp(String.fromCharCode(0x2028), 'g'), '\\u2028')
+  .replace(new RegExp(String.fromCharCode(0x2029), 'g'), '\\u2029');
+---
+<script type="application/ld+json" is:inline set:html={json} />

@@ -1,7 +1,8 @@
 export type Spec = {
   profileTh: string;
   profileEn: string;
-  thickness: string;
+  thicknessTh: string;
+  thicknessEn: string;
   applicationTh: string;
   applicationEn: string;
   startingPrice: string;
@@ -11,7 +12,8 @@ export const specs: Spec[] = [
   {
     profileTh: 'ลอนเมทัลชีท (Metal Sheet)',
     profileEn: 'Standard Metal Sheet',
-    thickness: '0.35 – 0.50 มม.',
+    thicknessTh: '0.35 – 0.50 มม.',
+    thicknessEn: '0.35 – 0.50 mm',
     applicationTh: 'หลังคาบ้าน โรงจอดรถ',
     applicationEn: 'House roofs, carports',
     startingPrice: '',
@@ -19,7 +21,8 @@ export const specs: Spec[] = [
   {
     profileTh: 'PU Foam ฉนวนกันความร้อน',
     profileEn: 'PU Foam Insulated',
-    thickness: '25 – 50 มม. (ฉนวน)',
+    thicknessTh: '25 – 50 มม. (ฉนวน)',
+    thicknessEn: '25 – 50 mm (insulation)',
     applicationTh: 'ห้องเย็น โรงงานควบคุมอุณหภูมิ',
     applicationEn: 'Cold storage, climate-controlled plants',
     startingPrice: '',
@@ -27,7 +30,8 @@ export const specs: Spec[] = [
   {
     profileTh: 'Bolt Type ยึดสกรู',
     profileEn: 'Bolt-Type',
-    thickness: '0.40 – 0.47 มม.',
+    thicknessTh: '0.40 – 0.47 มม.',
+    thicknessEn: '0.40 – 0.47 mm',
     applicationTh: 'หลังคาโรงงานทั่วไป',
     applicationEn: 'General factory roofing',
     startingPrice: '',
@@ -35,7 +39,8 @@ export const specs: Spec[] = [
   {
     profileTh: 'Clip-Lock ระบบคลิปล็อก',
     profileEn: 'Clip-Lock',
-    thickness: '0.47 – 0.55 มม.',
+    thicknessTh: '0.47 – 0.55 มม.',
+    thicknessEn: '0.47 – 0.55 mm',
     applicationTh: 'อาคารพาณิชย์ หลังคาลาดต่ำ',
     applicationEn: 'Commercial buildings, low-slope roofs',
     startingPrice: '',
@@ -43,7 +48,8 @@ export const specs: Spec[] = [
   {
     profileTh: 'Snap-Lock ระบบสแนปล็อก',
     profileEn: 'Snap-Lock',
-    thickness: '0.47 – 0.55 มม.',
+    thicknessTh: '0.47 – 0.55 มม.',
+    thicknessEn: '0.47 – 0.55 mm',
     applicationTh: 'อาคารสถาปัตยกรรม หลังคาโค้ง',
     applicationEn: 'Architectural buildings, curved roofs',
     startingPrice: '',
@@ -51,7 +57,8 @@ export const specs: Spec[] = [
   {
     profileTh: 'Panel Sheet แผ่นผนัง',
     profileEn: 'Wall Panel',
-    thickness: '30 – 75 มม.',
+    thicknessTh: '30 – 75 มม.',
+    thicknessEn: '30 – 75 mm',
     applicationTh: 'ผนังโรงงาน คลังสินค้า',
     applicationEn: 'Factory & warehouse walls',
     startingPrice: '',

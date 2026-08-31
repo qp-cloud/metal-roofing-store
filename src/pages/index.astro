@@ -82,6 +82,8 @@ const roofing = products.filter((p) => p.category === 'roofing');
           widths={[640, 960, 1280]}
           sizes="(max-width: 860px) 100vw, 48vw"
           quality={86}
+          loading="eager"
+          fetchpriority="high"
         />
         <div class="hero__image-shade" aria-hidden="true"></div>
         <p class="label hero__panel-label">MATERIAL <span aria-hidden="true">/</span> ON SITE</p>
@@ -260,15 +262,36 @@ const roofing = products.filter((p) => p.category === 'roofing');
       />
       <div class="work-gallery">
         <a class="work-photo work-photo--wide" href="/gallery">
-          <img src="/gallery/full/1013322459072462.webp" alt="งานหลังคาเมทัลชีทโรงจอดรถที่ติดตั้งเสร็จแล้ว" loading="lazy" />
+          <img
+            src="/gallery/full/1013322459072462.webp"
+            alt="งานหลังคาเมทัลชีทโรงจอดรถที่ติดตั้งเสร็จแล้ว"
+            width="1280"
+            height="1280"
+            loading="eager"
+            decoding="async"
+          />
           <span>หลังคาที่พักอาศัย</span>
         </a>
         <a class="work-photo" href="/gallery">
-          <img src="/gallery/full/1116543733807710.webp" alt="งานติดตั้งโครงสร้างเหล็กในพื้นที่ก่อสร้าง" loading="lazy" />
+          <img
+            src="/gallery/full/1116543733807710.webp"
+            alt="งานติดตั้งโครงสร้างเหล็กในพื้นที่ก่อสร้าง"
+            width="1050"
+            height="1400"
+            loading="lazy"
+            decoding="async"
+          />
           <span>งานโครงสร้าง</span>
         </a>
         <a class="work-photo" href="/gallery">
-          <img src="/gallery/full/1005493303188711.webp" alt="แผ่นเมทัลชีทสีเทาที่ผลิตและเตรียมส่งหน้างาน" loading="lazy" />
+          <img
+            src="/gallery/full/1005493303188711.webp"
+            alt="แผ่นเมทัลชีทสีเทาที่ผลิตและเตรียมส่งหน้างาน"
+            width="1280"
+            height="1280"
+            loading="lazy"
+            decoding="async"
+          />
           <span>ผลิตตามสเปก</span>
         </a>
       </div>

@@ -1,0 +1,311 @@
+{
+  "summary": {
+    "health_score": 45,
+    "business_type": "Local building-materials manufacturer + roofing contractor (hybrid storefront/service-area), bilingual TH/EN, Astro static site",
+    "audited_url": "https://metal-roofing-store.vercel.app/",
+    "audit_date": "2026-08-31",
+    "category_scores": {
+      "technical_seo": 48,
+      "content_quality": 46,
+      "on_page_seo": 48,
+      "schema": 5,
+      "performance_cwv": 72,
+      "ai_search_readiness": 53,
+      "images": 40,
+      "local_seo": 20,
+      "sxo": 34,
+      "sitemap": 45,
+      "visual_mobile": 68
+    },
+    "top_findings": [
+      "Zero structured data on every page (no Organization/LocalBusiness/Product/Article/Breadcrumb JSON-LD)",
+      "No robots.txt and no XML sitemap; @astrojs/sitemap not installed",
+      "No canonical, no hreflang, no OG/Twitter tags on a bilingual TH/EN site (BaseLayout.astro head)",
+      "No published street address and no Google Business Profile signal - blocks local ranking and citations",
+      "Price opacity: every product/spec row says 'สอบถามราคา' - kills snippet + AI Overview eligibility for highest-volume commercial queries",
+      "Thin money pages: /specifications 193 words, /products one sentence per model, vs 1,000-2,500 word competitor norm",
+      "Hero LCP image ships loading=lazy + fetchpriority=auto; render-blocking Google Fonts (2 Thai families, 7-8 weights)",
+      "Trailing-slash duplicates: /about and /about/ both 200 with identical body, no redirect (Vercel routing)",
+      "Trust proof (team, testimonials, มอก., reg number, factory photos) empty or off the money pages",
+      "Mobile: wordmark collides with hamburger; hero image pushes offer + CTA below the fold; sticky bar overlaps CTA; 3 CLIENT WORK images render blank"
+    ],
+    "quick_wins": [
+      "Add public/robots.txt (allow-all + AI crawler allow + Sitemap: line)",
+      "pnpm add @astrojs/sitemap + i18n config (defaultLocale th, locales th/en) -> emits sitemap with hreflang",
+      "Add canonical + hreflang th/en/x-default + OG/Twitter tags to BaseLayout.astro head (~15 lines, all pages)",
+      "Add priority (loading=eager + fetchpriority=high) to hero <Image> on TH + EN home - one-word LCP fix",
+      "Add Organization + WebSite JSON-LD @graph in BaseLayout (one <Schema> component, data already in site.ts)",
+      "vercel.json: trailingSlash:false redirect + X-Content-Type-Options / Referrer-Policy headers",
+      "Guard /en/ homepage testimonials block with length>0 to kill empty-section render bug",
+      "noindex the 'เร็ว ๆ นี้' stub pages (Promotions/Vision/Maps/Hours) and 7 comingSoon products",
+      "Add src/pages/404.astro wrapping BaseLayout",
+      "Remove unused @astrojs/react / dead 192KB client.*.js (zero client:* islands) or document intent"
+    ],
+    "notes_on_method": "No Google API credentials (no CrUX/GSC/GA4 field data) - CWV is single-run lab only. No DataForSEO/live SERP - local pack positions, citation NAP consistency, competitor proximity, and whether a GBP already exists could not be verified. Proximity (~55% of local ranking variance) not assessable without the real street address."
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 48,
+      "what_works": [
+        "Pure static SSR output, is_spa:false, no hydration, no long tasks",
+        "Clean URLs, unique titles/descriptions/H1s",
+        "Valid HTTPS + HSTS + brotli + HTTP/2, correct mobile viewport",
+        "Correct 404 status code from Vercel"
+      ],
+      "findings": [
+        {"title": "No robots.txt", "severity": "Critical", "description": "/robots.txt 404s; no crawl directives, no Sitemap discovery path on a near-zero-backlink domain.", "recommendation": "Add public/robots.txt: allow-all, explicit AI-crawler allow (GPTBot, ClaudeBot, PerplexityBot, Google-Extended), Sitemap: https://.../sitemap-index.xml"},
+        {"title": "No XML sitemap", "severity": "Critical", "description": "/sitemap.xml and variants 404; @astrojs/sitemap not in deps. ~28 pages + 3 blog posts have no discovery aid.", "recommendation": "pnpm add @astrojs/sitemap; configure i18n (defaultLocale th, locales {th,en}); rebuild; submit to GSC + Bing."},
+        {"title": "No canonical tags", "severity": "Critical", "description": "grep rel=canonical in dist/ = 0; not in BaseLayout.astro.", "recommendation": "Add <link rel=canonical href={Astro.url}> in BaseLayout head."},
+        {"title": "Trailing-slash duplicate URLs", "severity": "Critical", "description": "/about and /about/ both return 200 with identical body md5 and no redirect; Vercel filesystem routing overrides astro trailingSlash:'never'. No vercel.json.", "recommendation": "Add vercel.json with trailingSlash:false (301 redirect); pair with canonical tags."},
+        {"title": "No hreflang", "severity": "Critical", "description": "Bilingual TH/EN site with zero <link rel=alternate hreflang>. Language pairing exists only as a visible header toggle.", "recommendation": "Emit reciprocal th / en / x-default hreflang in BaseLayout head and in the sitemap."},
+        {"title": "Hero (LCP element) is lazy-loaded", "severity": "High", "description": "src/pages/index.astro <Image> hero has no priority; loading=lazy, fetchpriority=auto. Direct mobile LCP hit (lab LCP 2.9s mobile home, 3.3s products).", "recommendation": "Add priority to hero <Image> (TH + EN); add <link rel=preload as=image> for hero + first product image."},
+        {"title": "Render-blocking cross-origin Google Fonts", "severity": "High", "description": "Two heavy Thai families (IBM Plex Sans Thai + Noto Sans Thai), 7-8 weight files, ~770-870ms render-blocking. public/fonts/ exists but is empty (abandoned self-host).", "recommendation": "Self-host + subset to Thai+Latin, drop one family, ship 2-3 weights, preload the critical face, keep font-display:swap."},
+        {"title": "No OG / Twitter tags", "severity": "High", "description": "No og:title/description/image or twitter:card. Breaks LINE and Facebook link previews - the business's primary channels.", "recommendation": "Add OG + Twitter meta in BaseLayout from title/description props + a default og:image (1200x630)."},
+        {"title": "No custom 404 page", "severity": "Medium", "description": "Generic Vercel dead-end (status code is correct).", "recommendation": "Add src/pages/404.astro wrapping BaseLayout with nav back to key pages."},
+        {"title": "Partial security headers", "severity": "Medium", "description": "Only HSTS present. Missing X-Content-Type-Options, Referrer-Policy, Permissions-Policy, CSP.", "recommendation": "Set headers in vercel.json."},
+        {"title": "Dead React runtime shipped", "severity": "Medium", "description": "@astrojs/react built a 192KB dist/_astro/client.*.js referenced by zero pages - no client:* islands exist (Phosphor icons use /ssr import).", "recommendation": "Remove @astrojs/react integration, or document the intent to add islands."},
+        {"title": "No robots meta control / no IndexNow", "severity": "Low", "description": "No per-page noindex mechanism; stub pages are indexable. No IndexNow ping for fast recrawl.", "recommendation": "Add an optional noindex prop to BaseLayout; consider IndexNow after sitemap lands."}
+      ]
+    },
+    {
+      "name": "Content Quality & E-E-A-T",
+      "score": 46,
+      "what_works": [
+        "Deliberate anti-fabrication stance - copy is specific, human, honest (low AI-slop risk)",
+        "Real geography and process vocabulary (cut-to-length on site, Friendship Bridge, upper-Isan)",
+        "Clean heading hierarchy and solid Thai B2B readability",
+        "Real product taxonomy and a large (1,295-photo) genuine job-photo gallery",
+        "manim concept diagrams for technical explanation"
+      ],
+      "findings": [
+        {"title": "Team page is empty", "severity": "Critical", "description": "team.ts = []. No named experts or credentials, though the whole pitch is 'our technical team does your take-off'.", "recommendation": "Publish 2-4 real team members with role, years, and any engineer licence; surface a short version on /services and /about."},
+        {"title": "No certification / standards evidence", "severity": "Critical", "description": "มอก./TIS, steel grade, coating mass, PU density, fire rating absent sitewide (grep = 0). /about 'standards' section is generic unverifiable claims.", "recommendation": "Add a standards page with real มอก. numbers, coating class (AZ/Z), BMT/TCT, PU density, and scans/photos of certificates."},
+        {"title": "Factory proof is placeholder", "severity": "Critical", "description": "src/assets/photos/ has no facility/production/crew/delivery images; /about and /services render striped placeholder divs. A 'factory-standard manufacturer' shows no factory.", "recommendation": "Shoot and publish 15-25 real facility/line/crew/loading photos with descriptive captions."},
+        {"title": "Contact & legal trust gaps", "severity": "High", "description": "No street address (province only), no map, no hours, no หจก. registration number, no email, no written warranty term.", "recommendation": "Publish full NAP + hours + registration number + a one-line warranty statement on /contact and footer."},
+        {"title": "/specifications thin and price-blank", "severity": "High", "description": "193 words; every startingPrice blank while the page title promises 'ราคาเริ่มต้น'. No BMT/TCT, coating mass, span tables, R-value.", "recommendation": "Expand to a 1,200+ word pillar with real spec tables and starting ฿/ตร.ม. ranges, or retitle if price can't be shown."},
+        {"title": "Product pages thin + placeholder entries", "severity": "High", "description": "One sentence per model; 7 identical 'coming soon' entries are indexable.", "recommendation": "150-300 words per real model (profile, use case, spec range, colours, min order); noindex the comingSoon entries."},
+        {"title": "Blog thin and stalled", "severity": "High", "description": "3 short posts, none since 2026-06-12, no author, no schema, no sources, no cover images.", "recommendation": "Add author byline (Organization), cover image, sources; publish 1-2 buyer-intent guides/month (pricing, กันร้อน, เลือกความหนา)."},
+        {"title": "English tree partial and weaker", "severity": "High", "description": "/en/index uses an old template; empty EN testimonials section renders as a visible bug; article bodies are Thai-only; no hreflang/canonical.", "recommendation": "Bring /en/ to parity or scope it down deliberately; guard empty sections; translate article bodies or noindex /en/blog."},
+        {"title": "Intent coverage gaps", "severity": "High", "description": "No pricing content, no มอก. page, no 'เมทัลชีทกันร้อน' pillar, no city/area pages, no FAQ content anywhere.", "recommendation": "Build a pricing guide, a heat-insulation pillar, and Nong Khai / Udon Thani / Bueng Kan / Vientiane pages once real local content exists."},
+        {"title": "Gallery alt text is sequential numbers", "severity": "Medium", "description": "1,295 project photos carry only number alt text - the site's strongest asset is invisible to search and LLMs.", "recommendation": "Caption 40-60 hero photos with real project type, system, province; template the rest."},
+        {"title": "No on-site social proof / dead Facebook feed", "severity": "Medium", "description": "testimonials empty; facebook-posts.json = [] so the homepage feed never renders.", "recommendation": "Collect 6-10 real testimonials with name/company/project; run pnpm run facebook to populate the feed."},
+        {"title": "No dateModified on spec/price/product pages", "severity": "Medium", "description": "No freshness signal on pages where recency matters most.", "recommendation": "Show a visible 'ปรับปรุงล่าสุด' date and emit dateModified in schema."}
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 48,
+      "what_works": [
+        "Homepage TH/EN titles carry the brand + 'หนองคาย / Nong Khai' + service area",
+        "Unique title, description, single H1 per page",
+        "Clean semantic heading structure"
+      ],
+      "findings": [
+        {"title": "No canonical / hreflang / OG (see Technical)", "severity": "Critical", "description": "On-page metadata layer is essentially just title + description.", "recommendation": "Ship the BaseLayout head expansion."},
+        {"title": "Inner-page titles/H1s are brand-only", "severity": "High", "description": "Beyond the homepage, titles/H1s lack product and geo modifiers.", "recommendation": "Template titles as '{page topic} {product} | {brand} หนองคาย' and write descriptive H1s."},
+        {"title": "H2s are slogans, not queries", "severity": "Medium", "description": "Money-page H2s ('พร้อมเริ่มโครงการหลังคาของคุณ?') don't match how buyers search and block passage extraction.", "recommendation": "Use question-form H2s with a 40-60 word direct-answer lead block underneath."},
+        {"title": "Weak internal linking, no breadcrumbs", "severity": "Medium", "description": "Money pages get only nav/footer links; no BreadcrumbList; no contextual guide<->spec<->product<->configurator links.", "recommendation": "Add breadcrumbs + 3-5 contextual in-body links per money page."},
+        {"title": "Indexable stub pages in main nav", "severity": "Medium", "description": "'เร็ว ๆ นี้' Promotions (in nav), Vision, Maps, Hours stubs are indexable thin pages.", "recommendation": "noindex until real; drop Promotions from nav until it has content."}
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 5,
+      "what_works": [
+        "Clean server-rendered HTML (no SPA rendering barrier for parsers)",
+        "astro.config site is set, so absolute @id / url values are free"
+      ],
+      "findings": [
+        {"title": "No Organization / LocalBusiness", "severity": "Critical", "description": "No business entity in any markup. Recommend type ['Organization','RoofingContractor'] (+ 'Manufacturer'); province-level areaServed (no street address yet); address = addressRegion + addressCountry; sameAs = Facebook + LINE; one contactPoint per phone; hasOfferCatalog of the 6 real products.", "recommendation": "Add a <Schema> component in BaseLayout emitting an Organization + WebSite @graph on every page from site.ts."},
+        {"title": "No WebSite node", "severity": "Critical", "description": "No WebSite entity (omit SearchAction - site has no search).", "recommendation": "Include WebSite in the same @graph."},
+        {"title": "No BreadcrumbList", "severity": "High", "description": "30+ pages with a 3-level mega-nav and no breadcrumb markup.", "recommendation": "Generate BreadcrumbList from Astro.url.pathname for all pages at once."},
+        {"title": "No BlogPosting on 3 posts", "severity": "High", "description": "Frontmatter present except author (use Organization) and cover image (none set - blocks Article rich result).", "recommendation": "Emit BlogPosting from frontmatter; add cover images."},
+        {"title": "No ItemList / Product on /products", "severity": "Medium", "description": "Model as ItemList of 6 Product nodes with NO offers (no public price, no checkout - valid, just no product rich result). Exclude the 7 comingSoon entries.", "recommendation": "Add ItemList + Product nodes; do not fake Offer.price."},
+        {"title": "No logo ImageObject / og:image", "severity": "Medium", "description": "1024x1024 logo source exists at src/assets/brand/logo.png; not exposed as schema logo or OG image.", "recommendation": "Copy an optimised /logo.png; reference in Organization.logo and og:image."},
+        {"title": "No Person / Review / AggregateRating", "severity": "Info", "description": "team.ts and testimonials.ts are deliberately empty - do not fabricate.", "recommendation": "Add Person + Review markup once real content is published."},
+        {"title": "Do NOT add FAQPage / HowTo", "severity": "Info", "description": "Google retired FAQ rich results for all sites (May 2026) - no SERP feature. HowTo deprecated Sept 2023. FAQ-style CONTENT is still useful for users and AI answers, but add it as plain content or QAPage (genuine Q&A only), not FAQPage-for-SERP.", "recommendation": "Skip FAQPage/HowTo schema; keep the Q&A content itself."}
+      ]
+    },
+    {
+      "name": "Performance (Core Web Vitals)",
+      "score": 72,
+      "what_works": [
+        "CLS near-zero everywhere (0.004-0.039) - all images have explicit dimensions",
+        "TBT 0 ms on every page; INP estimated Good (<100ms) - zero JS hydration",
+        "Lighthouse lab: home 94 mobile / 99 desktop, configurator 99, products 91",
+        "FacebookUpdates is build-time static - no third-party JS / FB SDK"
+      ],
+      "findings": [
+        {"title": "LCP fails on mobile (lab)", "severity": "High", "description": "Home 2.9s, Products 3.3s mobile ('Needs Improvement'). Cause: hero image loading=lazy + fetchpriority=auto, not preloaded (264ms resource-load-delay).", "recommendation": "loading=eager + fetchpriority=high + <link rel=preload as=image> on hero and first product image. Expect LCP -0.5 to -1.0s into Good."},
+        {"title": "Render-blocking Google Fonts ~770-870ms", "severity": "High", "description": "Two Thai families, 8 weight files, cross-origin CSS. public/fonts/ empty (abandoned self-host).", "recommendation": "Self-host + subset Thai+Latin, one family, 2-3 weights, preload critical face."},
+        {"title": "Unoptimised gallery / FB-card images", "severity": "Medium", "description": "500-568KB full-res <img src> with no srcset; homepage lazy-loads ~1.5MB of them; dist/gallery = 243MB.", "recommendation": "Route through astro:assets (Image/Picture) with srcset + widths."},
+        {"title": "Only WebP emitted", "severity": "Medium", "description": "No AVIF for hero/product images.", "recommendation": "<Picture formats={['avif','webp']}> for hero + products (-25-35% bytes)."},
+        {"title": "/products TTFB spike", "severity": "Medium", "description": "160ms vs 40ms on home for static HTML.", "recommendation": "Add Vercel edge cache headers for static HTML."},
+        {"title": "Dead 192KB React runtime", "severity": "Low", "description": "dist/_astro/client.*.js built, referenced by zero pages.", "recommendation": "Remove @astrojs/react or add the intended islands."}
+      ]
+    },
+    {
+      "name": "AI Search Readiness (GEO)",
+      "score": 53,
+      "what_works": [
+        "Clean static HTML, AI crawlers not blocked",
+        "Good structural readability (68) - real headings, real prose",
+        "Homepage entity basics present in visible text (name, phones, region, service area)"
+      ],
+      "findings": [
+        {"title": "Zero structured data (entity grounding)", "severity": "Critical", "description": "No LocalBusiness/Organization for an AI to attach 'metal roofing manufacturer, Nong Khai, Thai-Lao border' to. Single biggest GEO lever.", "recommendation": "Ship Organization/RoofingContractor JSON-LD; grow address + sameAs as data lands."},
+        {"title": "Authority signals near-empty (28/100)", "severity": "Critical", "description": "No Google Business Profile, no street address, no sameAs cluster, no Wikidata/Wikipedia, no author bylines, no named certifications, no YouTube/Reddit/directory mentions.", "recommendation": "Verify GBP, publish the existing explainer animations to YouTube, get the real address, build the sameAs cluster."},
+        {"title": "No robots.txt / sitemap discovery path", "severity": "High", "description": "AI crawlers not blocked but no discovery aid on a near-zero-inbound domain.", "recommendation": "robots.txt with AI allow-list + Sitemap: line; @astrojs/sitemap."},
+        {"title": "Low citability of core pages", "severity": "High", "description": "H2s are slogans; no 40-60 word direct-answer blocks; prices are 100% 'ask for quote'; specs are qualitative (no coating class, warranty years, wind data).", "recommendation": "Add question H2s + direct-answer leads + quantified spec tables on /specifications, /about, /products (TH+EN)."},
+        {"title": "English pages leak Thai units", "severity": "High", "description": "/en/specifications renders '0.35 - 0.50 มม.' because specs.ts thickness is one hard-coded Thai string. Corrupts extraction for English AI queries; blog bodies Thai-only.", "recommendation": "Split specs.ts fields into thTh/thEn (e.g. thicknessTh/thicknessEn)."},
+        {"title": "No llms.txt", "severity": "Low", "description": "Honestly low value today (no major LLM honors it) but cheap future-proofing.", "recommendation": "Add public/llms.txt with a short business summary + key page links."}
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 40,
+      "what_works": [
+        "Explicit width/height on images -> near-zero CLS",
+        "WebP emitted by astro:assets for managed images",
+        "/gallery uses aspect-ratio pinning + eager/lazy split"
+      ],
+      "findings": [
+        {"title": "Gallery alt text is sequential numbers", "severity": "High", "description": "1,295 project photos have number-only alt text; no descriptive or geo/keyword content.", "recommendation": "Caption 40-60 primary photos with project type + system + province; template the rest."},
+        {"title": "Oversized unmanaged images", "severity": "Medium", "description": "Gallery / FB-card images 500-568KB full-res <img src>, no srcset; ~1.5MB lazy-loaded on the homepage.", "recommendation": "Route through astro:assets with responsive widths."},
+        {"title": "No AVIF", "severity": "Medium", "description": "Only WebP for hero/product images.", "recommendation": "Add AVIF via <Picture>."},
+        {"title": "3 CLIENT WORK images render blank", "severity": "High", "description": "3 project webp tiles + a footer logo report naturalWidth 0 in the built site - empty navy boxes; kills a social-proof section. No 4xx - likely bad asset path.", "recommendation": "Fix the asset paths; set loading=eager + width/height on the first row."},
+        {"title": "No og:image", "severity": "Medium", "description": "No social share image.", "recommendation": "Add a 1200x630 default og:image."}
+      ]
+    },
+    {
+      "name": "Local SEO",
+      "score": 20,
+      "what_works": [
+        "Name + all 3 phones consistent everywhere with valid E.164 tel: hrefs",
+        "Homepage TH/EN titles carry 'หนองคาย / Nong Khai' + service area",
+        "branches.ts cleanly skips the empty address rather than faking one"
+      ],
+      "findings": [
+        {"title": "No street address anywhere", "severity": "Critical", "description": "Province only. Blocks GBP verification, citations, PostalAddress schema, and proximity ranking (~55% of local variance).", "recommendation": "Publish the full factory address in branches.ts + a footer NAP block."},
+        {"title": "No Google Business Profile signal", "severity": "Critical", "description": "No listing referenced; map is a 'เร็ว ๆ นี้' placeholder; no hours, no directions link. Primary GBP category (the #1 local ranking factor) is unset.", "recommendation": "Create + verify a storefront GBP at the factory; primary category 'Roofing contractor' (or 'Roofing supply store'); secondaries Metal fabricator / Manufacturer / Insulation contractor; add service areas."},
+        {"title": "Zero local structured data", "severity": "Critical", "description": "No LocalBusiness/Organization/WebSite/Breadcrumb; no canonical/og/hreflang/robots/sitemap.", "recommendation": "Add Organization + WebSite in BaseLayout and a data-driven RoofingContractor/Manufacturer LocalBusiness node on /branches + /contact (address, geo 5-decimal, telephone, url, openingHoursSpecification, areaServed, sameAs)."},
+        {"title": "Facebook link is a personal profile", "severity": "High", "description": "profile.php?id=... - no NAP fields, no category, no reviews; unusable as a citation.", "recommendation": "Convert to a Facebook Business Page; update site.ts facebookHref + schema sameAs."},
+        {"title": "No Google review strategy", "severity": "High", "description": "Testimonials deliberately empty and pointed at Facebook; zero review velocity; no first-party or Google review signal.", "recommendation": "Launch a Google review drive on GBP go-live (QR at install sign-off + LINE follow-up; 2-4/month, no >2-week gap)."},
+        {"title": "No directory citations", "severity": "High", "description": "Nothing on Longdo Map, yellowpages.co.th, thaitambon, wazzadu, Apple Maps, or coil-supplier dealer locators. Citation factors are 3 of the top 5 AI-visibility factors.", "recommendation": "Build 8-12 consistent NAP citations on Thai directories after the address is published."},
+        {"title": "Thin on-page geo beyond the homepage", "severity": "Medium", "description": "Inner-page titles/H1s are brand-only; footer has no NAP block; site on a vercel.app subdomain (weak for brand/citation matching).", "recommendation": "Add geo modifiers to inner titles/H1s; footer NAP block; migrate to a .co.th/.com domain with 301s."},
+        {"title": "Service-area pages are an opportunity, not yet buildable", "severity": "Medium", "description": "Nong Khai / Udon Thani / Bueng Kan / Vientiane pages are the #1 local-organic factor, but gallery projects carry no province tags so there is no unique local content to build them on.", "recommendation": "Tag gallery projects by province first; then ship one substantive page per area (real projects, delivery notes, local specifics). Do not ship thin doorway pages."}
+      ]
+    },
+    {
+      "name": "SXO (Search Experience)",
+      "score": 34,
+      "what_works": [
+        "/configurator is the correct page type (Tool) for calculator queries",
+        "Product taxonomy is coherent",
+        "Contractor-bulk and estimator personas are closest to served (50-52)"
+      ],
+      "findings": [
+        {"title": "Price opacity on the highest-volume commercial queries", "severity": "Critical", "description": "'สอบถามราคา' on every product/spec row; competitors show ฿140-450/ตร.ม. Kills featured-snippet and AI-Overview eligibility for 'เมทัลชีท ราคา' / 'แผ่นหลังคาเหล็ก ราคา'.", "recommendation": "Show real starting ฿/ตร.ม. ranges + 'อัปเดต ส.ค. 2026' on /specifications and /products; keep 'ขอใบเสนอราคา' as the CTA."},
+        {"title": "/specifications page-type mismatch", "severity": "Critical", "description": "193 words vs 1,000-2,500 word buyer guides (jorakay, BlueScope, SCG, Thaiwatsadu) + AI Overview that rank for 'เมทัลชีท คือ / ความหนา / เลือก'.", "recommendation": "Expand into a 1,200+ word pillar guide + a small informational cluster."},
+        {"title": "Homepage loses the local pack", "severity": "High", "description": "Ranks for 'เมทัลชีท หนองคาย / ใกล้ฉัน' but SERP rewards local pack + full-NAP vendor pages; no LocalBusiness schema, NAP below fold, no map, no reviews, vercel.app subdomain.", "recommendation": "NAP + Maps embed + tap-to-call + review stars above the fold on / and /contact; link /branches from the header."},
+        {"title": "Split language targeting", "severity": "High", "description": "/en/* tree has no hreflang, no canonical - orphaned / cannibalising EN pages.", "recommendation": "hreflang th/en/x-default + self-canonicals everywhere."},
+        {"title": "Trust proof never on the money pages", "severity": "High", "description": "Testimonials, technical-team, มอก., company reg exist as separate pages and never surface where the buying decision happens. Trust is the lowest-scoring dimension for all 6 personas.", "recommendation": "Surface 2-3 testimonials, a certification badge row, and a team blurb on /products, /specifications, /services."},
+        {"title": "Configurator withholds its output", "severity": "Medium", "description": "86 words; shows 'ราคาโดยประมาณ' then routes to LINE instead of displaying the estimate; competitors display it. No supporting body copy.", "recommendation": "Show the estimated price inline; add 'ดาวน์โหลดสเปก (PDF)'; add 150-300 words explaining inputs/assumptions."},
+        {"title": "Generic CTAs", "severity": "Medium", "description": "'พร้อมเริ่มโครงการหลังคาของคุณ?' regardless of page intent.", "recommendation": "Intent-matched CTAs: 'ขอใบเสนอราคาโครงการ' / 'ดูราคาเริ่มต้น' / 'โทรเลย'."},
+        {"title": "Weak internal linking + no breadcrumbs", "severity": "Medium", "description": "Money pages get only nav/footer links.", "recommendation": "Contextual links + BreadcrumbList across guide <-> specs <-> products <-> configurator."}
+      ]
+    },
+    {
+      "name": "Visual / Mobile UX",
+      "score": 68,
+      "what_works": [
+        "Hero gradient wash-out issue is FIXED - near-black Thai H1 fully legible at 1440 and 390",
+        "Clean editorial desktop layout",
+        "Near-zero CLS from disciplined image dimensions"
+      ],
+      "findings": [
+        {"title": "Mobile header collision", "severity": "High", "description": "'หจก.มีชัยสตีล' wordmark overlaps / runs under the hamburger - looks broken on first paint.", "recommendation": "Hide the text wordmark below ~480px (logo mark only)."},
+        {"title": "Mobile above-the-fold buries the offer", "severity": "High", "description": "~570px hero image renders first; H1, value prop, product chips, primary CTA all below the fold.", "recommendation": "Reorder: eyebrow + H1 + one-line prop + CTA above the image; cut hero image to ~240px."},
+        {"title": "3 CLIENT WORK images render blank", "severity": "High", "description": "webp tiles + footer logo report naturalWidth 0; empty navy boxes; kills the social-proof section.", "recommendation": "Verify the 4 failing paths in public/; loading=eager + width/height on the first row."},
+        {"title": "Mobile sticky contact bar overlaps content", "severity": "High", "description": "Fixed bottom bar covers the hero CTA; no bottom padding reserved on main.", "recommendation": "padding-bottom = sticky-bar height + env(safe-area-inset-bottom) on the scroll container."},
+        {"title": "Contrast failures (AA)", "severity": "Medium", "description": "Brand amber links on white at ~14-15px fail AA for normal text; hero photo overlay text has no scrim; section-02 navy-band body copy borderline.", "recommendation": "Darken amber for body-size text/links or restrict amber to >=24px / bold >=18.66px; add a dark scrim behind hero-photo text. (Contrast numbers are screenshot estimates - re-run with oklch->sRGB.)"},
+        {"title": "Sub-44px tap targets", "severity": "Medium", "description": "Hamburger 32x40, TH/EN toggle 18x24, 'ออกแบบ 3D' 105x28; 19 sub-44px interactive elements on mobile.", "recommendation": "Pad hamburger to 44x44; merge TH/EN into a 44px segmented control; bump 12px Thai labels to >=13-14px."},
+        {"title": "No phone in desktop header", "severity": "Medium", "description": "Only LINE in the header; tel: links live ~4800px down.", "recommendation": "Add a tap-to-call number to the desktop header."}
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 1: Critical Fixes (crawl/index foundation + trust)",
+        "timeframe": "Week 1",
+        "items": [
+          "Add public/robots.txt (allow-all + AI-crawler allow + Sitemap: line)",
+          "pnpm add @astrojs/sitemap; configure i18n (defaultLocale th, locales th/en); rebuild; verify dist/sitemap-index.xml + dist/robots.txt; submit to GSC + Bing",
+          "BaseLayout.astro head: add canonical (Astro.url), hreflang th/en/x-default, OG + Twitter tags, default og:image",
+          "Add <Schema> component in BaseLayout: Organization + RoofingContractor + WebSite @graph from site.ts (province-level areaServed, sameAs Facebook+LINE, contactPoint per phone)",
+          "vercel.json: trailingSlash:false 301 redirect + X-Content-Type-Options + Referrer-Policy (fixes /about vs /about/ duplication)",
+          "Hero <Image> (TH + EN home): add priority (loading=eager + fetchpriority=high) + <link rel=preload as=image>",
+          "Fix the 3 blank CLIENT WORK images + footer logo (bad asset paths); loading=eager + width/height on the first row",
+          "Guard /en/ homepage testimonials block with length>0 (kill the empty-section render bug)",
+          "noindex the 'เร็ว ๆ นี้' stub pages (Promotions/Vision/Maps/Hours) and the 7 comingSoon products; drop Promotions from nav",
+          "Add src/pages/404.astro wrapping BaseLayout",
+          "Publish the real factory street address (branches.ts) + footer NAP block; create + verify a storefront Google Business Profile with primary category 'Roofing contractor'"
+        ]
+      },
+      {
+        "name": "Phase 2: High-Impact Improvements (money pages + CWV + mobile)",
+        "timeframe": "Weeks 2-3",
+        "items": [
+          "Show real starting ฿/ตร.ม. ranges + 'ปรับปรุงล่าสุด ส.ค. 2026' on /specifications and /products (fill specs.ts startingPrice or retitle the page)",
+          "Self-host + subset Thai fonts (one family, 2-3 weights, preload critical face); remove the render-blocking Google Fonts <link>",
+          "Add BreadcrumbList schema (from Astro.url.pathname) + BlogPosting schema (add cover images to the 3 posts) + ItemList/Product on /products (no offers)",
+          "Split specs.ts Thai-string fields into thicknessTh/thicknessEn etc. so /en/ stops leaking มม.",
+          "Mobile fixes: hide text wordmark <480px; reorder hero (H1+prop+CTA above image, image ~240px); reserve padding-bottom for the sticky bar; pad tap targets to 44px; darken amber for body-size text",
+          "Surface trust on money pages: 2-3 testimonials + certification badge row + team blurb on /products, /specifications, /services",
+          "Show the configurator estimate inline + add 'ดาวน์โหลดสเปก (PDF)' + 150-300 words of context",
+          "Convert Facebook to a Business Page; update site.ts + schema sameAs; replace the map/hours placeholders with a real Maps embed + 'นำทาง' link + published hours",
+          "Route gallery / FB-card images through astro:assets (srcset + AVIF); add real captions to 40-60 primary gallery photos",
+          "Remove unused @astrojs/react (dead 192KB client.*.js) or document the island plan"
+        ]
+      },
+      {
+        "name": "Phase 3: Content & Authority",
+        "timeframe": "Month 2",
+        "items": [
+          "Publish real team members (team.ts) with role/years/licence + engineer credentials",
+          "Publish a standards/certification page with real มอก. numbers, coating class, BMT/TCT, PU density, fire rating + certificate scans",
+          "Shoot and publish 15-25 real factory/line/crew/loading photos with descriptive captions (replace the placeholder divs on /about + /services)",
+          "Expand /specifications into a 1,200+ word pillar guide with quantified spec tables + question-form H2s + direct-answer lead blocks",
+          "150-300 words per real product model; publish 1-2 buyer-intent blog guides/month (pricing, กันร้อน, เลือกความหนา) with author byline + sources",
+          "Tag gallery projects by province; then build one substantive page each for Nong Khai / Udon Thani / Bueng Kan + a /ส่งลาว cross-border page (real projects, no thin doorways)",
+          "Build 8-12 consistent NAP citations on Thai directories (Longdo, yellowpages.co.th, thaitambon, wazzadu, Apple Maps)",
+          "Launch the Google review drive on GBP go-live (QR at sign-off + LINE follow-up; 2-4/month)",
+          "Publish the existing explainer animations to YouTube; add public/llms.txt",
+          "Migrate off vercel.app to a branded .co.th/.com domain with 301s + update GSC + schema url + canonical"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring & Iteration",
+        "timeframe": "Ongoing",
+        "items": [
+          "Set up Google Search Console + Bing Webmaster; watch indexation of the 33 URLs and the th/en hreflang report",
+          "Add a real CrUX/PSI check once traffic exists; track mobile LCP back under 2.5s after the hero + font fixes",
+          "Capture a /seo drift baseline now so future deploys are diffed",
+          "Monthly: GBP insights, review count + recency (no >2-week gap), local-pack position for 'เมทัลชีท หนองคาย'",
+          "Re-run this audit after Phase 2 to re-score Schema (target 60+), Local (target 55+), SXO (target 55+)"
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/",
+    "findings_files": [
+      "findings/technical.md", "findings/content.md", "findings/schema.md",
+      "findings/sitemap.md", "findings/performance.md", "findings/visual.md",
+      "findings/geo.md", "findings/local.md", "findings/sxo.md"
+    ]
+  }
+}

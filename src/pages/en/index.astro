@@ -72,23 +72,25 @@ import AnimatedBackground from '../../components/AnimatedBackground.astro';
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2>What Customers Say</h2>
-      <div class="grid-auto" data-reveal-group>
-        {testimonials.map((t) => (
-          <blockquote class="quote reveal">
-            <p>&ldquo;{t.quoteEn}&rdquo;</p>
-            <footer>
-              <strong>{t.nameEn}</strong> — {t.projectEn}
-              <span class="quote__branch">{t.branchEn}</span>
-            </footer>
-          </blockquote>
-        ))}
+  {testimonials.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <h2>What Customers Say</h2>
+        <div class="grid-auto" data-reveal-group>
+          {testimonials.map((t) => (
+            <blockquote class="quote reveal">
+              <p>&ldquo;{t.quoteEn}&rdquo;</p>
+              <footer>
+                <strong>{t.nameEn}</strong> — {t.projectEn}
+                <span class="quote__branch">{t.branchEn}</span>
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+        <p class="section-cta"><a href="/en/testimonials">See all testimonials &rarr;</a></p>
       </div>
-      <p class="section-cta"><a href="/en/testimonials">See all testimonials &rarr;</a></p>
-    </div>
-  </section>
+    </section>
+  )}
 
   <FacebookUpdates lang="en" />
 

@@ -1,0 +1,1317 @@
+{
+  "label": "home-mobile",
+  "url": "https://metal-roofing-store.vercel.app/",
+  "width": 390,
+  "mobile": true,
+  "analysis": {
+    "title": "หจก.มีชัยสตีล หนองคาย | โรงงานผลิตแผ่นหลังคาเหล็กและแผ่นฉนวน ส่งไทย–ลาว",
+    "lang": "th",
+    "url": "https://metal-roofing-store.vercel.app/",
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "horizontalOverflow": false,
+    "docHeight": 8823,
+    "cls": 0,
+    "shifts": [],
+    "wideElements": [],
+    "headings": [
+      {
+        "t": "H3",
+        "text": "ระบบหลังคา",
+        "fold": false,
+        "fs": "12.48px"
+      },
+      {
+        "t": "H3",
+        "text": "ผนังและฉนวน",
+        "fold": false,
+        "fs": "12.48px"
+      },
+      {
+        "t": "H3",
+        "text": "เครื่องมือช่วยตัดสินใจ",
+        "fold": false,
+        "fs": "12.48px"
+      },
+      {
+        "t": "H1",
+        "text": "แผ่นหลังคาเหล็กจากโรงงาน สำหรับงานผู้รับเหมาและโครงการ",
+        "fold": true,
+        "fs": "32px"
+      },
+      {
+        "t": "H2",
+        "text": "วัสดุครบ จบในที่เดียว",
+        "fold": false,
+        "fs": "24px"
+      },
+      {
+        "t": "H3",
+        "text": "หลังคาเมทัลชีท",
+        "fold": false,
+        "fs": "18.4px"
+      },
+      {
+        "t": "H3",
+        "text": "ผนัง",
+        "fold": false,
+        "fs": "18.4px"
+      },
+      {
+        "t": "H3",
+        "text": "ฉนวนกันความร้อน",
+        "fold": false,
+        "fs": "18.4px"
+      },
+      {
+        "t": "H3",
+        "text": "อุปกรณ์และอะไหล่",
+        "fold": false,
+        "fs": "18.4px"
+      },
+      {
+        "t": "H2",
+        "text": "หลังคาเมทัลชีท สวย เรียบ ลดปัญหารั่วซึม",
+        "fold": false,
+        "fs": "24px"
+      },
+      {
+        "t": "H2",
+        "text": "เปลี่ยนฝ้าและผนังเดิม ให้ดูโมเดิร์นด้วยลายไม้",
+        "fold": false,
+        "fs": "24px"
+      },
+      {
+        "t": "H2",
+        "text": "มีสินค้าจริง ให้คำปรึกษาได้จริง",
+        "fold": false,
+        "fs": "24px"
+      },
+      {
+        "t": "H3",
+        "text": "สั่งผลิตตามความยาวหน้างาน",
+        "fold": false,
+        "fs": "16.8px"
+      },
+      {
+        "t": "H3",
+        "text": "คำนวณปริมาณวัสดุให้ก่อนสั่ง",
+        "fold": false,
+        "fs": "16.8px"
+      }
+    ],
+    "h1count": 1,
+    "h1text": [
+      "แผ่นหลังคาเหล็กจากโรงงาน สำหรับงานผู้รับเหมาและโครงการ"
+    ],
+    "contactLinks": [
+      {
+        "href": "https://metal-roofing-store.vercel.app/contact#facebook",
+        "text": "Facebook",
+        "fold": false,
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "pos": "static",
+        "visible": false
+      },
+      {
+        "href": "https://line.me/R/ti/p/@680rgqnj",
+        "text": "แชท LINE",
+        "fold": true,
+        "w": 94,
+        "h": 44,
+        "top": 12,
+        "pos": "static",
+        "visible": true
+      },
+      {
+        "href": "https://line.me/R/ti/p/@680rgqnj",
+        "text": "สอบถามทาง LINE",
+        "fold": true,
+        "w": 174,
+        "h": 57,
+        "top": 802,
+        "pos": "static",
+        "visible": true
+      },
+      {
+        "href": "https://line.me/R/ti/p/@680rgqnj",
+        "text": "สอบถามทาง LINE",
+        "fold": false,
+        "w": 335,
+        "h": 57,
+        "top": 4145,
+        "pos": "static",
+        "visible": true
+      },
+      {
+        "href": "https://line.me/R/ti/p/@680rgqnj",
+        "text": "แชท LINE: @680rgqnj",
+        "fold": false,
+        "w": 209,
+        "h": 57,
+        "top": 7577,
+        "pos": "static",
+        "visible": true
+      },
+      {
+        "href": "tel:+6642990595",
+        "text": "โทร 042-990-595",
+        "fold": false,
+        "w": 177,
+        "h": 57,
+        "top": 7646,
+        "pos": "static",
+        "visible": true
+      },
+      {
+        "href": "tel:+6642990595",
+        "text": "042-990-595",
+        "fold": false,
+        "w": 99,
+        "h": 27,
+        "top": 8474,
+        "pos": "static",
+        "visible": true
+      },
+      {
+        "href": "tel:+66910529136",
+        "text": "091-052-9136",
+        "fold": false,
+        "w": 109,
+        "h": 27,
+        "top": 8510,
+        "pos": "static",
+        "visible": true
+      },
+      {
+        "href": "tel:+66818726147",
+        "text": "081-872-6147",
+        "fold": false,
+        "w": 109,
+        "h": 27,
+        "top": 8546,
+        "pos": "static",
+        "visible": true
+      },
+      {
+        "href": "https://line.me/R/ti/p/@680rgqnj",
+        "text": "LINE: @680rgqnj",
+        "fold": false,
+        "w": 123,
+        "h": 27,
+        "top": 8582,
+        "pos": "static",
+        "visible": true
+      },
+      {
+        "href": "https://www.facebook.com/profile.php?id=61593025679719",
+        "text": "Facebook",
+        "fold": false,
+        "w": 69,
+        "h": 27,
+        "top": 8618,
+        "pos": "static",
+        "visible": true
+      },
+      {
+        "href": "tel:+6642990595",
+        "text": "โทร",
+        "fold": true,
+        "w": 195,
+        "h": 57,
+        "top": 787,
+        "pos": "static",
+        "visible": true
+      },
+      {
+        "href": "https://line.me/R/ti/p/@680rgqnj",
+        "text": "LINE",
+        "fold": true,
+        "w": 195,
+        "h": 57,
+        "top": 787,
+        "pos": "static",
+        "visible": true
+      }
+    ],
+    "smallTapTargets": [
+      {
+        "tag": "a",
+        "text": "ข้ามไปเนื้อหาหลัก",
+        "w": 1,
+        "h": 1,
+        "top": -1,
+        "fold": false
+      },
+      {
+        "tag": "button",
+        "text": "เปิดเมนู",
+        "w": 32,
+        "h": 40,
+        "top": 14,
+        "fold": true
+      },
+      {
+        "tag": "a",
+        "text": "TH",
+        "w": 18,
+        "h": 24,
+        "top": 22,
+        "fold": true
+      },
+      {
+        "tag": "a",
+        "text": "EN",
+        "w": 18,
+        "h": 24,
+        "top": 22,
+        "fold": true
+      },
+      {
+        "tag": "a",
+        "text": "ออกแบบ 3D",
+        "w": 105,
+        "h": 28,
+        "top": 353,
+        "fold": true
+      },
+      {
+        "tag": "a",
+        "text": "ฉนวนกันความร้อน",
+        "w": 137,
+        "h": 29,
+        "top": 5594,
+        "fold": false
+      },
+      {
+        "tag": "a",
+        "text": "สีและเฉดวัสดุ",
+        "w": 99,
+        "h": 29,
+        "top": 5733,
+        "fold": false
+      },
+      {
+        "tag": "a",
+        "text": "สเปกสินค้า",
+        "w": 82,
+        "h": 29,
+        "top": 5847,
+        "fold": false
+      },
+      {
+        "tag": "a",
+        "text": "หน้าแรก",
+        "w": 54,
+        "h": 27,
+        "top": 8189,
+        "fold": false
+      },
+      {
+        "tag": "a",
+        "text": "เกี่ยวกับเรา",
+        "w": 74,
+        "h": 27,
+        "top": 8225,
+        "fold": false
+      },
+      {
+        "tag": "a",
+        "text": "สินค้าและบริการ",
+        "w": 107,
+        "h": 27,
+        "top": 8261,
+        "fold": false
+      },
+      {
+        "tag": "a",
+        "text": "ตัวอย่างผลงาน",
+        "w": 101,
+        "h": 27,
+        "top": 8297,
+        "fold": false
+      },
+      {
+        "tag": "a",
+        "text": "โปรโมชั่น",
+        "w": 57,
+        "h": 27,
+        "top": 8333,
+        "fold": false
+      },
+      {
+        "tag": "a",
+        "text": "ติดต่อเรา",
+        "w": 62,
+        "h": 27,
+        "top": 8369,
+        "fold": false
+      },
+      {
+        "tag": "a",
+        "text": "042-990-595",
+        "w": 99,
+        "h": 27,
+        "top": 8474,
+        "fold": false
+      },
+      {
+        "tag": "a",
+        "text": "091-052-9136",
+        "w": 109,
+        "h": 27,
+        "top": 8510,
+        "fold": false
+      },
+      {
+        "tag": "a",
+        "text": "081-872-6147",
+        "w": 109,
+        "h": 27,
+        "top": 8546,
+        "fold": false
+      },
+      {
+        "tag": "a",
+        "text": "LINE: @680rgqnj",
+        "w": 123,
+        "h": 27,
+        "top": 8582,
+        "fold": false
+      },
+      {
+        "tag": "a",
+        "text": "Facebook",
+        "w": 69,
+        "h": 27,
+        "top": 8618,
+        "fold": false
+      }
+    ],
+    "smallTapCount": 19,
+    "stickyBars": [
+      {
+        "tag": "header",
+        "cls": "site-header",
+        "pos": "sticky",
+        "top": 0,
+        "bottom": 69,
+        "h": 69,
+        "w": 390,
+        "z": "200"
+      },
+      {
+        "tag": "div",
+        "cls": "sticky-contact",
+        "pos": "fixed",
+        "top": 786,
+        "bottom": 844,
+        "h": 58,
+        "w": 390,
+        "z": "200"
+      }
+    ],
+    "navToggles": [
+      {
+        "text": "เปิดเมนู",
+        "w": 32,
+        "h": 40,
+        "visible": true,
+        "expanded": "false"
+      },
+      {
+        "text": "เกี่ยวกับเรา",
+        "w": 0,
+        "h": 0,
+        "visible": false,
+        "expanded": "false"
+      },
+      {
+        "text": "สินค้าและบริการ",
+        "w": 0,
+        "h": 0,
+        "visible": false,
+        "expanded": "false"
+      },
+      {
+        "text": "ตัวอย่างผลงาน",
+        "w": 0,
+        "h": 0,
+        "visible": false,
+        "expanded": "false"
+      },
+      {
+        "text": "ติดต่อเรา",
+        "w": 0,
+        "h": 0,
+        "visible": false,
+        "expanded": "false"
+      }
+    ],
+    "bodyFont": {
+      "family": "\"IBM Plex Sans Thai\", \"Noto Sans Thai\", system-ui, sans-serif",
+      "size": "16px",
+      "lineHeight": "28px"
+    },
+    "fontsReady": "loaded",
+    "loadedFonts": [
+      "IBM Plex Sans Thai 400 unloaded",
+      "IBM Plex Sans Thai 400 loaded",
+      "IBM Plex Sans Thai 400 unloaded",
+      "IBM Plex Sans Thai 400 loaded",
+      "IBM Plex Sans Thai 500 unloaded",
+      "IBM Plex Sans Thai 500 unloaded",
+      "IBM Plex Sans Thai 500 unloaded",
+      "IBM Plex Sans Thai 500 unloaded",
+      "IBM Plex Sans Thai 600 unloaded",
+      "IBM Plex Sans Thai 600 loaded",
+      "IBM Plex Sans Thai 600 unloaded",
+      "IBM Plex Sans Thai 600 loaded",
+      "IBM Plex Sans Thai 700 unloaded",
+      "IBM Plex Sans Thai 700 loaded",
+      "IBM Plex Sans Thai 700 unloaded",
+      "IBM Plex Sans Thai 700 loaded",
+      "Noto Sans Thai 400 unloaded",
+      "Noto Sans Thai 400 unloaded",
+      "Noto Sans Thai 400 unloaded",
+      "Noto Sans Thai 600 unloaded"
+    ],
+    "textSizes": {
+      "16px": 37,
+      "16.8px": 1,
+      "14.72px": 15,
+      "15.2px": 1,
+      "12px": 9,
+      "17.6px": 4,
+      "14.4px": 5,
+      "13.12px": 7,
+      "12.48px": 3,
+      "13.6px": 2,
+      "19.2px": 1
+    },
+    "tinyText": [
+      {
+        "text": "[\nผู้ผลิตและจำหน่ายเมทัลชีท มาตรฐานโรงงา",
+        "fs": 12,
+        "top": 453
+      },
+      {
+        "text": "01\n/\nWHAT WE SUPPLY",
+        "fs": 12,
+        "top": 1159
+      },
+      {
+        "text": "02\n/\nROOFING METAL SHEET",
+        "fs": 12,
+        "top": 2430
+      },
+      {
+        "text": "ROOFING / PRODUCT RANGE",
+        "fs": 12,
+        "top": 2929
+      },
+      {
+        "text": "ลอนมาตรฐาน",
+        "fs": 12.48,
+        "top": 3012
+      },
+      {
+        "text": "Snap-Lock",
+        "fs": 12.48,
+        "top": 3109
+      },
+      {
+        "text": "หลังคาโค้ง",
+        "fs": 12.48,
+        "top": 3210
+      },
+      {
+        "text": "03\n/\nWALL & CEILING",
+        "fs": 12,
+        "top": 3776
+      },
+      {
+        "text": "04\n/\nWHY CHOOSE US",
+        "fs": 12,
+        "top": 4347
+      },
+      {
+        "text": "05\n/\nMORE MATERIALS",
+        "fs": 12,
+        "top": 5359
+      },
+      {
+        "text": "06\n/\nCLIENT WORK",
+        "fs": 12,
+        "top": 6153
+      },
+      {
+        "text": "07\n/\nSTART YOUR PROJECT",
+        "fs": 12,
+        "top": 7320
+      }
+    ],
+    "imgCount": 7,
+    "brokenImgs": [],
+    "imgsNoDims": 3,
+    "imgsNoAlt": 0,
+    "imgsLazy": 7,
+    "imgDetail": [
+      {
+        "src": "logo.BwUawu_I_1uRHY0.webp",
+        "nat": "44x44",
+        "disp": "44x44",
+        "alt": "",
+        "loading": "lazy"
+      },
+      {
+        "src": "hero-metal-roof.B4zKC3mW_Z8CR5O.webp",
+        "nat": "390x259",
+        "disp": "342x240",
+        "alt": "หลังคาเมทัลชีทสีน้ำเงินเข้มบนอ",
+        "loading": "lazy"
+      },
+      {
+        "src": "wall-ceiling-cafe.BhItX84__vepnw.webp",
+        "nat": "0x0",
+        "disp": "390x320",
+        "alt": "ฝ้าเมทัลชีทลายไม้และผนังเหล็กส",
+        "loading": "lazy"
+      },
+      {
+        "src": "1013322459072462.webp",
+        "nat": "0x0",
+        "disp": "342x220",
+        "alt": "งานหลังคาเมทัลชีทโรงจอดรถที่ติ",
+        "loading": "lazy"
+      },
+      {
+        "src": "1116543733807710.webp",
+        "nat": "0x0",
+        "disp": "342x220",
+        "alt": "งานติดตั้งโครงสร้างเหล็กในพื้น",
+        "loading": "lazy"
+      },
+      {
+        "src": "1005493303188711.webp",
+        "nat": "0x0",
+        "disp": "342x220",
+        "alt": "แผ่นเมทัลชีทสีเทาที่ผลิตและเตร",
+        "loading": "lazy"
+      },
+      {
+        "src": "logo.BwUawu_I_Z1htGee.webp",
+        "nat": "0x0",
+        "disp": "40x40",
+        "alt": "",
+        "loading": "lazy"
+      }
+    ]
+  },
+  "contrast": [
+    {
+      "text": "MATERIAL / ON SITE",
+      "ratio": 1.01,
+      "fs": 12,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.95,0.01,250)",
+      "bg": "rgb(0.24,0.04,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 189,
+      "tag": "P"
+    },
+    {
+      "text": "ตัดความยาวตามหน้างาน",
+      "ratio": 1.01,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.95,0.01,250)",
+      "bg": "rgb(0.24,0.04,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 353,
+      "tag": "SPAN"
+    },
+    {
+      "text": "หลังคาเมทัลชีท สวย เรียบ ลดปัญหารั่วซึม",
+      "ratio": 1.01,
+      "fs": 24,
+      "bold": true,
+      "large": true,
+      "threshold": 3,
+      "fg": "rgb(0.95,0.01,250)",
+      "bg": "rgb(0.24,0.04,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 2492,
+      "tag": "H2"
+    },
+    {
+      "text": "แผ่นเหล็กมุงหลังคา",
+      "ratio": 1.01,
+      "fs": 13.1,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.95,0.01,250)",
+      "bg": "rgb(0.24,0.04,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 2695,
+      "tag": "LI"
+    },
+    {
+      "text": "หลังคาระบบยึดสกรู",
+      "ratio": 1.01,
+      "fs": 13.1,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.95,0.01,250)",
+      "bg": "rgb(0.24,0.04,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 2695,
+      "tag": "LI"
+    },
+    {
+      "text": "ระบบคลิปล็อก",
+      "ratio": 1.01,
+      "fs": 13.1,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.95,0.01,250)",
+      "bg": "rgb(0.24,0.04,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 2741,
+      "tag": "LI"
+    },
+    {
+      "text": "ระบบสแนปล็อก",
+      "ratio": 1.01,
+      "fs": 13.1,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.95,0.01,250)",
+      "bg": "rgb(0.24,0.04,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 2741,
+      "tag": "LI"
+    },
+    {
+      "text": "หลังคาที่พักอาศัย",
+      "ratio": 1.01,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.95,0.01,250)",
+      "bg": "rgb(0.24,0.04,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 6538,
+      "tag": "SPAN"
+    },
+    {
+      "text": "งานโครงสร้าง",
+      "ratio": 1.01,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.95,0.01,250)",
+      "bg": "rgb(0.24,0.04,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 6770,
+      "tag": "SPAN"
+    },
+    {
+      "text": "ผลิตตามสเปก",
+      "ratio": 1.01,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.95,0.01,250)",
+      "bg": "rgb(0.24,0.04,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 7002,
+      "tag": "SPAN"
+    },
+    {
+      "text": "พร้อมเริ่มโครงการหลังคาของคุณ?",
+      "ratio": 1.01,
+      "fs": 24,
+      "bold": true,
+      "large": true,
+      "threshold": 3,
+      "fg": "rgb(0.95,0.01,250)",
+      "bg": "rgb(0.24,0.04,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 7382,
+      "tag": "H2"
+    },
+    {
+      "text": "โทร 042-990-595",
+      "ratio": 1.01,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.95,0.01,250)",
+      "bg": "rgb(0.24,0.04,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 7646,
+      "tag": "A"
+    },
+    {
+      "text": "หจก.มีชัยสตีล",
+      "ratio": 1.01,
+      "fs": 19.2,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.97,0.01,250)",
+      "bg": "rgb(0.27,0.045,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 7995,
+      "tag": "P"
+    },
+    {
+      "text": "ลิงก์ด่วน",
+      "ratio": 1.01,
+      "fs": 15.2,
+      "bold": true,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.97,0.01,250)",
+      "bg": "rgb(0.27,0.045,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 8159,
+      "tag": "H3"
+    },
+    {
+      "text": "หน้าแรก",
+      "ratio": 1.01,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.97,0.01,250)",
+      "bg": "rgb(0.27,0.045,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 8189,
+      "tag": "A"
+    },
+    {
+      "text": "เกี่ยวกับเรา",
+      "ratio": 1.01,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.97,0.01,250)",
+      "bg": "rgb(0.27,0.045,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 8225,
+      "tag": "A"
+    },
+    {
+      "text": "สินค้าและบริการ",
+      "ratio": 1.01,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.97,0.01,250)",
+      "bg": "rgb(0.27,0.045,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 8261,
+      "tag": "A"
+    },
+    {
+      "text": "ตัวอย่างผลงาน",
+      "ratio": 1.01,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.97,0.01,250)",
+      "bg": "rgb(0.27,0.045,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 8297,
+      "tag": "A"
+    },
+    {
+      "text": "โปรโมชั่น",
+      "ratio": 1.01,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.97,0.01,250)",
+      "bg": "rgb(0.27,0.045,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 8333,
+      "tag": "A"
+    },
+    {
+      "text": "ติดต่อเรา",
+      "ratio": 1.01,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.97,0.01,250)",
+      "bg": "rgb(0.27,0.045,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 8369,
+      "tag": "A"
+    },
+    {
+      "text": "ติดต่อ",
+      "ratio": 1.01,
+      "fs": 15.2,
+      "bold": true,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.97,0.01,250)",
+      "bg": "rgb(0.27,0.045,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 8445,
+      "tag": "H3"
+    },
+    {
+      "text": "042-990-595",
+      "ratio": 1.01,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.97,0.01,250)",
+      "bg": "rgb(0.27,0.045,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 8474,
+      "tag": "A"
+    },
+    {
+      "text": "091-052-9136",
+      "ratio": 1.01,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.97,0.01,250)",
+      "bg": "rgb(0.27,0.045,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 8510,
+      "tag": "A"
+    },
+    {
+      "text": "081-872-6147",
+      "ratio": 1.01,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.97,0.01,250)",
+      "bg": "rgb(0.27,0.045,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 8546,
+      "tag": "A"
+    },
+    {
+      "text": "LINE: @680rgqnj",
+      "ratio": 1.01,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.97,0.01,250)",
+      "bg": "rgb(0.27,0.045,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 8582,
+      "tag": "A"
+    },
+    {
+      "text": "Facebook",
+      "ratio": 1.01,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.97,0.01,250)",
+      "bg": "rgb(0.27,0.045,252)",
+      "overImage": false,
+      "pass": false,
+      "top": 8618,
+      "tag": "A"
+    },
+    {
+      "text": "แชท LINE",
+      "ratio": 1.03,
+      "fs": 14.1,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.2,0.01,60)",
+      "bg": "rgb(0.76,0.145,74)",
+      "overImage": false,
+      "pass": false,
+      "top": 12,
+      "tag": "A"
+    },
+    {
+      "text": "ขอใบเสนอราคาโครงการ",
+      "ratio": 1.03,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.2,0.01,60)",
+      "bg": "rgb(0.76,0.145,74)",
+      "overImage": false,
+      "pass": false,
+      "top": 733,
+      "tag": "A"
+    },
+    {
+      "text": "ส่งขนาดหลังคาให้เราประเมิน",
+      "ratio": 1.03,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.2,0.01,60)",
+      "bg": "rgb(0.76,0.145,74)",
+      "overImage": false,
+      "pass": false,
+      "top": 2800,
+      "tag": "A"
+    },
+    {
+      "text": "ROOFING / PRODUCT RANGE",
+      "ratio": 1.03,
+      "fs": 12,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.52,0.03,250)",
+      "bg": "rgb(0.93,0.012,245)",
+      "overImage": false,
+      "pass": false,
+      "top": 2929,
+      "tag": "P"
+    },
+    {
+      "text": "304",
+      "ratio": 1.03,
+      "fs": 25.6,
+      "bold": true,
+      "large": true,
+      "threshold": 3,
+      "fg": "rgb(0.2,0.01,60)",
+      "bg": "rgb(0.76,0.145,74)",
+      "overImage": false,
+      "pass": false,
+      "top": 3080,
+      "tag": "SPAN"
+    },
+    {
+      "text": "Snap-Lock",
+      "ratio": 1.03,
+      "fs": 12.5,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.2,0.01,60)",
+      "bg": "rgb(0.76,0.145,74)",
+      "overImage": false,
+      "pass": false,
+      "top": 3109,
+      "tag": "SPAN"
+    },
+    {
+      "text": "สั่งตัดความยาวต่อเนื่อง ลดรอยต่อและเศษวัสดุ",
+      "ratio": 1.03,
+      "fs": 13.6,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.52,0.03,250)",
+      "bg": "rgb(0.93,0.012,245)",
+      "overImage": false,
+      "pass": false,
+      "top": 3264,
+      "tag": "P"
+    },
+    {
+      "text": "04\n/\nWHY CHOOSE US",
+      "ratio": 1.03,
+      "fs": 12,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.52,0.03,250)",
+      "bg": "rgb(0.975,0.003,245)",
+      "overImage": false,
+      "pass": false,
+      "top": 4347,
+      "tag": "P"
+    },
+    {
+      "text": "มีสินค้าจริง ให้คำปรึกษาได้จริง",
+      "ratio": 1.03,
+      "fs": 24,
+      "bold": true,
+      "large": true,
+      "threshold": 3,
+      "fg": "rgb(0.23,0.008,250)",
+      "bg": "rgb(0.975,0.003,245)",
+      "overImage": false,
+      "pass": false,
+      "top": 4409,
+      "tag": "H2"
+    },
+    {
+      "text": "ตั้งแต่เลือกวัสดุไปจนถึงสั่งผลิต ทีมช่างเทคนิ",
+      "ratio": 1.03,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.52,0.03,250)",
+      "bg": "rgb(0.975,0.003,245)",
+      "overImage": false,
+      "pass": false,
+      "top": 4452,
+      "tag": "P"
+    },
+    {
+      "text": "สั่งผลิตตามความยาวหน้างาน",
+      "ratio": 1.03,
+      "fs": 16.8,
+      "bold": true,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.23,0.008,250)",
+      "bg": "rgb(0.975,0.003,245)",
+      "overImage": false,
+      "pass": false,
+      "top": 4613,
+      "tag": "H3"
+    },
+    {
+      "text": "ตัดตามความยาวจริงของแต่ละช่วงหลังคา ลดรอยต่อ ",
+      "ratio": 1.03,
+      "fs": 14.4,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.52,0.03,250)",
+      "bg": "rgb(0.975,0.003,245)",
+      "overImage": false,
+      "pass": false,
+      "top": 4649,
+      "tag": "P"
+    },
+    {
+      "text": "คำนวณปริมาณวัสดุให้ก่อนสั่ง",
+      "ratio": 1.03,
+      "fs": 16.8,
+      "bold": true,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.23,0.008,250)",
+      "bg": "rgb(0.975,0.003,245)",
+      "overImage": false,
+      "pass": false,
+      "top": 4772,
+      "tag": "H3"
+    },
+    {
+      "text": "ส่งแบบมา ทีมช่างเทคนิคช่วยถอดปริมาณ (Taking-o",
+      "ratio": 1.03,
+      "fs": 14.4,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.52,0.03,250)",
+      "bg": "rgb(0.975,0.003,245)",
+      "overImage": false,
+      "pass": false,
+      "top": 4807,
+      "tag": "P"
+    },
+    {
+      "text": "ส่งข้ามแดนไป สปป.ลาว",
+      "ratio": 1.03,
+      "fs": 16.8,
+      "bold": true,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.23,0.008,250)",
+      "bg": "rgb(0.975,0.003,245)",
+      "overImage": false,
+      "pass": false,
+      "top": 4931,
+      "tag": "H3"
+    },
+    {
+      "text": "อยู่ติดสะพานมิตรภาพไทย–ลาว แห่งที่ 1 ห่างเวีย",
+      "ratio": 1.03,
+      "fs": 14.4,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.52,0.03,250)",
+      "bg": "rgb(0.975,0.003,245)",
+      "overImage": false,
+      "pass": false,
+      "top": 4966,
+      "tag": "P"
+    },
+    {
+      "text": "ใบเสนอราคาตามงานจริง",
+      "ratio": 1.03,
+      "fs": 16.8,
+      "bold": true,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.23,0.008,250)",
+      "bg": "rgb(0.975,0.003,245)",
+      "overImage": false,
+      "pass": false,
+      "top": 5089,
+      "tag": "H3"
+    },
+    {
+      "text": "คิดราคาตามสเปก ปริมาณ และหน้างานจริง แจ้งชัดเ",
+      "ratio": 1.03,
+      "fs": 14.4,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.52,0.03,250)",
+      "bg": "rgb(0.975,0.003,245)",
+      "overImage": false,
+      "pass": false,
+      "top": 5125,
+      "tag": "P"
+    },
+    {
+      "text": "06\n/\nCLIENT WORK",
+      "ratio": 1.03,
+      "fs": 12,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.52,0.03,250)",
+      "bg": "rgb(0.975,0.003,245)",
+      "overImage": false,
+      "pass": false,
+      "top": 6153,
+      "tag": "P"
+    },
+    {
+      "text": "ผลงานติดตั้งจริงจากหน้างาน",
+      "ratio": 1.03,
+      "fs": 24,
+      "bold": true,
+      "large": true,
+      "threshold": 3,
+      "fg": "rgb(0.23,0.008,250)",
+      "bg": "rgb(0.975,0.003,245)",
+      "overImage": false,
+      "pass": false,
+      "top": 6215,
+      "tag": "H2"
+    },
+    {
+      "text": "ดูงานหลังคา ผนัง และฉนวนที่ติดตั้งจริง พร้อมร",
+      "ratio": 1.03,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.52,0.03,250)",
+      "bg": "rgb(0.975,0.003,245)",
+      "overImage": false,
+      "pass": false,
+      "top": 6258,
+      "tag": "P"
+    },
+    {
+      "text": "ดูผลงานทั้งหมด",
+      "ratio": 1.03,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.2,0.01,60)",
+      "bg": "rgb(0.76,0.145,74)",
+      "overImage": false,
+      "pass": false,
+      "top": 7070,
+      "tag": "A"
+    },
+    {
+      "text": "รีวิวลูกค้า",
+      "ratio": 1.03,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.23,0.008,250)",
+      "bg": "rgb(0.975,0.003,245)",
+      "overImage": false,
+      "pass": false,
+      "top": 7070,
+      "tag": "A"
+    },
+    {
+      "text": "แชท LINE: @680rgqnj",
+      "ratio": 1.03,
+      "fs": 16,
+      "bold": false,
+      "large": false,
+      "threshold": 4.5,
+      "fg": "rgb(0.2,0.01,60)",
+      "bg": "rgb(0.76,0.145,74)",
+      "overImage": false,
+      "pass": false,
+      "top": 7577,
+      "tag": "A"
+    }
+  ],
+  "failedRequests": [],
+  "badStatus": []
+}
